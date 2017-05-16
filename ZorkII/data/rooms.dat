@@ -1,130 +1,105 @@
-Room Name: Ancient key holder room 
-Room Description: This is the entrance/ exit to the temple 
-Exit Rooms: Room 1, Room 2
-Room Name: Room 1
-Room Description: contains a basic sword  
-Exit Rooms: Room 10, Ancient key holder room 
-Room Name: Room 2
-Room Description: contains an axe 
-Exit Rooms: Room 3, Room 4
-Room Name: Room 3
-Room Description: Dank meme on the wall 
-Exit Rooms: Room 2
-Room Name: Room 4
-Room Description: Fallen dirt blocking East side 
-Exit Rooms: Room 2, Room 9, Room 5, Room 7
-Room Name: Room 5
-Room Description: contains a backpack to carry gems 
-Exit Rooms: Room 4, Room 6
-Room Name: Room 6
-Room Description: contains message (     )
-Exit Rooms: Room 7, Room 8 
-Room Name: Room 7
-Room Description: 1st Gem and 1 basic enemy 
-Exit Rooms: Room 6, Room 4
-Room Name: Room 8
-Room Description: contains shovel 
-Exit Rooms: Room 25, Room 6
-Room Name: Room 9
+Room Name: Ancient key holder room
+Room Description: This is the entrance and exit to the temple
+Exit Rooms: E-Sword Room, W-Axe Room
+Room Name: Sword Room
+Room Description: contains a basic sword
+Exit Rooms: S-Lighter Room, W-Ancient key holder room
+Room Name: Axe Room
+Room Description: contains an axe
+Exit Rooms: W-Meme Room, S-Dirt Room
+Room Name: Meme Room
+Room Description: Dank meme on the wall
+Exit Rooms: E-Axe Room
+Room Name: Dirt E Room
+Room Description: Fallen dirt blocking East side
+Exit Rooms: N-Axe Room, W-Backpack Room, S-Origins Room
+Room Name: Backpack Room
+Room Description: contains a backpack to carry gems
+Exit Rooms: E-Dirt E Room, S-Message Room
+Room Name: Message Room
+Room Description: You are getting close to the gems!
+Exit Rooms: E-Origins Room, S-Shovel Room
+Room Name: Origins Room
+Room Description: 1st Gem and 1 basic enemy
+Exit Rooms: W-Message Room, N-Dirt E Room
+Room Name: Shovel Room
+Room Description: contains shovel
+Exit Rooms: S-Uno Enemy Room, N-Message Room
+Room Name: TNT Room
 Room Description: contains TNT (needs lighter to use) 
-Exit Rooms: Room 4
-Room Name: Room 10
+Exit Rooms: W-Dirt E Room
+Room Name: Lighter Room
 Room Description: contains lighter and steel wall blocking South entrance
-Exit Rooms: Room 1, Room 11, Room 12
-Room Name: Room 11
-Room Description: 1 basic enemy 
-Exit Rooms: Room 10, Room 13
-Room Name: Room 12
+Exit Rooms: N-Sword Room, E-Basic Enemy Room, S-Gem Two Room
+Room Name: Basic Enemy Room
+Room Description: 1 basic enemy
+Exit Rooms: W-Lighter Room, S-Enrichment Room
+Room Name: Gem Two Room
 Room Description: 2nd gem and 1 basic enemy 
-Exit Rooms: Room 10
-Room Name: Room 13
-Room Description: Enrichment room (upgrade certain items like swords, makes item stronger/better)
-Exit Rooms: Room 21, Room 14, Room 11
-Room Name: Room 14
-Room Description: contains flashlight
-Exit Rooms: Room 13, Room 16, Room 15
-Room Name: Room 15
-Room Description: 1 basic enemy and 1 archer
-Exit Rooms: Room 14, Room 17, Room 18 
-Room Name: Room 16
-Room Description: contains two handed sword
-Exit Rooms: Room 17, Room 14
-Room Name: Room 17
+Exit Rooms: N-Lighter Room
+Room Name: Enrichment Room
+Room Description: Enrichment room (upgrade certain items like swords, makes item stronger/better) 
+Exit Rooms: S-Dark Room, W-Flashlight Room, N-Basic Enemy Room
+Name: Flashlight Room 
+Room Description: contains flashlight 
+Exit Rooms: E-Enrichment Room, S-Big sword Room, W-Archer Room
+Room Name: Archer Room
+Room Description: 1 basic enemy and 1 archer 
+Exit Rooms: E-Flashlight Room, S-Double Enemy Room, W-Riddle Room
+Room Name: Big Sword Room
+Room Description: contains two handed sword 
+Exit Rooms: W-Double Enemy Room, N-Flashlight Room 
+Room Name: Double Enemy Room
 Room Description: 2 basic enemies 
-Exit Rooms: Room 16, Room 19, Room 15
-Room Name: Room 18
-Room Description: riddle on sign (        ) 
-Exit Rooms: Room 15, Room 19 
-Room Name: Room 19
-Room Description: Key Placer
-Exit Rooms: Room 20, Room 17, Room 18
-Room Name: Room 20
+Exit Rooms: E-Big Sword Room, W-Key Placer Room, N-Archer Room
+Room Name: Riddle Room
+Room Description: riddle on sign ( ) 
+Exit Rooms: E-Archer Room, S-Key Placer Room
+Room Name: Key Placer Room
+Description: Key Placer
+Exit Rooms: S-Treasure Room, E-Double Enemy Room, N-Riddle Room
+Room Name: Treasure Room
 Room Description: Treasure Room 
-Exit Rooms: Room 19 
-Room Name: Room 21
-Room Description: Dark room, needs flashlight to see
-Exit Rooms: Room 13, Room 22
-Room Name: Room 22
-Room Description: Fallen dirt blocking West side
-Exit Rooms: Room 21, Room 24, Room 23
-Room Name: Room 23
+Exit Rooms: N-Key Placer Room
+Room Name: Dark Room
+Room Description: Dark room, needs flashlight to see 
+Exit Rooms: N-Enrichment Room, W-Dirt W Room
+Room Name: Dirt W Room
+Room Description: Fallen dirt blocking West side 
+Exit Rooms: E-Dark Room, W-Third Gem Room, S-Locked Door Room
+Room Name: Locked Door Room
 Room Description: Locked wooden door blocking South side
-Exit Rooms: Room, 22, Room 24
-Room Name: Room 24
-Room Description: 3rd Gem and 2 basic enemies with 2 archers
-Exit Rooms: Room 23, Room 22
-Room Name: Room 25
-Room Description: 1 basic enemy 
-Exit Rooms: Room 8, Room 26, Room 27 
-Room Name: Room 26
-Room Description: Fallen dirt blocking South side
-Exit Rooms: Room 27, Room 25
-Room Name: Room 27
+Exit Rooms: N-Dirt W Room, S-Third Gem Room
+Room Name: Third Gem Room
+Room Description: Third Gem and 2 basic enemies with 2 archers
+Exit Rooms: N-Locked Door Room, W-Dirt W Room
+Room Name: Uno Enemy Room
+Room Description: 1 basic enemy
+Exit Rooms: N-Shovel Room, S-Dirt S Room, E-Fourth Gem Room 
+Room Name: Dirt S Room
+Room Description: Fallen dirt blocking South side 
+Exit Rooms: S-Fourth Gem Room, N-Uno Enemy Room
+Room Name: Fourth Gem Room
 Room Description: 4th Gem and 5 archers 
-Exit Rooms: Room 25, Room 26, Room 28 
-Room Name: Room 28
+Exit Rooms: E-Uno Enemy Room, W-Last Gem Room 
+Room Name: Fifth Gem Message Room
 Room Description: Message saying ("Looking for the 5th Gem?") 
-Exit Rooms: Room 29, Room 30, Room 32, Room 33, Room 27
-Room Name: Room 29
-Room Description: Enrichment room (upgrade certain items like swords, makes item stronger/better)
-Exit Rooms: Room 28 
-Room Name: Room 30
-Room Description: Steel wall blocking South side
-Exit Rooms: Room 28, Room 31
-Room Name: Room 31
+Exit Rooms: N-Second Enrichment Room, S-Meme Two Room, W-Third Enrichment Room, E-Fourth Gem Room
+Room Name: Second Enrichment Room
+Room Description: Enrichment room (upgrade certain items like swords, makes item stronger/better) 
+Exit Rooms: W-Last Gem Message Room
+Room Name: Steel Wall S Room
+Room Description: Steel wall blocking South side 
+Exit Rooms: W-Last Gem Message Room, S-Dark Two Room 
+Room Name: Dark Two Room
 Room Description: Dark room 
-Exit Rooms: Room 30, Room 32, Room 34
-Room Name: Room 32
-Room Description: Dank meme on wall
-Exit Rooms: Room 33, Room 31, Room 28
-Room Name: Room 33
+Exit Rooms: N-Steel Wall, S-Room, W-Last Gem and Boss Room 
+Room Name: Meme Two Room
+Room Description: Dank meme on wall 
+Exit Rooms: W-Third Enrichment Room, S-Dark Two Room, N-Last Gem Message Room
+Room Name: Third Enrichment Room
 Room Description: Enrichment room 
-Exit Rooms: Room 28, Room 32
-Room Name: Room 34
-Room Description: 5th Gem and BOSS
-Exit Rooms: Room 34
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Exit Rooms: N-Last Gem Message Room, E-Meme Two Room
+Room Name: Last Gem and Boss Room
+Room Description: Fifth Gem and BOSS
+Exit Rooms: W-Meme Two Room
