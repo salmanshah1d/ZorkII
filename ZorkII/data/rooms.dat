@@ -1,62 +1,62 @@
 Room Name: Ancient key holder room
-Room Description: This is the entrance and exit to the temple
+Room Description: You have just walked into the temple
 Exit Rooms: E-Sword Room, W-Axe Room
 Room Name: Sword Room
-Room Description: contains a basic sword
+Room Description: As you walk in you see a sword glowing in the corner
 Exit Rooms: S-Lighter Room, W-Ancient key holder room
 Room Name: Axe Room
-Room Description: contains an axe
+Room Description: There is a small axe resting on the wall
 Exit Rooms: W-Meme Room, S-Dirt Room
 Room Name: Meme Room
-Room Description: Dank meme on the wall
+Room Description: As you walk in, you are taken aback by dank memes throughout the walls
 Exit Rooms: E-Axe Room
 Room Name: Dirt E Room
-Room Description: Fallen dirt blocking East side
+Room Description: On the East wall there is dirt blocking all the east exits
 Exit Rooms: N-Axe Room, W-Backpack Room, S-Origins Room
 Room Name: Backpack Room
-Room Description: contains a backpack to carry gems
+Room Description: There is a small backpack with a gem patch on it
 Exit Rooms: E-Dirt E Room, S-Message Room
 Room Name: Message Room
-Room Description: You are getting close to the gems!
+Room Description: There is a message edged into the wall saying "You are getting close to the gems!"
 Exit Rooms: E-Origins Room, S-Shovel Room
 Room Name: Origins Room
-Room Description: 1st Gem and 1 basic enemy
+Room Description: You can see a glowing gem in the back of the room but there is a enemy between you and you treasure
 Exit Rooms: W-Message Room, N-Dirt E Room
 Room Name: Shovel Room
-Room Description: contains shovel
+Room Description: On the middle of the floor there is a rusty shovel
 Exit Rooms: S-Uno Enemy Room, N-Message Room
 Room Name: TNT Room
-Room Description: contains TNT (needs lighter to use) 
+Room Description: You see a pile of TNT.... but no way to light it
 Exit Rooms: W-Dirt E Room
 Room Name: Lighter Room
-Room Description: contains lighter and steel wall blocking South entrance
+Room Description: On top of a table there is a lighter, also the south wall is blocked by a steel wall
 Exit Rooms: N-Sword Room, E-Basic Enemy Room, S-Gem Two Room
 Room Name: Basic Enemy Room
-Room Description: 1 basic enemy
+Room Description: One enemy jumps out of the shadows
 Exit Rooms: W-Lighter Room, S-Enrichment Room
 Room Name: Gem Two Room
-Room Description: 2nd gem and 1 basic enemy 
+Room Description: You see another gem with an enemy bloacking your way
 Exit Rooms: N-Lighter Room
 Room Name: Enrichment Room
-Room Description: Enrichment room (upgrade certain items like swords, makes item stronger/better) 
+Room Description: You walked into a enrichment room where you can upgrade your items
 Exit Rooms: S-Dark Room, W-Flashlight Room, N-Basic Enemy Room
-Name: Flashlight Room 
-Room Description: contains flashlight 
+Name: Flashlight Room
+Room Description: There is a flashlight on the floor
 Exit Rooms: E-Enrichment Room, S-Big sword Room, W-Archer Room
 Room Name: Archer Room
-Room Description: 1 basic enemy and 1 archer 
+Room Description: Two enemies jump out, one with a sword and one with a bow
 Exit Rooms: E-Flashlight Room, S-Double Enemy Room, W-Riddle Room
 Room Name: Big Sword Room
-Room Description: contains two handed sword 
-Exit Rooms: W-Double Enemy Room, N-Flashlight Room 
+Room Description: You see a huge two handed sword laying on the ground
+Exit Rooms: W-Double Enemy Room, N-Flashlight Room
 Room Name: Double Enemy Room
-Room Description: 2 basic enemies 
+Room Description: two enemies with swords run at you
 Exit Rooms: E-Big Sword Room, W-Key Placer Room, N-Archer Room
 Room Name: Riddle Room
 Room Description: riddle on sign ( ) 
 Exit Rooms: E-Archer Room, S-Key Placer Room
 Room Name: Key Placer Room
-Description: Key Placer
+Room Description: Key Placer
 Exit Rooms: S-Treasure Room, E-Double Enemy Room, N-Riddle Room
 Room Name: Treasure Room
 Room Description: Treasure Room 
