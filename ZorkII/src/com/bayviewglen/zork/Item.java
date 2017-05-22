@@ -20,4 +20,8 @@ public class Item {
 	public String toString(){
 		return("(" + object + ", " + weight + ")");
 	}
+
+	public String display() {
+		return(weight + "-pound " + object);
+	}
 }
