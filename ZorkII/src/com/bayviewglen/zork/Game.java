@@ -2,6 +2,7 @@ package com.bayviewglen.zork;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -62,9 +63,13 @@ class Game
 				// This puts the room we created (Without the exits in the masterMap)
 				masterRoomMap.put(roomName.toUpperCase().substring(10).trim().replaceAll(" ",  "_"), room);
 				
-				
-				
-				// Now we better set the exits.
+				String roomItems = roomScanner.nextLine();
+				// An array of strings in the format E-RoomName
+				String[] items = roomItems.split(":")[1].split(",");
+				ArrayList<Item> itemList = new ArrayList<Item>(); 
+				for (String s : items){
+					itemList.add(new Item(s.split("-")[0].trim(), Integer.parseInt(s.split("-")[1].trim())));
+				}
 			}
 			
 			for (String key : masterRoomMap.keySet()){
