@@ -129,15 +129,41 @@ class Game
      */
     private void printWelcome()
     {
+    	Scanner keyboard = new Scanner(System.in);
+        System.out.print("Hello! What's your name? ");
+        String name = keyboard.nextLine();
+        System.out.println("");
+        System.out.println("Hello, " + name + ", you find yourself in the Shah Mosque in Isfahan, Iran, in the south side of Naghsh-e Jahan Square.");
+        delay(4.5);
+        System.out.println("Upon coming to Iran as a Pakistani tourist from China, you learned about an ancient family secret.");
+        delay(4.5);
+        System.out.println("When walking through a spice market in the blistering heat of the Iranian sun, you mistakenly stumbled into an alley.");
+        delay(4.5);
+        System.out.println("There, you encountered a local Iranian man named Kevin DLau. DLau tells you that your family originated in Iran, 800 years ago.");
+        delay(5.2);
+        System.out.println("He explains that your ancestor, Mehdi Bao Tran sealed a fortune of 5 gems, each with a different quality in the Shah mosque.");
+        delay(5.2);
+        System.out.println("He explains that fate led you to the dark alley on that very day. You are meant to collect the gems.");
+        delay(4.3);
+        System.out.println("When you have all 5 gems, you will achieve the unthinkable. You will get a 5 in AP Computer Science.");
+        delay(4.3);
+        System.out.println("In the Shah mosque, you shall find these gems, but not without significant obstacles. May your adventure begin.");
         System.out.println();
-        System.out.println("Welcome to Zork!");
-        System.out.println("Zork is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
-        System.out.println();
+        delay(6);
         System.out.println(currentRoom.longDescription());
     }
 
-    /**
+	private void delay(double num) {
+    	num *= 1000;
+		try {
+			Thread.sleep((int)num);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+
+	/**
      * Given a command, process (that is: execute) the command.
      * If this command ends the game, true is returned, otherwise false is
      * returned.
