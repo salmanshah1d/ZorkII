@@ -39,6 +39,7 @@ class Room {
 		roomName = "DEFAULT ROOM";
 		description = "DEFAULT DESCRIPTION";
 		exits = new HashMap<String, Room>();
+		roomItems = new ArrayList<Item>(); 
 	}
 
 	public void setExit(char direction, Room r) throws Exception {
@@ -103,8 +104,7 @@ class Room {
 	 * kitchen. Exits: north west
 	 */
 	public String longDescription() {
-
-		return "Room: " + roomName + "\n\n" + description + itemString() + "\n" + exitString();
+		return "\nRoom: " + roomName + "\n\n" + description + itemString() + "\n" + exitString();
 	}
 
 	/**
@@ -113,11 +113,11 @@ class Room {
 	 */
 
 	private String itemString() {
-		if (roomItems != null) {
-			String returnString = "\nItems: ";
+		if (roomItems.size() != 0) {
+			String returnString = "\nItems: " + roomItems.get(0).display();
 
-			for (Item item : roomItems) {
-				returnString += ", " + item.display();
+			for (int i = 1; i < roomItems.size(); i++) {
+				returnString += ", " + roomItems.get(i).display();
 			}
 			
 			return returnString;
@@ -152,6 +152,10 @@ class Room {
 		this.roomName = roomName;
 	}
 
+	public void setRoomItems(ArrayList<Item> itemsListInp) {
+		this.roomItems = itemsListInp;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
