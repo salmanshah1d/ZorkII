@@ -1,4 +1,6 @@
 package com.bayviewglen.zork;
+
+java.io.File;
 /**
  * Class Command - Part of the "Zork" game.
  * 
