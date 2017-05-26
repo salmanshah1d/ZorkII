@@ -59,16 +59,22 @@ class Game {
 				}
 
 				exits.put(roomName.substring(10).trim().toUpperCase().replaceAll(" ", "_"), temp);
-				
-				//adds room items ArrayList
+
+				// adds room items ArrayList
 				String[] roomItems = roomScanner.nextLine().split(":")[1].split(",");
 				// An array of strings in the format ItemName-ItemWeight
 				ArrayList<Item> itemList = new ArrayList<Item>();
-				for (String s : roomItems) {
-					itemList.add(new Item(s.split("-")[0].trim(), Integer.parseInt(s.split("-")[1].trim())));
+				for (int s = 0; s < roomItems.length; s++) {
+					if (roomItems[s].equals("None-0")) {
+						s += 1;
+					} else {
+						itemList.add(new Item(roomItems[s].split("-")[0].trim(),
+								Integer.parseInt(roomItems[s].split("-")[1].trim())));
+					}
 				}
 				room.setRoomItems(itemList);
-				
+
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 				// This puts the room we created (Without the exits in the
 				// masterMap)
 				masterRoomMap.put(roomName.toUpperCase().substring(10).trim().replaceAll(" ", "_"), room);
@@ -124,7 +130,9 @@ class Game {
 			Command command = parser.getCommand();
 			finished = processCommand(command);
 		}
-		System.out.println("Thank you for playing.  Good bye.");
+
+		System.out.println("Thank you for playing. Good bye.");
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 	}
 
 	/**
@@ -134,32 +142,61 @@ class Game {
 		Scanner keyboard = new Scanner(System.in);
 		System.out.print("Hello! What's your name? ");
 		String name = keyboard.nextLine();
-		intro(name, keyboard);
+
+		name = textCheck(name);
+		System.out.println("(Heads up: press enter after each line when you're done reading.)");
+		intro(name);
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 		System.out.println(currentRoom.longDescription());
 	}
 
-	private void intro(String name, Scanner keyboard) {
-		// TODO Auto-generated method stub
-		System.out.println("\nHello, " + name
+
+	private String textCheck(String text) {
+		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		boolean valid = true;
+		Scanner keyboard = new Scanner(System.in);
+		for (int i = 0; i < text.length() && valid == true; i++) {
+			if (alphabet.indexOf(text.charAt(i)) < 0) {
+				valid = false;
+			}
+		}
+		while (valid == false || text.length() == 0) {
+			System.out.print("Please enter a legit name boi: ");
+			text = keyboard.nextLine();
+			valid = true;
+			for (int i = 0; i < text.length() && valid == true; i++) {
+				if (alphabet.indexOf(text.charAt(i)) < 0) {
+					valid = false;
+				}
+			}
+		}
+		return text;
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
+	}
+
+
+	private void intro(String name) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("\nHello, " + name
 				+ ", you find yourself in the Shah Mosque in Isfahan, Iran, in the south side of Naghsh-e Jahan Square.");
-		enter(keyboard);
-		System.out.println(
+		scanner.nextLine();
+		System.out.print(
 				"As a Pakistani tourist from China, when walking through a spice market in the blistering heat of the Iranian sun, you");
-		delay(4.4);
-		System.out.println("mistakenly stumbled into an alley where you learned an ancient family secret.");
-		delay(4);
-		System.out.println(
+		scanner.nextLine();
+		System.out.print("mistakenly stumbled into an alley where you learned an ancient family secret.");
+		scanner.nextLine();
+		System.out.print(
 				"There, you encountered a local Iranian man named Kevin DLau whom'st tells you that your family originated in Iran, 800 years ago.");
-		delay(6);
-		System.out.println(
-				"He explains that your ancestor, Mehdi Bao Tran hid a total of 5 gems, each with a different quality in the Shah mosque.");
-		delay(6);
-		System.out.println(
+		scanner.nextLine();
+		System.out.print(
+				"He explains that your ancestor, Mehdi Bao Tran hid a total of 5 gems, each with a different quality, in the Shah mosque.");
+		scanner.nextLine();
+		System.out.print(
 				"He explains that fate led you to the dark alley on that very day. You are meant to collect the gems.");
-		delay(5);
-		System.out.println(
-				"When you have all 5 gems, you will achieve the unthinkable. You will have wealth, health, peace, and most importantly...");
-		delay(5);
+		scanner.nextLine();
+		System.out.print(
+				"When you have all 5 gems, you will achieve the unthinkable. You will have wealth, health, peace, happiness, and most importantly...");
+		scanner.nextLine();
 		System.out.print("You ");
 		delay(0.25);
 		System.out.print("will ");
@@ -173,17 +210,18 @@ class Game {
 		System.out.print("in ");
 		delay(0.25);
 		System.out.println("AP Computer Science A!");
+		scanner.nextLine();
+		System.out.print("In the Shah mosque, you shall find these gems, but not without significant obstacles.");
+		scanner.nextLine();
+		System.out.print("May ");
 		delay(1);
-		System.out.println(
-				"In the Shah mosque, you shall find these gems, but not without significant obstacles. May your adventure begin.");
-		System.out.println();
-		delay(6);
-	}
-
-	private void enter(Scanner keyboard) {
-		if (keyboard.nextLine() == ""){
-			
-		}
+		System.out.print("your ");
+		delay(1);
+		System.out.print("adventure ");
+		delay(1);
+		System.out.print("begin. ");
+		scanner.nextLine();
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 	}
 
 	private void delay(double num) {
@@ -229,9 +267,8 @@ class Game {
 	 * message and a list of the command words.
 	 */
 	private void printHelp() {
-		System.out.println("You are lost. You are alone. You wander");
-		System.out.println("around at Monash Uni, Peninsula Campus.");
-		System.out.println();
+		System.out.println("You are lost. You are alone. You wander.");
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 		System.out.println("Your command words are:");
 		parser.showCommands();
 	}
