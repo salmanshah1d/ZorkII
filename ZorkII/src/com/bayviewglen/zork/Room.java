@@ -1,8 +1,8 @@
 package com.bayviewglen.zork;
 /*
- * Class Room - a room in an adventure game.
+ * Class Room - a room in an adventure game. 
  *
- * Author:  Michael Kolling
+ * Author:  Michael Kolling.
  * Version: 1.1
  * Date:    August 2000
  * 
