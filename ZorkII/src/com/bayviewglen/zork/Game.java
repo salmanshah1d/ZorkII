@@ -74,6 +74,27 @@ class Game {
 				}
 				room.setRoomItems(itemList);
 
+				// adds room items ArrayList
+				String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
+				// An array of strings in the format ItemName-ItemWeight
+				ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+				for (int t = 0; t < roomEnemies.length; t++) {
+					if (roomItems[t].equals("None-0")) {
+						t += 1;
+					} else {
+						if (roomItems[t].split("-")[0].trim() == "Yute"){
+							enemyList.add(new Yute(roomItems[t].split("-")[1].trim()));
+						}
+						else if (roomItems[t].split("-")[0].trim() == "Yute"){
+							enemyList.add(new WasteMansYute(roomItems[t].split("-")[1].trim()));
+						} else {
+							enemyList.add(new HypeBeastYute(roomItems[t].split("-")[1].trim()));
+						}
+					}
+				}
+				room.setRoomEnemies(enemyList);
+				
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 				// This puts the room we created (Without the exits in the
 				// masterMap)
 				masterRoomMap.put(roomName.toUpperCase().substring(10).trim().replaceAll(" ", "_"), room);
@@ -129,7 +150,9 @@ class Game {
 			Command command = parser.getCommand();
 			finished = processCommand(command);
 		}
+
 		System.out.println("Thank you for playing. Good bye.");
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 	}
 
 	/**
@@ -139,11 +162,14 @@ class Game {
 		Scanner keyboard = new Scanner(System.in);
 		System.out.print("Hello! What's your name? ");
 		String name = keyboard.nextLine();
+
 		name = textCheck(name);
 		System.out.println("(Heads up: press enter after each line when you're done reading.)");
 		intro(name);
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 		System.out.println(currentRoom.longDescription());
 	}
+
 
 	private String textCheck(String text) {
 		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -165,7 +191,9 @@ class Game {
 			}
 		}
 		return text;
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 	}
+
 
 	private void intro(String name) {
 		Scanner scanner = new Scanner(System.in);
@@ -213,6 +241,7 @@ class Game {
 		delay(1);
 		System.out.print("begin. ");
 		scanner.nextLine();
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 	}
 
 	private void delay(double num) {
@@ -259,6 +288,7 @@ class Game {
 	 */
 	private void printHelp() {
 		System.out.println("You are lost. You are alone. You wander.");
+//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 		System.out.println("Your command words are:");
 		parser.showCommands();
 	}

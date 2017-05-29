@@ -2,15 +2,16 @@ package com.bayviewglen.zork;
 
 public class Item {
 	private String description;
-	private int mass;
-	private int cost;
+
+	private double mass;
+	private double cost;
 	
-	Item(String objectInp, int weightInp) {
+	Item(String objectInp, double weightInp) {
 		description = objectInp;
 		mass = weightInp;
 	}
 	
-	Item(String objectInp, int weightInp, int costInp) {
+	Item(String objectInp, double weightInp, int costInp) {
 		description = objectInp;
 		mass = weightInp;
 		cost = costInp;
@@ -20,30 +21,26 @@ public class Item {
 		return description;
 	}
 	
-	public int getMass(){
+	public double getMass(){
 		return mass;
 	}
 	
-	public int getCost(){
+	public double getCost(){
 		return cost;
 	}
 	
 	public void setDescription(String descrInp){
 		this.description = descrInp;	}
 	
-	public void setMass(int massInp){
-		this.cost = massInp;	}
+	public void setMass(double massInp){
+		this.mass = massInp;	}
 	
-	public void setCost(int costInp){
+	public void setCost(double costInp){
 		this.cost = costInp;
 	}
 	
 	public String display() {
 		return(description + " (" + mass + ")");
 	}	
-	
-	public String toString(){
-		return("(" + description + ", " + mass + ")");
-	}
 }
 
