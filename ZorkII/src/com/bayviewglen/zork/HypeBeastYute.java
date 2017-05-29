@@ -8,6 +8,7 @@ public class HypeBeastYute extends Enemy{
 		Weapon wasteMansYuteShank = new GreasyShank();
 		//sets character attributes
 		private int characterHealth = 100;
+		private int characterHealthMax = 100;
 		private int characterPower = wasteMansYuteShank.getPower();
 
 		public void setEnemyInventory(ArrayList<Item> hypeBeastYuteInventory) {

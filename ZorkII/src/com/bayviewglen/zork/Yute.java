@@ -8,6 +8,7 @@ public class Yute extends Enemy{
 	Weapon yuteShank = new DirtyShank();
 	//sets character attributes
 	private int characterHealth = 50;
+	private int characterHealthMax = 50;
 	private int characterPower = yuteShank.getPower();
 	//ArrayList<Item> yuteInventory = new ArrayList<Item>();
 	
