@@ -4,6 +4,7 @@ public class Weapon extends Item{
 	
 	private int Power;
 	private int critChance;
+	private static final int CRITICALSTRIKEMULTIPLIER = 3;
 	
 	public Weapon(String description, double mass, int cost ,int power, int critChance){
 		super(description, mass, cost);
