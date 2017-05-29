@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Character {
 	private String characterName;
 	private int characterHealth;
+	private int characterHealthMax;
 	private int characterPower;
 	private int characterArmor;
 	
@@ -42,16 +43,23 @@ public Character(String name, int health){
 	this.characterHealth= health;
 }
 
-public Character(String name, int health, int power){
+/*public Character(String name, int health, int power){
 	this.characterName = name;
 	this.characterHealth= health;
 	this.characterPower = power;
 }
-
+*/
 
 public Character(String name, int health, int power, int armor){
 	this.characterName = name;
 	this.characterHealth= health;
+	this.characterPower = power;
+	this.characterArmor = armor;
+}
+public Character(String name, int health, int maxHealth, int power, int armor){
+	this.characterName = name;
+	this.characterHealth= health;
+	this.characterHealthMax = maxHealth;
 	this.characterPower = power;
 	this.characterArmor = armor;
 }
@@ -72,6 +80,13 @@ public Character(String name, int health, int power, int armor){
 
 	
 	
-	
+	public int getCharacterHealthMax() {
+		return characterHealthMax;
+	}
+
+
+	public void setCharacterHealthMax(int characterHealthMax) {
+		this.characterHealthMax = characterHealthMax;
+	}
 	
 }

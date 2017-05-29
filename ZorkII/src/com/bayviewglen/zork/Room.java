@@ -1,8 +1,8 @@
 package com.bayviewglen.zork;
 /*
- * Class Room - a room in an adventure game.
+ * Class Room - a room in an adventure game. 
  *
- * Author:  Michael Kolling
+ * Author:  Michael Kolling.
  * Version: 1.1
  * Date:    August 2000
  * 
@@ -24,6 +24,7 @@ class Room {
 	private String description;
 	private HashMap<String, Room> exits; // stores exits of this room.
 	private ArrayList<Item> roomItems;
+	private ArrayList<Enemy> roomEnemies;
 
 	/**
 	 * Create a room described "description". Initially, it has no exits.
@@ -40,6 +41,7 @@ class Room {
 		description = "DEFAULT DESCRIPTION";
 		exits = new HashMap<String, Room>();
 		roomItems = new ArrayList<Item>(); 
+		roomEnemies = new ArrayList<Enemy>();
 	}
 
 	public void setExit(char direction, Room r) throws Exception {
@@ -162,5 +164,9 @@ class Room {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public void setRoomEnemies(ArrayList<Enemy> enemyList) {
+		this.roomEnemies = enemyList;
 	}
 }
