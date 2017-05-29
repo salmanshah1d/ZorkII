@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import org.omg.CORBA.SystemException;
+
 /**
  * Class Game - the main class of the "Zork" game.
  *
@@ -24,8 +26,12 @@ import java.util.Scanner;
  */
 
 class Game {
+	
+	public Character mainCharacter = new Character();
+	public Sword sword = new Sword();
 	private Parser parser;
 	private Room currentRoom;
+	Inventory characterInventory = new Inventory();
 	// This is a MASTER object that contains all of the rooms and is easily
 	// accessible.
 	// The key will be the name of the room -> no spaces (Use all caps and
@@ -73,31 +79,26 @@ class Game {
 					}
 				}
 				room.setRoomItems(itemList);
-
-<<<<<<< HEAD
 				// adds room items ArrayList
-				String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
-				// An array of strings in the format ItemName-ItemWeight
-				ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-				for (int t = 0; t < roomEnemies.length; t++) {
-					if (roomItems[t].equals("None-0")) {
-						t += 1;
-					} else {
-						if (roomItems[t].split("-")[0].trim() == "Yute"){
-							enemyList.add(new Yute(roomItems[t].split("-")[1].trim()));
-						}
-						else if (roomItems[t].split("-")[0].trim() == "Yute"){
-							enemyList.add(new WasteMansYute(roomItems[t].split("-")[1].trim()));
-						} else {
-							enemyList.add(new HypeBeastYute(roomItems[t].split("-")[1].trim()));
-						}
-					}
-				}
-				room.setRoomEnemies(enemyList);
-				
-=======
->>>>>>> refs/remotes/origin/master
-//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
+                String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
+                // An array of strings in the format ItemName-ItemWeight
+                ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+                for (int t = 0; t < roomEnemies.length; t++) {
+                                if (roomItems[t].equals("None-0")) {
+                                                t += 1;
+                                } else {
+                                                if (roomItems[t].split("-")[0].trim() == "Yute"){
+                                                                enemyList.add(new Yute(roomItems[t].split("-")[1].trim()));
+                                                }
+                                                else if (roomItems[t].split("-")[0].trim() == "Yute"){
+                                                                enemyList.add(new WasteMansYute(roomItems[t].split("-")[1].trim()));
+                                                } else {
+                                                                enemyList.add(new HypeBeastYute(roomItems[t].split("-")[1].trim()));
+                                                }
+                                }
+                }
+                room.setRoomEnemies(enemyList);
+
 				// This puts the room we created (Without the exits in the
 				// masterMap)
 				masterRoomMap.put(roomName.toUpperCase().substring(10).trim().replaceAll(" ", "_"), room);
@@ -279,9 +280,16 @@ class Game {
 				return true; // signal that we want to quit
 		} else if (commandWord.equals("eat")) {
 			System.out.println("Do you really think you should be eating at a time like this?");
+		}	
+		else if (commandWord.equals("use")){
+			if(command.hasSecondWord()==false)
+				System.out.println("Use what?");
+			else 
+				use(command.getSecondWord());
 		}
 		return false;
 	}
+
 
 	// implementations of user commands:
 
@@ -319,5 +327,28 @@ class Game {
 			System.out.println(currentRoom.longDescription());
 		}
 	}
+	
+	public void use(String secondWord) {
+	//checks to see if the item the player wants to use in their inventory
+		int inventorySize = characterInventory.getNumItems();
+		for(int i = 0; i<inventorySize; i++){
+			Item theItem = characterInventory.getInventory().get(i);
+			String itemName = theItem.getDescription();
 
+			if(itemName.equals(secondWord)){
+				
+				//checks the type of the item
+				if(theItem instanceof Food){
+					mainCharacter.setCharacterHealth(((Food) theItem).getHealthRestored() + mainCharacter.getCharacterHealth());
+					if(mainCharacter.getCharacterHealth()>mainCharacter.getCharacterHealthMax())
+						mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
+				}
+				else if (theItem instanceof WeaponAttachment){
+					
+				}
+			}
+			
+		}
+		
+	}
 }
