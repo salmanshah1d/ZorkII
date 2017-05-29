@@ -74,6 +74,7 @@ class Game {
 				}
 				room.setRoomItems(itemList);
 
+<<<<<<< HEAD
 				// adds room items ArrayList
 				String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
 				// An array of strings in the format ItemName-ItemWeight
@@ -94,6 +95,8 @@ class Game {
 				}
 				room.setRoomEnemies(enemyList);
 				
+=======
+>>>>>>> refs/remotes/origin/master
 //>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 				// This puts the room we created (Without the exits in the
 				// masterMap)
