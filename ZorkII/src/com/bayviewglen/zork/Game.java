@@ -101,6 +101,29 @@ class Game {
 
 
 
+<<<<<<< HEAD
+				// adds room items ArrayList
+				String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
+				// An array of strings in the format ItemName-ItemWeight
+				ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+				for (int t = 0; t < roomEnemies.length; t++) {
+					if (roomItems[t].equals("None-0")) {
+						t += 1;
+					} else {
+						if (roomItems[t].split("-")[0].trim() == "Yute"){
+							enemyList.add(new Yute(roomItems[t].split("-")[1].trim()));
+						}
+						else if (roomItems[t].split("-")[0].trim() == "Yute"){
+							enemyList.add(new WasteMansYute(roomItems[t].split("-")[1].trim()));
+						} else {
+							enemyList.add(new HypeBeastYute(roomItems[t].split("-")[1].trim()));
+						}
+					}
+				}
+				room.setRoomEnemies(enemyList);
+				
+=======
+>>>>>>> refs/remotes/origin/master
 //>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 				// This puts the room we created (Without the exits in the
 				// masterMap)
