@@ -23,7 +23,8 @@ class Room {
 	private String roomName;
 	private String description;
 	private HashMap<String, Room> exits; // stores exits of this room.
-	private ArrayList<Item> roomItems;
+	private Inventory roomInventory;
+	private Inventory characterInventory;
 	private ArrayList<Enemy> roomEnemies;
 
 	/**
@@ -35,12 +36,13 @@ class Room {
 		exits = new HashMap<String, Room>();
 	}
 
-	public Room() {
+	public Room(Inventory characterInventoryInput) {
 		// default constructor.
 		roomName = "DEFAULT ROOM";
 		description = "DEFAULT DESCRIPTION";
 		exits = new HashMap<String, Room>();
-		roomItems = new ArrayList<Item>(); 
+		roomInventory = new Inventory();
+		characterInventory = characterInventoryInput;
 		roomEnemies = new ArrayList<Enemy>();
 	}
 
@@ -106,32 +108,31 @@ class Room {
 	 * kitchen. Exits: north west
 	 */
 	public String longDescription() {
-		return "\nRoom: " + roomName + "\n\n" + description + itemString() + "\n" + exitString();
+		return "\nRoom: " + roomName + "\n\n" + description + characterItemsString() + itemString() + "\n" + exitString();
+	}
+
+	private String characterItemsString() {
+		if (characterInventory.getWeight() != 0) {
+			return ("\nYour Items: " + characterInventory.print());
+		} else {
+			return ("\nYour Items: None");
+		}
 	}
 
 	/**
-	 * Return a string describing the room's exits, for example "Exits: north
-	 * west ".
+	 * Return a string describing the room's items
 	 */
 
 	private String itemString() {
-		if (roomItems.size() != 0) {
-			String returnString = "\nItems: " + roomItems.get(0).display();
-
-			for (int i = 1; i < roomItems.size(); i++) {
-				returnString += ", " + roomItems.get(i).display();
-			}
-			
-			return returnString;
-			
+		if (roomInventory.getWeight() != 0) {
+			return ("\nRoom Items: " + roomInventory.print());
 		} else {
-			return "";
+			return ("\nRoom Items: None");
 		}
-
 	}
 
 	private String exitString() {
-		String returnString = "Exits:";
+		String returnString = "Room Exits:";
 		Set keys = exits.keySet();
 		for (Iterator iter = keys.iterator(); iter.hasNext();)
 			returnString += " " + iter.next();
@@ -154,10 +155,10 @@ class Room {
 		this.roomName = roomName;
 	}
 
-	public void setRoomItems(ArrayList<Item> itemsListInp) {
-		this.roomItems = itemsListInp;
+	public void setRoomInventory(Inventory roomItems) {
+		this.roomInventory = roomItems;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
@@ -168,5 +169,13 @@ class Room {
 
 	public void setRoomEnemies(ArrayList<Enemy> enemyList) {
 		this.roomEnemies = enemyList;
+	}
+	
+	public ArrayList<Enemy> getRoomEnemies() {
+		return roomEnemies;
+	}
+	
+	public Inventory getRoomInventory () {
+		return roomInventory;
 	}
 }

@@ -31,6 +31,4 @@ public class Weapon extends Item{
 	public void setPower(int power) {
 		Power = power;
 	}
-	
-
 }

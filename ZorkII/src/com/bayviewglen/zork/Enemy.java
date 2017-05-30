@@ -2,9 +2,9 @@ package com.bayviewglen.zork;
 
 import java.util.ArrayList;
 
-public class Enemy extends Character{
+public class Enemy extends Character {
 	ArrayList<Item> enemyInventory = new ArrayList<Item>();
-	
+
 	public ArrayList<Item> getEnemyInventory() {
 		return enemyInventory;
 	}
@@ -13,10 +13,11 @@ public class Enemy extends Character{
 		this.enemyInventory = enemyInventory;
 	}
 
-	public Enemy(){
+	public Enemy() {
 		super();
-}
-	public Enemy(String name){
+	}
+
+	public Enemy(String name) {
 		super(name);
-}
+	}
 }

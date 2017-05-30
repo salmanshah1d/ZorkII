@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.bayviewglen.zork;
 
 import java.io.File;
@@ -27,12 +26,13 @@ import org.omg.CORBA.SystemException;
  */
 
 class Game {
-	
+
 	public Character mainCharacter = new Character();
 	public Sword sword = new Sword();
 	private Parser parser;
 	private Room currentRoom;
 	Inventory characterInventory = new Inventory();
+	Inventory roomInventory;
 	// This is a MASTER object that contains all of the rooms and is easily
 	// accessible.
 	// The key will be the name of the room -> no spaces (Use all caps and
@@ -49,7 +49,7 @@ class Game {
 			HashMap<String, HashMap<String, String>> exits = new HashMap<String, HashMap<String, String>>();
 			roomScanner = new Scanner(new File(fileName));
 			while (roomScanner.hasNext()) {
-				Room room = new Room();
+				Room room = new Room(characterInventory);
 				// Read the Name
 				String roomName = roomScanner.nextLine();
 				room.setRoomName(roomName.split(":")[1].trim());
@@ -65,200 +65,45 @@ class Game {
 					temp.put(s.split("-")[0].trim(), s.split("-")[1]);
 				}
 
-=======
-package com.bayviewglen.zork;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-
-import org.omg.CORBA.SystemException;
-
-/**
- * Class Game - the main class of the "Zork" game.
- *
- * Author: Michael Kolling Version: 1.1 Date: March 2000
- * 
- * This class is the main class of the "Zork" application. Zork is a very
- * simple, text based adventure game. Users can walk around some scenery. That's
- * all. It should really be extended to make it more interesting!
- * 
- * To play this game, create an instance of this class and call the "play"
- * routine.
- * 
- * This main class creates and initialises all the others: it creates all rooms,
- * creates the parser and starts the game. It also evaluates the commands that
- * the parser returns.
- */
-
-class Game {
-	
-	public Character mainCharacter = new Character();
-	public Sword sword = new Sword();
-	private Parser parser;
-	private Room currentRoom;
-	Inventory characterInventory = new Inventory();
-	// This is a MASTER object that contains all of the rooms and is easily
-	// accessible.
-	// The key will be the name of the room -> no spaces (Use all caps and
-	// underscore -> Great Room would have a key of GREAT_ROOM
-	// In a hashmap keys are case sensitive.
-	// masterRoomMap.get("GREAT_ROOM") will return the Room Object that is the
-	// Great Room (assuming you have one).
-	private HashMap<String, Room> masterRoomMap;
-
-	private void initRooms(String fileName) throws Exception {
-		masterRoomMap = new HashMap<String, Room>();
-		Scanner roomScanner;
-		try {
-			HashMap<String, HashMap<String, String>> exits = new HashMap<String, HashMap<String, String>>();
-			roomScanner = new Scanner(new File(fileName));
-			while (roomScanner.hasNext()) {
-				Room room = new Room();
-				// Read the Name
-				String roomName = roomScanner.nextLine();
-				room.setRoomName(roomName.split(":")[1].trim());
-				// Read the Description
-				String roomDescription = roomScanner.nextLine();
-				room.setDescription(roomDescription.split(":")[1].replaceAll("<br>", "\n").trim());
-				// Read the Exits
-				String roomExits = roomScanner.nextLine();
-				// An array of strings in the format E-RoomName
-				String[] rooms = roomExits.split(":")[1].split(",");
-				HashMap<String, String> temp = new HashMap<String, String>();
-				for (String s : rooms) {
-					temp.put(s.split("-")[0].trim(), s.split("-")[1]);
-				}
-
->>>>>>> refs/remotes/origin/master
 				exits.put(roomName.substring(10).trim().toUpperCase().replaceAll(" ", "_"), temp);
-<<<<<<< HEAD
-=======
 
 				// adds room items ArrayList
 				String[] roomItems = roomScanner.nextLine().split(":")[1].split(",");
+				roomInventory = new Inventory();
 				// An array of strings in the format ItemName-ItemWeight
-				ArrayList<Item> itemList = new ArrayList<Item>();
 				for (int s = 0; s < roomItems.length; s++) {
 					if (roomItems[s].equals("None-0")) {
 						s += 1;
 					} else {
-						itemList.add(new Item(roomItems[s].split("-")[0].trim(),
+						if (roomItems[s].split("-")[0].trim().equals("Sword")){
+							roomInventory.addItem(new Sword());
+						} else /*else if (roomItems[s].split("-")[0].trim().equals("Food")){
+							room
+						}*/
+						roomInventory.addItem(new Item(roomItems[s].split("-")[0].trim(),
 								Integer.parseInt(roomItems[s].split("-")[1].trim())));
 					}
 				}
-				room.setRoomItems(itemList);
-				// adds room items ArrayList
-                String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
-                // An array of strings in the format ItemName-ItemWeight
-                ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-                for (int t = 0; t < roomEnemies.length; t++) {
-                                if (roomItems[t].equals("None-0")) {
-                                                t += 1;
-                                } else {
-                                                if (roomItems[t].split("-")[0].trim() == "Yute"){
-                                                                enemyList.add(new Yute(roomItems[t].split("-")[1].trim()));
-                                                }
-                                                else if (roomItems[t].split("-")[0].trim() == "Yute"){
-                                                                enemyList.add(new WasteMansYute(roomItems[t].split("-")[1].trim()));
-                                                } else {
-                                                                enemyList.add(new HypeBeastYute(roomItems[t].split("-")[1].trim()));
-                                                }
-                                }
-                }
-                room.setRoomEnemies(enemyList);
-
-				// This puts the room we created (Without the exits in the
-				// masterMap)
-				masterRoomMap.put(roomName.toUpperCase().substring(10).trim().replaceAll(" ", "_"), room);
-
-			}
-
-			for (String key : masterRoomMap.keySet()) {
-				Room roomTemp = masterRoomMap.get(key);
-				HashMap<String, String> tempExits = exits.get(key);
-				for (String s : tempExits.keySet()) {
-					// s = direction
-					// value is the room.
-
-					String roomName2 = tempExits.get(s.trim());
-					Room exitRoom = masterRoomMap.get(roomName2.toUpperCase().replaceAll(" ", "_"));
-					roomTemp.setExit(s.trim().charAt(0), exitRoom);
-
-				}
-
-			}
-
-			roomScanner.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the game and initialise its internal map.
-	 */
-	public Game() {
-		try {
-			initRooms("data/rooms.dat");
-			currentRoom = masterRoomMap.get("ANCIENT_KEY_HOLDER_ROOM");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		parser = new Parser();
-	}
-
-	/**
-	 * Main play routine. Loops until end of play.
-	 */
-	public void play() {
-		printWelcome();
-
-		// Enter the main command loop. Here we repeatedly read commands and
-		// execute them until the game is over.
-
-		boolean finished = false;
-		while (!finished) {
-			Command command = parser.getCommand();
-			finished = processCommand(command);
-		}
->>>>>>> refs/remotes/origin/master
+				room.setRoomInventory(roomInventory);
 
 				// adds room items ArrayList
-				String[] roomItems = roomScanner.nextLine().split(":")[1].split(",");
+				String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
 				// An array of strings in the format ItemName-ItemWeight
-				ArrayList<Item> itemList = new ArrayList<Item>();
-				for (int s = 0; s < roomItems.length; s++) {
-					if (roomItems[s].equals("None-0")) {
-						s += 1;
+				ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+				for (int t = 0; t < roomEnemies.length; t++) {
+					if (roomEnemies[t].equals("None-0")) {
+						t += 1;
 					} else {
-						itemList.add(new Item(roomItems[s].split("-")[0].trim(),
-								Integer.parseInt(roomItems[s].split("-")[1].trim())));
+						if (roomEnemies[t].split("-")[0].trim().equals("Yute")) {
+							enemyList.add(new Yute(roomEnemies[t].split("-")[1].trim()));
+						} else if (roomEnemies[t].split("-")[0].trim().equals("WasteMansYute")) {
+							enemyList.add(new WasteMansYute(roomEnemies[t].split("-")[1].trim()));
+						} else {
+							enemyList.add(new HypeBeastYute(roomEnemies[t].split("-")[1].trim()));
+						}
 					}
 				}
-				room.setRoomItems(itemList);
-				// adds room items ArrayList
-                String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
-                // An array of strings in the format ItemName-ItemWeight
-                ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-                for (int t = 0; t < roomEnemies.length; t++) {
-                                if (roomItems[t].equals("None-0")) {
-                                                t += 1;
-                                } else {
-                                                if (roomItems[t].split("-")[0].trim() == "Yute"){
-                                                                enemyList.add(new Yute(roomItems[t].split("-")[1].trim()));
-                                                }
-                                                else if (roomItems[t].split("-")[0].trim() == "Yute"){
-                                                                enemyList.add(new WasteMansYute(roomItems[t].split("-")[1].trim()));
-                                                } else {
-                                                                enemyList.add(new HypeBeastYute(roomItems[t].split("-")[1].trim()));
-                                                }
-                                }
-                }
-                room.setRoomEnemies(enemyList);
+				room.setRoomEnemies(enemyList);
 
 				// This puts the room we created (Without the exits in the
 				// masterMap)
@@ -317,8 +162,7 @@ class Game {
 		}
 
 		System.out.println("Thank you for playing. Good bye.");
-//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
-<<<<<<< HEAD
+		// >>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 	}
 
 	/**
@@ -331,11 +175,9 @@ class Game {
 
 		name = textCheck(name);
 		System.out.println("(Heads up: press enter after each line when you're done reading.)");
-		intro(name);
-//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
+		// intro(name);
 		System.out.println(currentRoom.longDescription());
 	}
-
 
 	private String textCheck(String text) {
 		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -357,9 +199,8 @@ class Game {
 			}
 		}
 		return text;
-//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
+		// >>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 	}
-
 
 	private void intro(String name) {
 		Scanner scanner = new Scanner(System.in);
@@ -407,7 +248,7 @@ class Game {
 		delay(1);
 		System.out.print("begin. ");
 		scanner.nextLine();
-//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
+		// >>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 	}
 
 	private void delay(double num) {
@@ -435,6 +276,8 @@ class Game {
 			printHelp();
 		else if (commandWord.equals("go"))
 			goRoom(command);
+		else if (commandWord.equals("take"))
+			takeItem(command);
 		else if (commandWord.equals("quit")) {
 			if (command.hasSecondWord())
 				System.out.println("Quit what?");
@@ -442,68 +285,14 @@ class Game {
 				return true; // signal that we want to quit
 		} else if (commandWord.equals("eat")) {
 			System.out.println("Do you really think you should be eating at a time like this?");
-		}	
-		else if (commandWord.equals("use")){
-			if(command.hasSecondWord()==false)
+		} else if (commandWord.equals("use")) {
+			if (command.hasSecondWord() == false)
 				System.out.println("Use what?");
-			else 
-				use(command.getSecondWord());
-		}
-		return false;
-	}
-
-
-	// implementations of user commands:
-
-	/**
-	 * Print out some help information. Here we print some stupid, cryptic
-	 * message and a list of the command words.
-	 */
-=======
-	}
-
-	private void delay(double num) {
-		num *= 1000;
-		try {
-			Thread.sleep((int) num);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Given a command, process (that is: execute) the command. If this command
-	 * ends the game, true is returned, otherwise false is returned.
-	 */
-	private boolean processCommand(Command command) {
-		if (command.isUnknown()) {
-			System.out.println("I don't know what you mean...");
-			return false;
-		}
-
-		String commandWord = command.getCommandWord();
-		if (commandWord.equals("help"))
-			printHelp();
-		else if (commandWord.equals("go"))
-			goRoom(command);
-		else if (commandWord.equals("quit")) {
-			if (command.hasSecondWord())
-				System.out.println("Quit what?");
 			else
-				return true; // signal that we want to quit
-		} else if (commandWord.equals("eat")) {
-			System.out.println("Do you really think you should be eating at a time like this?");
-		}	
-		else if (commandWord.equals("use")){
-			if(command.hasSecondWord()==false)
-				System.out.println("Use what?");
-			else 
 				use(command.getSecondWord());
 		}
 		return false;
 	}
-
 
 	// implementations of user commands:
 
@@ -511,11 +300,9 @@ class Game {
 	 * Print out some help information. Here we print some stupid, cryptic
 	 * message and a list of the command words.
 	 */
->>>>>>> refs/remotes/origin/master
 	private void printHelp() {
 		System.out.println("You are lost. You are alone. You wander.");
-//>>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
-<<<<<<< HEAD
+		// >>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 		System.out.println("Your command words are:");
 		parser.showCommands();
 	}
@@ -543,81 +330,98 @@ class Game {
 			System.out.println(currentRoom.longDescription());
 		}
 	}
-	
-	public void use(String secondWord) {
-	//checks to see if the item the player wants to use in their inventory
-		int inventorySize = characterInventory.getNumItems();
-		for(int i = 0; i<inventorySize; i++){
-			Item theItem = characterInventory.getInventory().get(i);
-			String itemName = theItem.getDescription();
 
-			if(itemName.equals(secondWord)){
-				
-				//checks the type of the item
-				if(theItem instanceof Food){
-					mainCharacter.setCharacterHealth(((Food) theItem).getHealthRestored() + mainCharacter.getCharacterHealth());
-					if(mainCharacter.getCharacterHealth()>mainCharacter.getCharacterHealthMax())
-						mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
-				}
-				else if (theItem instanceof WeaponAttachment){
-					
-				}
-			}
-			
-		}
-		
-	}
-=======
-		System.out.println("Your command words are:");
-		parser.showCommands();
-	}
-
-	/**
-	 * Try to go to one direction. If there is an exit, enter the new room,
-	 * otherwise print an error message.
-	 */
-	private void goRoom(Command command) {
+	private void takeItem(Command command) {
 		if (!command.hasSecondWord()) {
-			// if there is no second word, we don't know where to go...
-			System.out.println("Go where?");
+			// if there is no second word, we don't know what to pick up...
+			System.out.println("Take what?");
 			return;
 		}
 
-		String direction = command.getSecondWord();
+		String object = command.getSecondWord();
 
-		// Try to leave current room.
-		Room nextRoom = currentRoom.nextRoom(direction);
+		int itemIndex = -1;
 
-		if (nextRoom == null)
-			System.out.println("There is no door!");
-		else {
-			currentRoom = nextRoom;
-			System.out.println(currentRoom.longDescription());
+		for (int i = 0; i < currentRoom.getRoomInventory().getNumItems(); i++) {
+			if (currentRoom.getRoomInventory().getItem(i).getDescription().equals(object)) {
+				itemIndex = i;
+			}
+		}
+
+		if (itemIndex == -1) {
+			System.out.println("There is no such item...");
+			return;
+		} else {
+			characterInventory.addItem(currentRoom.getRoomInventory().getItem(itemIndex));
+			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
+			System.out.println("Done. Now?");
 		}
 	}
-	
+
+	/*private void attackEnemy(Command command) {
+		if (!command.hasSecondWord()) {
+			// if there is no second word, we don't know who to attack
+			System.out.println("Attack who?");
+			return;
+		}
+
+		String enemy = command.getSecondWord();
+		int enemyIndex = -1;
+
+		for (int i = 0; i < currentRoom.getRoomEnemies().size(); i++) {
+			if (currentRoom.getRoomEnemies().get(i).getCharacterName().equals(enemy)) {
+				enemyIndex = i;
+			}
+		}
+
+		if (enemyIndex == -1) {
+			System.out.println("There is no such enemy...");
+			return;
+		} else {
+			mainCharacter.setSword(characterInventory.getItem(0));
+			enemy.setCharacterHealth(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - mainCharacter.getSword().getPower());
+		}
+	}*/
+
+	/*private void fight(Character mainCharacter, Enemy enemy) {
+		Scanner keyboard = new Scanner(System.in);
+		boolean quit = false;
+		while (mainCharacter.getCharacterHealth() > 0 && enemy.getCharacterHealth() > 0 && !quit) {
+			System.out.println("Your Health: " + mainCharacter.getCharacterHealth());
+			System.out.println("Enemy Health: " + enemy.getCharacterHealth());
+			System.out.println("You can either: attack, run");
+			System.out.print("> ");
+			String command = keyboard.nextLine();
+
+			if (command.equals("attack")) {
+				enemy.setCharacterHealth(enemy.getCharacterHealth() - mainCharacter.getSword().getPower());
+			} else {
+				quit = true;
+			}
+		}
+	}*/
+
 	public void use(String secondWord) {
-	//checks to see if the item the player wants to use in their inventory
+		// checks to see if the item the player wants to use in their inventory
 		int inventorySize = characterInventory.getNumItems();
-		for(int i = 0; i<inventorySize; i++){
+		for (int i = 0; i < inventorySize; i++) {
 			Item theItem = characterInventory.getInventory().get(i);
 			String itemName = theItem.getDescription();
 
-			if(itemName.equals(secondWord)){
-				
-				//checks the type of the item
-				if(theItem instanceof Food){
-					mainCharacter.setCharacterHealth(((Food) theItem).getHealthRestored() + mainCharacter.getCharacterHealth());
-					if(mainCharacter.getCharacterHealth()>mainCharacter.getCharacterHealthMax())
+			if (itemName.equals(secondWord)) {
+
+				// checks the type of the item
+				if (theItem instanceof Food) {
+					mainCharacter.setCharacterHealth(
+							((Food) theItem).getHealthRestored() + mainCharacter.getCharacterHealth());
+					if (mainCharacter.getCharacterHealth() > mainCharacter.getCharacterHealthMax())
 						mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
-				}
-				else if (theItem instanceof WeaponAttachment){
-					
+				} else if (theItem instanceof WeaponAttachment) {
+
 				}
 			}
-			
+
 		}
-		
+
 	}
->>>>>>> refs/remotes/origin/master
 }

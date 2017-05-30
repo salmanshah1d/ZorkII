@@ -48,9 +48,10 @@ public class Inventory {
 		String words = "";
 		for (int i = 0; i<inventory.size(); i ++){
 			if (inventory.get(i)!=null){
-				words += inventory.get(i).getDescription() + "\n";
+				words += inventory.get(i).display() + ", ";
 			}
 		}
+		words = words.substring(0, words.length()-2);
 		return words;
 	}
 
@@ -62,5 +63,9 @@ public class Inventory {
 
 	public void setMaxWeight(int maxWeight) {
 		this.maxWeight = maxWeight;
+	}
+	
+	public Item getItem(int index) {
+		return inventory.get(index);
 	}
 }

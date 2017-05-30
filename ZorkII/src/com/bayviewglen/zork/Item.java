@@ -7,12 +7,12 @@ public class Item {
 	private double cost;
 	
 	Item(String objectInp, double weightInp) {
-		description = objectInp;
+		description = objectInp.toLowerCase();
 		mass = weightInp;
 	}
 	
 	Item(String objectInp, double weightInp, int costInp) {
-		description = objectInp;
+		description = objectInp.toLowerCase();
 		mass = weightInp;
 		cost = costInp;
 	}
