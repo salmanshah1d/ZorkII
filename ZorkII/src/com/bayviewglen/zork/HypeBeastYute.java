@@ -7,19 +7,16 @@ public class HypeBeastYute extends Enemy{
 	//creates a weapon to be used in combat
 		Weapon wasteMansYuteShank = new GreasyShank();
 		//sets character attributes
-		private int characterHealth = 100;
-		private int characterHealthMax = 100;
+		//private int characterHealth = 100;
+		//private int characterHealthMax = 100;
 		private int characterPower = wasteMansYuteShank.getPower();
 
-		public void setEnemyInventory(ArrayList<Item> hypeBeastYuteInventory) {
+		public void setEnemyInventory(Inventory hypeBeastYuteInventory) {
 			this.enemyInventory = hypeBeastYuteInventory;
-			hypeBeastYuteInventory.add(new GreasyShank());
+			hypeBeastYuteInventory.addItem(new GreasyShank());
 		}
 
-		public HypeBeastYute(){
-			super();
-		}
 		public HypeBeastYute(String name){
-			super(name);
+			super(name, 100);
 		}
 }
