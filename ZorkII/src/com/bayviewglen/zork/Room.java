@@ -25,7 +25,7 @@ class Room {
 	private HashMap<String, Room> exits; // stores exits of this room.
 	private Inventory roomInventory;
 	private Inventory characterInventory;
-	private ArrayList<Enemy> roomEnemies;
+	private ArrayList<Character> roomEnemies;
 
 	/**
 	 * Create a room described "description". Initially, it has no exits.
@@ -43,7 +43,7 @@ class Room {
 		exits = new HashMap<String, Room>();
 		roomInventory = new Inventory();
 		characterInventory = characterInventoryInput;
-		roomEnemies = new ArrayList<Enemy>();
+		roomEnemies = new ArrayList<Character>();
 	}
 
 	public void setExit(char direction, Room r) throws Exception {
@@ -167,11 +167,11 @@ class Room {
 		this.description = description;
 	}
 
-	public void setRoomEnemies(ArrayList<Enemy> enemyList) {
+	public void setRoomEnemies(ArrayList<Character> enemyList) {
 		this.roomEnemies = enemyList;
 	}
 	
-	public ArrayList<Enemy> getRoomEnemies() {
+	public ArrayList<Character> getRoomEnemies() {
 		return roomEnemies;
 	}
 	

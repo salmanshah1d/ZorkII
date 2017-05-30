@@ -28,7 +28,6 @@ import org.omg.CORBA.SystemException;
 class Game {
 
 	public Character mainCharacter = new Character();
-	public Sword sword = new Sword();
 	private Parser parser;
 	private Room currentRoom;
 	Inventory characterInventory = new Inventory();
@@ -67,7 +66,7 @@ class Game {
 
 				exits.put(roomName.substring(10).trim().toUpperCase().replaceAll(" ", "_"), temp);
 
-				// adds room items ArrayList
+				// adds room items Inventory
 				String[] roomItems = roomScanner.nextLine().split(":")[1].split(",");
 				roomInventory = new Inventory();
 				// An array of strings in the format ItemName-ItemWeight
@@ -75,11 +74,6 @@ class Game {
 					if (roomItems[s].equals("None-0")) {
 						s += 1;
 					} else {
-						if (roomItems[s].split("-")[0].trim().equals("Sword")){
-							roomInventory.addItem(new Sword());
-						} else /*else if (roomItems[s].split("-")[0].trim().equals("Food")){
-							room
-						}*/
 						roomInventory.addItem(new Item(roomItems[s].split("-")[0].trim(),
 								Integer.parseInt(roomItems[s].split("-")[1].trim())));
 					}
@@ -89,7 +83,7 @@ class Game {
 				// adds room items ArrayList
 				String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
 				// An array of strings in the format ItemName-ItemWeight
-				ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+				ArrayList<Character> enemyList = new ArrayList<Character>();
 				for (int t = 0; t < roomEnemies.length; t++) {
 					if (roomEnemies[t].equals("None-0")) {
 						t += 1;
@@ -117,15 +111,11 @@ class Game {
 				for (String s : tempExits.keySet()) {
 					// s = direction
 					// value is the room.
-
 					String roomName2 = tempExits.get(s.trim());
 					Room exitRoom = masterRoomMap.get(roomName2.toUpperCase().replaceAll(" ", "_"));
 					roomTemp.setExit(s.trim().charAt(0), exitRoom);
-
 				}
-
 			}
-
 			roomScanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -278,6 +268,8 @@ class Game {
 			goRoom(command);
 		else if (commandWord.equals("take"))
 			takeItem(command);
+		else if (commandWord.equals("attack"))
+			attackEnemy(command);
 		else if (commandWord.equals("quit")) {
 			if (command.hasSecondWord())
 				System.out.println("Quit what?");
@@ -347,10 +339,14 @@ class Game {
 				itemIndex = i;
 			}
 		}
-
 		if (itemIndex == -1) {
 			System.out.println("There is no such item...");
 			return;
+		} else if (currentRoom.getRoomInventory().getItem(itemIndex).getDescription().equals("sword")) {
+			mainCharacter.setSword(currentRoom.getRoomInventory().getItem(itemIndex));
+			characterInventory.addItem(currentRoom.getRoomInventory().getItem(itemIndex));
+			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
+			System.out.println("Done. Now?");
 		} else {
 			characterInventory.addItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
@@ -358,13 +354,12 @@ class Game {
 		}
 	}
 
-	/*private void attackEnemy(Command command) {
+	private void attackEnemy(Command command) {
 		if (!command.hasSecondWord()) {
 			// if there is no second word, we don't know who to attack
 			System.out.println("Attack who?");
 			return;
 		}
-
 		String enemy = command.getSecondWord();
 		int enemyIndex = -1;
 
@@ -378,28 +373,11 @@ class Game {
 			System.out.println("There is no such enemy...");
 			return;
 		} else {
-			mainCharacter.setSword(characterInventory.getItem(0));
-			enemy.setCharacterHealth(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - mainCharacter.getSword().getPower());
-		}
-	}*/
-
-	/*private void fight(Character mainCharacter, Enemy enemy) {
-		Scanner keyboard = new Scanner(System.in);
-		boolean quit = false;
-		while (mainCharacter.getCharacterHealth() > 0 && enemy.getCharacterHealth() > 0 && !quit) {
+			//currentRoom.getRoomEnemies().get(enemyIndex).setCharacterHealth(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() /*- mainCharacter.getSword().getPower()*/);
 			System.out.println("Your Health: " + mainCharacter.getCharacterHealth());
-			System.out.println("Enemy Health: " + enemy.getCharacterHealth());
-			System.out.println("You can either: attack, run");
-			System.out.print("> ");
-			String command = keyboard.nextLine();
-
-			if (command.equals("attack")) {
-				enemy.setCharacterHealth(enemy.getCharacterHealth() - mainCharacter.getSword().getPower());
-			} else {
-				quit = true;
-			}
+			System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + "'s Health: " + currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth());
 		}
-	}*/
+	}
 
 	public void use(String secondWord) {
 		// checks to see if the item the player wants to use in their inventory

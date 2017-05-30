@@ -2,13 +2,16 @@ package com.bayviewglen.zork;
 
 public class Item {
 	private String description;
-
 	private double mass;
 	private double cost;
+	private int power;
 	
 	Item(String objectInp, double weightInp) {
 		description = objectInp.toLowerCase();
 		mass = weightInp;
+		if (objectInp.equals("Sword")){
+			power = 50;
+		}
 	}
 	
 	Item(String objectInp, double weightInp, int costInp) {
@@ -41,6 +44,10 @@ public class Item {
 	
 	public String display() {
 		return(description + " (" + mass + ")");
+	}
+
+	public int getPower() {
+		return power;
 	}	
 }
 

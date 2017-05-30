@@ -7,7 +7,7 @@ public class Character {
 	private String characterName;
 	private int characterHealth;
 	private int characterHealthMax; // what is this?
-	private Sword characterSword;
+	private Item characterSword;
 	private int characterPower;
 	private int characterArmor;
 
@@ -84,11 +84,11 @@ public class Character {
 		this.characterHealthMax = characterHealthMax;
 	}
 
-	public void setSword(Sword sword) {
-		this.characterSword = sword;
+	public void setSword(Item item) {
+		this.characterSword = item;
 	}
 
-	public Sword getSword() {
+	public Item getSword() {
 		return characterSword;
 	}
 }
