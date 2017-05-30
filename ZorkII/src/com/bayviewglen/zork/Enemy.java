@@ -1,20 +1,18 @@
 package com.bayviewglen.zork;
 
-import java.util.ArrayList;
-
 public class Enemy extends Character {
-	ArrayList<Item> enemyInventory = new ArrayList<Item>();
+	public Enemy(String name, int i){
+		super(name, i);
+	}
+	
+	Inventory enemyInventory = new Inventory();
 
-	public ArrayList<Item> getEnemyInventory() {
+	public Inventory getEnemyInventory() {
 		return enemyInventory;
 	}
 
-	public void setEnemyInventory(ArrayList<Item> enemyInventory) {
+	public void setEnemyInventory(Inventory enemyInventory) {
 		this.enemyInventory = enemyInventory;
-	}
-
-	public Enemy() {
-		super();
 	}
 
 	public Enemy(String name) {

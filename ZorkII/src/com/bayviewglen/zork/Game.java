@@ -83,7 +83,7 @@ class Game {
 				// adds room items ArrayList
 				String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
 				// An array of strings in the format ItemName-ItemWeight
-				ArrayList<Character> enemyList = new ArrayList<Character>();
+				ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 				for (int t = 0; t < roomEnemies.length; t++) {
 					if (roomEnemies[t].equals("None-0")) {
 						t += 1;
@@ -373,7 +373,7 @@ class Game {
 			System.out.println("There is no such enemy...");
 			return;
 		} else {
-			//currentRoom.getRoomEnemies().get(enemyIndex).setCharacterHealth(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() /*- mainCharacter.getSword().getPower()*/);
+			currentRoom.getRoomEnemies().get(enemyIndex).setCharacterHealth(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - mainCharacter.getSword().getPower());
 			System.out.println("Your Health: " + mainCharacter.getCharacterHealth());
 			System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + "'s Health: " + currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth());
 		}
