@@ -7,19 +7,16 @@ public class WasteMansYute extends Enemy{
 	//creates a weapon to be used in combat
 	Weapon wasteMansYuteShank = new GreasyShank();
 	//sets character attributes
-	private int characterHealth = 75;
-	private int characterHealthMax = 75;
+	//private int characterHealth = 75;
+	//private int characterHealthMax = 75;
 	private int characterPower = wasteMansYuteShank.getPower();
 
-	public void setEnemyInventory(ArrayList<Item> wasteMansYuteInventory) {
+	public void setEnemyInventory(Inventory wasteMansYuteInventory) {
 		this.enemyInventory = wasteMansYuteInventory;
-		wasteMansYuteInventory.add(new GreasyShank());
+		wasteMansYuteInventory.addItem(new GreasyShank());
 	}
 
-	public WasteMansYute(){
-		super();
-	}
 	public WasteMansYute(String name){
-		super(name);
+		super(name, 75);
 	}
 }
