@@ -2,7 +2,7 @@ package com.bayviewglen.zork;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+// test
 public class ShayanShakeriNezhad extends NonPlayableCharacter{
 	
 	private String characterName = "ShayanSn";
