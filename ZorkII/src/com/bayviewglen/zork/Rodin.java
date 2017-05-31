@@ -111,7 +111,7 @@ public class Rodin extends NonPlayableCharacter{
 				for (int j=0; j<inv.getNumItems();j++){
 					if(wishToSell.equalsIgnoreCase(inv.getItem(j).getDescription())){
 						rodinInventory.add(inv.getItem(j));
-						inv.setWallet(inv.getWallet()+inv.getItem(j).getCost());
+						inv.setWallet((int)(inv.getWallet()+inv.getItem(j).getCost()));
 						inv.removeItem(inv.getItem(j));
 						System.out.println("You now have " + inv.getWallet() + "Iranian Rials.");
 						isSellable = true;
