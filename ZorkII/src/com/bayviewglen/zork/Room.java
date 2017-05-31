@@ -217,4 +217,8 @@ class Room {
 	public void setNPC(NonPlayableCharacter nonPlayableCharacter) {
 		this.npc = nonPlayableCharacter;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/remotes/origin/master
