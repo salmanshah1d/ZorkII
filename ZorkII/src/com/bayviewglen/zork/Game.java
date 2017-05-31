@@ -33,6 +33,7 @@ class Game {
 	private Sword mainSword;
 	private Inventory characterInventory = new Inventory();
 	private Inventory roomInventory;
+	boolean finished = false;
 	// This is a MASTER object that contains all of the rooms and is easily
 	// accessible.
 	// The key will be the name of the room -> no spaces (Use all caps and
@@ -149,7 +150,7 @@ class Game {
 		// Enter the main command loop. Here we repeatedly read commands and
 		// execute them until the game is over.
 
-		boolean finished = false;
+		finished = false;
 		while (!finished) {
 			Command command = parser.getCommand();
 			finished = processCommand(command);
@@ -274,8 +275,9 @@ class Game {
 			takeItem(command);
 		else if (commandWord.equals("attack"))
 			attackEnemy(command);
-		else if (commandWord.equals("talk"))
-			talk(command);
+		/*
+		 * else if (commandWord.equals("talk")) talk(command);
+		 */
 		else if (commandWord.equals("quit")) {
 			if (command.hasSecondWord())
 				System.out.println("Quit what?");
@@ -294,10 +296,12 @@ class Game {
 
 	// implementations of user commands:
 
-	private void talk(Command command) {
-		
-		
-	}
+	/*
+	 * private void talk(Command command) { if
+	 * (currentRoom.getNonPlayableCharacter.getName().equals(command)){
+	 * currentRoom.getNonPlayableCharacter.talk(); } else {
+	 * System.out.println(command + " is not in this room."); } }
+	 */
 
 	/**
 	 * Print out some help information. Here we print some stupid, cryptic
@@ -384,22 +388,29 @@ class Game {
 			System.out.println("There is no such enemy...");
 			return;
 		} else {
-			currentRoom.getRoomEnemies().get(enemyIndex)
-					.setCharacterHealth(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth()
-							- mainSword.getPower());
-			mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth() - currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getPower());
+			currentRoom.getRoomEnemies().get(enemyIndex).setCharacterHealth(
+					currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - mainSword.getPower());
+			mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth()
+					- currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getPower());
 			System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " attacked you back!");
-			System.out.print("Your Health: " + mainCharacter.getCharacterHealth() + " |");
-			for (int i = 0; i < mainCharacter.getCharacterHealth()/5; i++){
-				System.out.print("-");
+			if (currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() < 0) {
+				System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " is dead.");
+				currentRoom.getRoomEnemies().remove(enemyIndex);
+			} else if (mainCharacter.getCharacterHealth() < 0) {
+				finished = true;
+			} else { //indicates that game continues
+				System.out.print("Your Health: " + mainCharacter.getCharacterHealth() + " |");
+				for (int i = 0; i < mainCharacter.getCharacterHealth() / 5; i++) {
+					System.out.print("-");
+				}
+				for (int j = mainCharacter.getCharacterHealth() / 5; j < 20; j++) {
+					System.out.print(" ");
+				}
+				System.out.println("|");
+				System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + "'s Health: "
+						+ currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth());
 			}
-			for (int j = mainCharacter.getCharacterHealth()/5; j < 20; j++){
-				System.out.print(" ");
-			}
-			System.out.println("|");
-			System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + "'s Health: "
-					+ currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth());
-		}	
+		}
 	}
 
 	public void use(String secondWord) {
