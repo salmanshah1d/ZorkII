@@ -25,7 +25,7 @@ class Room {
 	private HashMap<String, Room> exits; // stores exits of this room.
 	private Inventory roomInventory;
 	private Inventory characterInventory;
-	private NonPlayableCharacter npc;
+	private Character npc;
 	private ArrayList<Enemy> roomEnemies;
 
 	/**
@@ -115,7 +115,7 @@ class Room {
 
 	private String npString() {
 		if (npc != null) {
-			return ("You see " + npc.getCharacterName() + " in this room. To interact with him, write \"talk <name>\".\n");
+			return ("\nYou see " + npc.getCharacterName() + " in this room. To interact with him, write \"talk <name>\".\n");
 		} else {
 			return "";
 		}
