@@ -23,6 +23,16 @@ public class Inventory {
 		}
 	}
 
+	public void addItem(Weapon weapon) {
+		if ((weight + weapon.getMass()) < maxWeight) { // IT IS A + NOT A "+="
+			inventory.add(weapon);
+			weight += weapon.getMass();
+
+		} else {
+			System.out.println("It is too heavy to be carried!");
+		}
+	}
+	
 	// how to remove an item
 	public void removeItem(Item item) {
 		currentIndex = inventory.indexOf(item);
@@ -67,10 +77,10 @@ public class Inventory {
 	}
 
 	public Item getItem(int index) {
+		if (inventory.get(index).getDescription().equals("Sword")){
+			return (Weapon) inventory.get(index); 
+		} else {
 		return inventory.get(index);
-	}
-
-	public void setSword(Sword sword, Character mainCharacter){
-		mainCharacter.setSword(sword);
+		}
 	}
 }

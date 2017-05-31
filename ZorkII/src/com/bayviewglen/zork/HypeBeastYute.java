@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class HypeBeastYute extends Enemy{
 	
 	//creates a weapon to be used in combat
-		Weapon wasteMansYuteShank = new GreasyShank();
+		static Weapon hypeBeastYuteShank = new GreasyShank();
 		//sets character attributes
 		//private int characterHealth = 100;
 		//private int characterHealthMax = 100;
-		private int characterPower = wasteMansYuteShank.getPower();
+		private int characterPower = hypeBeastYuteShank.getPower();
 
 		public void setEnemyInventory(Inventory hypeBeastYuteInventory) {
 			this.enemyInventory = hypeBeastYuteInventory;
@@ -17,6 +17,6 @@ public class HypeBeastYute extends Enemy{
 		}
 
 		public HypeBeastYute(String name){
-			super(name, 100);
+			super(name, 100, hypeBeastYuteShank);
 		}
 }

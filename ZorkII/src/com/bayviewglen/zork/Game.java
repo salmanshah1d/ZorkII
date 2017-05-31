@@ -30,8 +30,9 @@ class Game {
 	public Character mainCharacter = new Character();
 	private Parser parser;
 	private Room currentRoom;
-	Inventory characterInventory = new Inventory();
-	Inventory roomInventory;
+	private Sword mainSword;
+	private Inventory characterInventory = new Inventory();
+	private Inventory roomInventory;
 	// This is a MASTER object that contains all of the rooms and is easily
 	// accessible.
 	// The key will be the name of the room -> no spaces (Use all caps and
@@ -73,6 +74,9 @@ class Game {
 				for (int s = 0; s < roomItems.length; s++) {
 					if (roomItems[s].equals("None-0")) {
 						s += 1;
+					} else if (roomItems[s].substring(0, roomItems[s].length() - 2).equals("Sword")) {
+						roomInventory.addItem(new Weapon(roomItems[s].split("-")[0].trim(),
+								Integer.parseInt(roomItems[s].split("-")[1].trim()), 25));
 					} else {
 						roomInventory.addItem(new Item(roomItems[s].split("-")[0].trim(),
 								Integer.parseInt(roomItems[s].split("-")[1].trim())));
@@ -270,6 +274,8 @@ class Game {
 			takeItem(command);
 		else if (commandWord.equals("attack"))
 			attackEnemy(command);
+		else if (commandWord.equals("talk"))
+			talk(command);
 		else if (commandWord.equals("quit")) {
 			if (command.hasSecondWord())
 				System.out.println("Quit what?");
@@ -287,6 +293,11 @@ class Game {
 	}
 
 	// implementations of user commands:
+
+	private void talk(Command command) {
+		
+		
+	}
 
 	/**
 	 * Print out some help information. Here we print some stupid, cryptic
@@ -343,7 +354,7 @@ class Game {
 			System.out.println("There is no such item...");
 			return;
 		} else if (currentRoom.getRoomInventory().getItem(itemIndex).getDescription().equals("sword")) {
-			mainCharacter.setSword(currentRoom.getRoomInventory().getItem(itemIndex));
+			mainSword = new Sword();
 			characterInventory.addItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			System.out.println("Done. Now?");
@@ -373,10 +384,22 @@ class Game {
 			System.out.println("There is no such enemy...");
 			return;
 		} else {
-			currentRoom.getRoomEnemies().get(enemyIndex).setCharacterHealth(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - mainCharacter.getSword().getPower());
-			System.out.println("Your Health: " + mainCharacter.getCharacterHealth());
-			System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + "'s Health: " + currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth());
-		}
+			currentRoom.getRoomEnemies().get(enemyIndex)
+					.setCharacterHealth(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth()
+							- mainSword.getPower());
+			mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth() - currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getPower());
+			System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " attacked you back!");
+			System.out.print("Your Health: " + mainCharacter.getCharacterHealth() + " |");
+			for (int i = 0; i < mainCharacter.getCharacterHealth()/5; i++){
+				System.out.print("-");
+			}
+			for (int j = mainCharacter.getCharacterHealth()/5; j < 20; j++){
+				System.out.print(" ");
+			}
+			System.out.println("|");
+			System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + "'s Health: "
+					+ currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth());
+		}	
 	}
 
 	public void use(String secondWord) {

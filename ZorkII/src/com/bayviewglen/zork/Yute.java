@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Yute extends Enemy{
 
 	//creates a weapon to be used in combat
-	Weapon yuteShank = new DirtyShank();
+	static Weapon yuteShank = new DirtyShank();
 	//sets character attributes
 	private int characterPower = yuteShank.getPower();
 	//private int characterHealth = 100;
@@ -24,6 +24,6 @@ public class Yute extends Enemy{
 	}
 	
 	public Yute(String name){
-		super(name, 50);
+		super(name, 50, yuteShank);
 	}
 }

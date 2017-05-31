@@ -13,7 +13,7 @@ public class Weapon extends Item{
 	}
 	
 	public Weapon(String description, double mass, int power){
-		super(description,mass);
+		super(description, mass);
 		this.Power = power;
 	}
 	
