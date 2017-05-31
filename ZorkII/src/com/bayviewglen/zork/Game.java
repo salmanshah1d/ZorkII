@@ -104,33 +104,22 @@ class Game {
 
 				room.setRoomEnemies(enemyList);
 
-				String roomNPC = roomScanner.nextLine().split(":")[1];
-
+				String roomNPC = roomScanner.nextLine().split(":")[1].trim();
+				
 				if (roomNPC.equals("ShayanSn")) {
-					currentRoom.setNPC(new ShayanShakeriNezhad());
-				}
-				if (roomNPC.equals("Salesi")) {
-					currentRoom.setNPC(new ShayanSalesi());
-				}
-
-				if (roomNPC.equals("Rodin")) {
-					currentRoom.setNPC(new Rodin());
-				}
-
-				if (roomNPC.equals("Andrei")) {
-					currentRoom.setNPC(new Andrei());
-				}
-				
-				if (roomNPC.equals("Daniel")) {
-					currentRoom.setNPC(new Rodin());
-				}
-				
-				if (roomNPC.equals("RyanMak")) {
-					currentRoom.setNPC(new RyanMak());
-				}
-
-				if (roomNPC.equals("Mr. DesLauriers")) {
-					currentRoom.setNPC(new Deslaurier());
+					room.setNPC(new ShayanShakeriNezhad());
+				} else if (roomNPC.equals("Salesi")) {
+					room.setNPC(new ShayanSalesi());
+				} else if (roomNPC.equals("Rodin")) {
+					room.setNPC(new Rodin());
+				} else if (roomNPC.equals("Andrei")) {
+					room.setNPC(new Andrei());
+				} else if (roomNPC.equals("Daniel")) {
+					room.setNPC(new Rodin());
+				} else if (roomNPC.equals("RyanMak")) {
+					room.setNPC(new RyanMak());
+				} else if (roomNPC.equals("Mr. DesLauriers")) {
+					room.setNPC(new Deslaurier());
 				}
 				
 				// This puts the room we created (Without the exits in the
