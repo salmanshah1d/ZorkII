@@ -9,7 +9,6 @@ public class Character {
 	private int characterHealth;
 	private int characterHealthMax; // what is this?
 	private Weapon characterWeapon;
-	private int characterWallet;
 	//private int characterPower;
 	private int characterArmor;
 
@@ -35,7 +34,6 @@ public class Character {
 
 	public Character() {
 		this.characterHealth = 100;
-		this.characterWallet = 0;
 	}
 
 	public Character(String name) {
