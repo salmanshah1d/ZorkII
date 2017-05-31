@@ -57,7 +57,7 @@ public class Inventory {
 
 	// print out the inventory you have
 	public String print() {
-		String words = "";
+		String words = "ayy";
 		if (inventory.size() == 1) {
 			if (inventory.get(0).getDescription().charAt(0) == 'a'){
 				words += "an " + inventory.get(0).display();

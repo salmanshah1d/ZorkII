@@ -73,11 +73,11 @@ class Game {
 				roomInventory = new Inventory();
 				// An array of strings in the format ItemName-ItemWeight
 				for (int s = 0; s < roomItems.length; s++) {
-					if (roomItems[s].equals("None-0")) {
+					if (roomItems[s].equals(" None-0")) {
 						s += 1;
 					} else if (roomItems[s].substring(0, roomItems[s].length() - 2).equals("Sword")) {
 						roomInventory.addItem(new Weapon(roomItems[s].split("-")[0].trim(),
-								Integer.parseInt(roomItems[s].split("-")[1].trim()), 25));
+								Integer.parseInt(roomItems[s].split("-")[1].trim()), 20));
 					} else {
 						roomInventory.addItem(new Item(roomItems[s].split("-")[0].trim(),
 								Integer.parseInt(roomItems[s].split("-")[1].trim())));
@@ -148,7 +148,6 @@ class Game {
 			initRooms("data/rooms.dat");
 			currentRoom = masterRoomMap.get("ANCIENT_KEY_HOLDER_ROOM");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		parser = new Parser();
@@ -262,7 +261,6 @@ class Game {
 		try {
 			Thread.sleep((int) num);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -295,8 +293,6 @@ class Game {
 				System.out.println("Quit what?");
 			else
 				return true; // signal that we want to quit
-		} else if (commandWord.equals("eat")) {
-			eat(command);
 		} else if (commandWord.equals("use")) {
 			if (command.hasSecondWord() == false)
 				System.out.println("Use what?");
@@ -314,11 +310,6 @@ class Game {
 	 * currentRoom.getNonPlayableCharacter.talk(); } else {
 	 * System.out.println(command + " is not in this room."); } }
 	 */
-
-	private void eat(Command command) {
-		// TODO Auto-generated method stub
-
-	}
 
 	/**
 	 * Print out some help information. Here we print some stupid, cryptic

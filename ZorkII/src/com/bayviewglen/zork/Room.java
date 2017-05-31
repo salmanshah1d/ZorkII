@@ -167,7 +167,7 @@ class Room {
 	}
 
 	private String exitString() {
-		String returnString = "Room Exits:";
+		String returnString = "You can exit to the ";
 		Set keys = exits.keySet();
 		for (Iterator iter = keys.iterator(); iter.hasNext();)
 			returnString += " " + iter.next();
