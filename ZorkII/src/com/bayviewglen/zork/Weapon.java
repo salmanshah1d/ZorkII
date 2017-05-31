@@ -4,6 +4,7 @@ public class Weapon extends Item{
 	
 	private int Power;
 	private int critChance;
+
 	private static final int CRITICALSTRIKEMULTIPLIER = 3;
 	
 	public Weapon(String description, double mass, int cost ,int power, int critChance){
@@ -13,7 +14,7 @@ public class Weapon extends Item{
 	}
 	
 	public Weapon(String description, double mass, int power){
-		super(description, mass);
+		super(description,mass);
 		this.Power = power;
 	}
 	
@@ -31,8 +32,14 @@ public class Weapon extends Item{
 	public void setPower(int power) {
 		Power = power;
 	}
-	
 	public int getCritChance() {
 		return critChance;
 	}
+
+	public void setCritChance(int critChance) {
+		this.critChance = critChance;
+	}
+
+	
+
 }
