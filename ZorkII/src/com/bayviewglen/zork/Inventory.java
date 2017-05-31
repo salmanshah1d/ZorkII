@@ -32,7 +32,7 @@ public class Inventory {
 			System.out.println("It is too heavy to be carried!");
 		}
 	}
-	
+
 	// how to remove an item
 	public void removeItem(Item item) {
 		currentIndex = inventory.indexOf(item);
@@ -58,12 +58,30 @@ public class Inventory {
 	// print out the inventory you have
 	public String print() {
 		String words = "";
-		for (int i = 0; i < inventory.size(); i++) {
-			if (inventory.get(i) != null) {
-				words += inventory.get(i).display() + ", ";
+		if (inventory.size() == 1) {
+			if (inventory.get(0).getDescription().charAt(0) == 'a'){
+				words += "an " + inventory.get(0).display();
+			} else {
+				words += "a " + inventory.get(0).display();
 			}
+		} else if (inventory.size() == 2) {
+			if (inventory.get(0).getDescription().charAt(0) == 'a' && inventory.get(1).getDescription().charAt(0) == 'a'){
+				words += "an " + inventory.get(0).display() + " and an " + inventory.get(1).display();
+			} else if (inventory.get(0).getDescription().charAt(0) == 'a') {
+				words += "an " + inventory.get(0).display() + " and a " + inventory.get(1).display();
+			} else if (inventory.get(1).getDescription().charAt(0) == 'a') {
+				words += "a " + inventory.get(0).display() + " and an " + inventory.get(1).display();
+			} else {
+				words += "a " + inventory.get(0).display() + " and a " + inventory.get(1).display();
+			}
+		} else {
+			for (int i = 0; i < inventory.size()-1; i++) {
+				if (inventory.get(i) != null) {
+					words += "a " + inventory.get(i).display() + ", ";
+				}
+			}
+			words += "and " + inventory.get(inventory.size()-1).display();
 		}
-		words = words.substring(0, words.length() - 2);
 		return words;
 	}
 
@@ -77,10 +95,10 @@ public class Inventory {
 	}
 
 	public Item getItem(int index) {
-		if (inventory.get(index).getDescription().equals("Sword")){
-			return (Weapon) inventory.get(index); 
+		if (inventory.get(index).getDescription().equals("Sword")) {
+			return (Weapon) inventory.get(index);
 		} else {
-		return inventory.get(index);
+			return inventory.get(index);
 		}
 	}
 }
