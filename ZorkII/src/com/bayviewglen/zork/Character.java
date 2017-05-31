@@ -5,6 +5,7 @@ import java.util.ArrayList;
 //Used to create the main character. All other characters extend this class
 public class Character {
 	private String characterName;
+	private String description;
 	private int characterHealth;
 	private int characterHealthMax; // what is this?
 	private Weapon characterWeapon;
@@ -39,7 +40,8 @@ public class Character {
 		this.characterName = name;
 	}
 
-	public Character(String name, int health, Weapon weapon) {
+	public Character(String kind, String name, int health, Weapon weapon) {
+		this.description = kind;
 		this.characterName = name;
 		this.characterHealth = health;
 		this.characterWeapon = weapon;
@@ -91,5 +93,9 @@ public class Character {
 
 	public void setWeapon(Weapon item) {
 		this.characterWeapon = item;
+	}
+	
+	public String getDescription() {
+		return description;
 	}
 }

@@ -3,7 +3,7 @@ package com.bayviewglen.zork;
 import java.util.ArrayList;
 
 public class WasteMansYute extends Enemy{
-	
+	static String description = "Waste Mans";
 	//creates a weapon to be used in combat
 	static Weapon wasteMansYuteShank = new GreasyShank();
 	//sets character attributes
@@ -17,6 +17,6 @@ public class WasteMansYute extends Enemy{
 	}
 
 	public WasteMansYute(String name){
-		super(name, 75, wasteMansYuteShank);
+		super(description, name, 75, wasteMansYuteShank);
 	}
 }

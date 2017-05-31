@@ -33,7 +33,7 @@ class Game {
 	private Sword mainSword;
 	private Inventory characterInventory = new Inventory();
 	private Inventory roomInventory;
-	boolean finished = false;
+	boolean finished;
 	// This is a MASTER object that contains all of the rooms and is easily
 	// accessible.
 	// The key will be the name of the room -> no spaces (Use all caps and
@@ -87,21 +87,21 @@ class Game {
 
 				// adds room items ArrayList
 				String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
+				
 				// An array of strings in the format ItemName-ItemWeight
 				ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 				for (int t = 0; t < roomEnemies.length; t++) {
-					if (roomEnemies[t].equals("None-0")) {
+					if (roomEnemies[t].equals(" None-0")) {
 						t += 1;
+					} else if (roomEnemies[t].split("-")[0].trim().equals("Yute")) {
+						enemyList.add(new Yute(roomEnemies[t].split("-")[1].trim()));
+					} else if (roomEnemies[t].split("-")[0].trim().equals("WasteMansYute")) {
+						enemyList.add(new WasteMansYute(roomEnemies[t].split("-")[1].trim()));
 					} else {
-						if (roomEnemies[t].split("-")[0].trim().equals("Yute")) {
-							enemyList.add(new Yute(roomEnemies[t].split("-")[1].trim()));
-						} else if (roomEnemies[t].split("-")[0].trim().equals("WasteMansYute")) {
-							enemyList.add(new WasteMansYute(roomEnemies[t].split("-")[1].trim()));
-						} else {
-							enemyList.add(new HypeBeastYute(roomEnemies[t].split("-")[1].trim()));
-						}
+						enemyList.add(new HypeBeastYute(roomEnemies[t].split("-")[1].trim()));
 					}
 				}
+
 				room.setRoomEnemies(enemyList);
 
 				// This puts the room we created (Without the exits in the
@@ -146,10 +146,8 @@ class Game {
 	 */
 	public void play() {
 		printWelcome();
-
 		// Enter the main command loop. Here we repeatedly read commands and
 		// execute them until the game is over.
-
 		finished = false;
 		while (!finished) {
 			Command command = parser.getCommand();
@@ -273,8 +271,9 @@ class Game {
 			goRoom(command);
 		else if (commandWord.equals("take"))
 			takeItem(command);
-		else if (commandWord.equals("attack"))
-			attackEnemy(command);
+		else if (commandWord.equals("attack")) {
+			return attackEnemy(command);
+		}
 		/*
 		 * else if (commandWord.equals("talk")) talk(command);
 		 */
@@ -284,7 +283,7 @@ class Game {
 			else
 				return true; // signal that we want to quit
 		} else if (commandWord.equals("eat")) {
-			System.out.println("Do you really think you should be eating at a time like this?");
+			eat(command);
 		} else if (commandWord.equals("use")) {
 			if (command.hasSecondWord() == false)
 				System.out.println("Use what?");
@@ -302,6 +301,11 @@ class Game {
 	 * currentRoom.getNonPlayableCharacter.talk(); } else {
 	 * System.out.println(command + " is not in this room."); } }
 	 */
+
+	private void eat(Command command) {
+		// TODO Auto-generated method stub
+
+	}
 
 	/**
 	 * Print out some help information. Here we print some stupid, cryptic
@@ -339,6 +343,11 @@ class Game {
 	}
 
 	private void takeItem(Command command) {
+		if (currentRoom.getRoomEnemies().size() > 0) {
+			System.out.println(currentRoom.getRoomEnemies().get(0).getDescription() + " " + currentRoom.getRoomEnemies().get(0).getCharacterName() + " is not letting you take this item. You must defeat him.");
+			return;
+		}
+		
 		if (!command.hasSecondWord()) {
 			// if there is no second word, we don't know what to pick up...
 			System.out.println("Take what?");
@@ -369,11 +378,11 @@ class Game {
 		}
 	}
 
-	private void attackEnemy(Command command) {
+	private boolean attackEnemy(Command command) {
 		if (!command.hasSecondWord()) {
 			// if there is no second word, we don't know who to attack
 			System.out.println("Attack who?");
-			return;
+			return false;
 		}
 		String enemy = command.getSecondWord();
 		int enemyIndex = -1;
@@ -386,31 +395,43 @@ class Game {
 
 		if (enemyIndex == -1) {
 			System.out.println("There is no such enemy...");
-			return;
+			return false;
 		} else {
+			if (mainSword != null) {
 			currentRoom.getRoomEnemies().get(enemyIndex).setCharacterHealth(
 					currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - mainSword.getPower());
 			mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth()
 					- currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getPower());
-			System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " attacked you back!");
-			if (currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() < 0) {
-				System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " is dead.");
+			} else {
+				System.out.println("You don't have a sword yet!");
+			}
+			
+			if (currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() <= 0) {
+				System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " has been defeated.");
 				currentRoom.getRoomEnemies().remove(enemyIndex);
-			} else if (mainCharacter.getCharacterHealth() < 0) {
-				finished = true;
-			} else { //indicates that game continues
-				System.out.print("Your Health: " + mainCharacter.getCharacterHealth() + " |");
-				for (int i = 0; i < mainCharacter.getCharacterHealth() / 5; i++) {
-					System.out.print("-");
+
+			} else if (mainCharacter.getCharacterHealth() <= 0) {
+				System.out.println("Sorry, you have lost. Catch this L.");
+				return true;
+				
+			} else {
+				if (mainSword != null) {
+					System.out.println(
+							currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " attacked you back!");
+					System.out.print("Your Health: " + mainCharacter.getCharacterHealth() + " |");
+					for (int i = 0; i < mainCharacter.getCharacterHealth() / 5; i++) {
+						System.out.print("-");
+					}
+					for (int j = mainCharacter.getCharacterHealth() / 5; j < 20; j++) {
+						System.out.print(" ");
+					}
+					System.out.println("|");
+					System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + "'s Health: "
+							+ currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth());
 				}
-				for (int j = mainCharacter.getCharacterHealth() / 5; j < 20; j++) {
-					System.out.print(" ");
-				}
-				System.out.println("|");
-				System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + "'s Health: "
-						+ currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth());
 			}
 		}
+		return false;
 	}
 
 	public void use(String secondWord) {

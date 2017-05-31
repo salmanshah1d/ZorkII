@@ -1,8 +1,8 @@
 package com.bayviewglen.zork;
 
 public class Enemy extends Character {
-	public Enemy(String name, int i, Weapon weapon){
-		super(name, i, weapon);
+	public Enemy(String description, String name, int i, Weapon weapon){
+		super(description, name, i, weapon);
 	}
 	
 	Inventory enemyInventory = new Inventory();

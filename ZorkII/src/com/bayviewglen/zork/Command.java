@@ -40,7 +40,7 @@ class Command
         commandWord = firstWord;
         this.secondWord = secondWord;
     }
-
+    
     /**
      * Return the command word (the first word) of this command. If the
      * command was not understood, the result is null.

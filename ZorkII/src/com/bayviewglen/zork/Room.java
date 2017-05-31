@@ -108,14 +108,34 @@ class Room {
 	 * kitchen. Exits: north west
 	 */
 	public String longDescription() {
-		return "\nRoom: " + roomName + "\n\n" + description + characterItemsString() + itemString() + "\n" + exitString();
+		enemyProcedure();
+		return "\nRoom: " + roomName + "\n\n" + description + characterItemsString() + itemString() + "\n"
+				+ exitString();
+	}
+
+	private void enemyProcedure() {
+		String returnString = "";
+		if (roomEnemies.size() != 0) {
+			returnString += "\nYou encounter ";
+			for (int i = 0; i < roomEnemies.size(); i++){
+				returnString += roomEnemies.get(i).getDescription() + " " + roomEnemies.get(i).getCharacterName();
+			}
+			returnString += ". You must kill him to pick up any items in this room.";
+			System.out.println(returnString);
+		} else {
+			System.out.println("");
+		}
 	}
 
 	private String characterItemsString() {
 		if (characterInventory.getWeight() != 0) {
-			return ("\nYour Items: " + characterInventory.print());
+			if (characterInventory.getWeight() == 1) {
+				return ("\nYou presently have a " + characterInventory.print() + ".");
+			} else {
+				return ("\nYou presently have " + characterInventory.print() + ".");
+			}
 		} else {
-			return ("\nYour Items: None");
+			return ("");
 		}
 	}
 
@@ -125,9 +145,13 @@ class Room {
 
 	private String itemString() {
 		if (roomInventory.getWeight() != 0) {
-			return ("\nRoom Items: " + roomInventory.print());
+			if (roomInventory.getWeight() == 1) {
+				return ("\nOn the floor, you find a " + roomInventory.print() + ".");
+			} else {
+				return ("\nOn the floor, you find " + roomInventory.print() + ".");
+			}
 		} else {
-			return ("\nRoom Items: None");
+			return ("");
 		}
 	}
 
@@ -170,12 +194,12 @@ class Room {
 	public void setRoomEnemies(ArrayList<Enemy> enemyList) {
 		this.roomEnemies = enemyList;
 	}
-	
+
 	public ArrayList<Enemy> getRoomEnemies() {
 		return roomEnemies;
 	}
-	
-	public Inventory getRoomInventory () {
+
+	public Inventory getRoomInventory() {
 		return roomInventory;
 	}
 }
