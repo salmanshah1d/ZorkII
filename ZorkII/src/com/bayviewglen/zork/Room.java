@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.bayviewglen.zork;
 /*
  * Class Room - a room in an adventure game. 
@@ -219,22 +218,19 @@ class Room {
 		this.npc = nonPlayableCharacter;
 	}
 }
-=======
-package com.bayviewglen.zork;
 /*
- * Class Room - a room in an adventure game. 
+ * ======= package com.bayviewglen.zork; /* Class Room - a room in an adventure
+ * game.
  *
- * Author:  Michael Kolling.
- * Version: 1.1
- * Date:    August 2000
+ * Author: Michael Kolling. Version: 1.1 Date: August 2000
  * 
  * This class is part of Zork. Zork is a simple, text based adventure game.
  *
- * "Room" represents one location in the scenery of the game.  It is 
- * connected to at most four other rooms via exits.  The exits are labelled
- * north, east, south, west.  For each direction, the room stores a reference
- * to the neighbouring room, or null if there is no exit in that direction.
- */
+ * "Room" represents one location in the scenery of the game. It is connected to
+ * at most four other rooms via exits. The exits are labelled north, east,
+ * south, west. For each direction, the room stores a reference to the
+ * neighbouring room, or null if there is no exit in that direction.
+ 
 
 import java.util.Set;
 import java.util.ArrayList;
@@ -253,7 +249,7 @@ class Room {
 	/**
 	 * Create a room described "description". Initially, it has no exits.
 	 * "description" is something like "a kitchen" or "an open court yard".
-	 */
+	 
 	public Room(String description) {
 		this.description = description;
 		exits = new HashMap<String, Room>();
@@ -301,7 +297,7 @@ class Room {
 	/**
 	 * Define the exits of this room. Every direction either leads to another
 	 * room or is null (no exit there).
-	 */
+	 
 	public void setExits(Room north, Room east, Room south, Room west, Room up, Room down) {
 		if (north != null)
 			exits.put("north", north);
@@ -321,7 +317,7 @@ class Room {
 	/**
 	 * Return the description of the room (the one that was defined in the
 	 * constructor).
-	 */
+	 
 	public String shortDescription() {
 		return "Room: " + roomName + "\n\n" + description;
 	}
@@ -329,7 +325,7 @@ class Room {
 	/**
 	 * Return a long description of this room, on the form: You are in the
 	 * kitchen. Exits: north west
-	 */
+	 
 	public String longDescription() {
 		return "\nRoom: " + roomName + "\n\n" + description + enemyString() + npString() + characterItemsString()
 				+ itemString() + "\n" + exitString();
@@ -337,7 +333,8 @@ class Room {
 
 	private String npString() {
 		if (npc != null) {
-			return ("\nYou see " + npc.getCharacterName() + " in this room. To interact with him, write \"talk <name>\".\n");
+			return ("\nYou see " + npc.getCharacterName()
+					+ " in this room. To interact with him, write \"talk <name>\".\n");
 		} else {
 			return "";
 		}
@@ -378,7 +375,7 @@ class Room {
 
 	/**
 	 * Return a string describing the room's items
-	 */
+	 
 
 	private String itemString() {
 		if (roomInventory.getNumItems() != 0) {
@@ -399,7 +396,7 @@ class Room {
 	/**
 	 * Return the room that is reached if we go from this room in direction
 	 * "direction". If there is no room in that direction, return null.
-	 */
+	 
 	public Room nextRoom(String direction) {
 		return (Room) exits.get(direction);
 	}
@@ -439,5 +436,4 @@ class Room {
 	public void setNPC(NonPlayableCharacter nonPlayableCharacter) {
 		this.npc = nonPlayableCharacter;
 	}
-}
->>>>>>> refs/remotes/origin/master
+}*/
