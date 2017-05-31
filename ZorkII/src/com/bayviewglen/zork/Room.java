@@ -25,6 +25,7 @@ class Room {
 	private HashMap<String, Room> exits; // stores exits of this room.
 	private Inventory roomInventory;
 	private Inventory characterInventory;
+	private NonPlayableCharacter npc;
 	private ArrayList<Enemy> roomEnemies;
 
 	/**
@@ -108,32 +109,46 @@ class Room {
 	 * kitchen. Exits: north west
 	 */
 	public String longDescription() {
-		enemyProcedure();
-		return "\nRoom: " + roomName + "\n\n" + description + characterItemsString() + itemString() + "\n"
-				+ exitString();
+		return "\nRoom: " + roomName + "\n\n" + description + enemyString() + npString() + characterItemsString()
+				+ itemString() + "\n" + exitString();
 	}
 
-	private void enemyProcedure() {
+	private String npString() {
+		if (npc != null) {
+			return ("You see " + npc.getName() + " in this room. To interact with him, write \"talk <name>\".\n");
+		} else {
+			return "";
+		}
+	}
+
+	private String enemyString() {
 		String returnString = "";
+		String enemies = "";
 		if (roomEnemies.size() != 0) {
 			returnString += "\nYou encounter ";
-			for (int i = 0; i < roomEnemies.size(); i++){
-				returnString += roomEnemies.get(i).getDescription() + " " + roomEnemies.get(i).getCharacterName();
+			returnString += roomEnemies.get(0).getDescription() + " " + roomEnemies.get(0).getCharacterName();
+			enemies += roomEnemies.get(0).getCharacterName();
+			for (int i = 1; i < roomEnemies.size() - 1; i++) {
+				returnString += ", " + roomEnemies.get(i).getDescription() + " "
+						+ roomEnemies.get(i).getCharacterName();
+				enemies += ", " + roomEnemies.get(i).getCharacterName();
 			}
-			returnString += ". You must kill him to pick up any items in this room.";
-			System.out.println(returnString);
+			if (roomEnemies.size() > 1) {
+				returnString += roomEnemies.get(roomEnemies.size() - 1).getDescription() + " "
+						+ roomEnemies.get(roomEnemies.size() - 1).getCharacterName();
+				enemies += roomEnemies.get(roomEnemies.size() - 1).getCharacterName();
+			}
+			returnString += ". You must defeat " + enemies
+					+ " to pick up any items in this room. To attack him, type \"attack <name>\".\n";
+			return (returnString);
 		} else {
-			System.out.println("");
+			return ("");
 		}
 	}
 
 	private String characterItemsString() {
-		if (characterInventory.getWeight() != 0) {
-			if (characterInventory.getWeight() == 1) {
-				return ("\nYou presently have a " + characterInventory.print() + ".");
-			} else {
-				return ("\nYou presently have " + characterInventory.print() + ".");
-			}
+		if (characterInventory.getNumItems() != 0) {
+			return ("\nYou presently have " + characterInventory.print() + ".");
 		} else {
 			return ("");
 		}
@@ -144,23 +159,19 @@ class Room {
 	 */
 
 	private String itemString() {
-		if (roomInventory.getWeight() != 0) {
-			if (roomInventory.getWeight() == 1) {
-				return ("\nOn the floor, you find a " + roomInventory.print() + ".");
-			} else {
-				return ("\nOn the floor, you find " + roomInventory.print() + ".");
-			}
+		if (roomInventory.getNumItems() != 0) {
+			return ("\nIn the " + roomName + ", you find " + roomInventory.print() + ".");
 		} else {
 			return ("");
 		}
 	}
 
 	private String exitString() {
-		String returnString = "Room Exits:";
+		String returnString = "You can exit to the: ";
 		Set keys = exits.keySet();
 		for (Iterator iter = keys.iterator(); iter.hasNext();)
-			returnString += " " + iter.next();
-		return returnString;
+			returnString += iter.next() + ", ";
+		return returnString.substring(0, returnString.length() - 2);
 	}
 
 	/**
@@ -201,5 +212,9 @@ class Room {
 
 	public Inventory getRoomInventory() {
 		return roomInventory;
+	}
+
+	public void setNPC(NonPlayableCharacter nonPlayableCharacter) {
+		this.npc = nonPlayableCharacter;
 	}
 }
