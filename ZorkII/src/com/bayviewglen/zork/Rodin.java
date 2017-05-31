@@ -52,8 +52,6 @@ public class Rodin extends NonPlayableCharacter{
 		
 	}
 	
-	
-	
 	public void displayInventory(){
 	//	shayanSnInventoryNames =new ArrayList<String>();
 		if(rodinInventory.size() > 0){

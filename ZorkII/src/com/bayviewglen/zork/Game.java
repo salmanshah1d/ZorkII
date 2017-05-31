@@ -107,16 +107,32 @@ class Game {
 				String roomNPC = roomScanner.nextLine().split(":")[1];
 
 				if (roomNPC.equals("ShayanSn")) {
-					currentRoom.setNPC(new NonPlayableCharacter("ShayanSn"));
+					currentRoom.setNPC(new ShayanShakeriNezhad());
 				}
 				if (roomNPC.equals("Salesi")) {
-					currentRoom.setNPC(new NonPlayableCharacter("Salesi"));
+					currentRoom.setNPC(new ShayanSalesi());
 				}
 
 				if (roomNPC.equals("Rodin")) {
-					currentRoom.setNPC(new NonPlayableCharacter("Rodin"));
+					currentRoom.setNPC(new Rodin());
 				}
 
+				if (roomNPC.equals("Andrei")) {
+					currentRoom.setNPC(new Andrei());
+				}
+				
+				if (roomNPC.equals("Daniel")) {
+					currentRoom.setNPC(new Rodin());
+				}
+				
+				if (roomNPC.equals("RyanMak")) {
+					currentRoom.setNPC(new RyanMak());
+				}
+
+				if (roomNPC.equals("Mr. DesLauriers")) {
+					currentRoom.setNPC(new Deslaurier());
+				}
+				
 				// This puts the room we created (Without the exits in the
 				// masterMap)
 				masterRoomMap.put(roomName.toUpperCase().substring(10).trim().replaceAll(" ", "_"), room);
@@ -403,11 +419,23 @@ class Game {
 			return false;
 		} else {
 			if (mainSword != null) {
+				int charDamage = mainSword.getPower();
+				int enemyDamage = currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getPower();
+				int crit = (int) (Math.random() * 100);
+				for (int i = 0; i < mainSword.getCritChance(); i++) {
+					if (i == crit) {
+						charDamage *= 3;
+					}
+				}
+				for (int j = 0; j < currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getCritChance(); j++) {
+					if (j == crit) {
+						enemyDamage *= 3;
+					}
+				}
 				currentRoom.getRoomEnemies().get(enemyIndex).setCharacterHealth(
-						currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - mainSword.getPower());
+						currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - charDamage);
 				if (currentRoom.getRoomEnemies().size() > 0) {
-					mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth()
-							- currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getPower());
+					mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth() - enemyDamage);
 				}
 			} else {
 				System.out.println("You don't have a sword yet!");
@@ -440,6 +468,7 @@ class Game {
 			}
 		}
 		return false;
+
 	}
 
 	public void use(String secondWord) {

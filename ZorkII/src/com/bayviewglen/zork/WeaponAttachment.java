@@ -6,7 +6,7 @@ private int critChanceAdded;
 	
 	public WeaponAttachment (String name, Double mass, int cost, int powerAdded,int critAdded){
 		super(name,mass,cost);
-		this.attackPowerAdded =powerAdded;
+		this.attackPowerAdded = powerAdded;
 		this.critChanceAdded = critAdded;
 	}
 

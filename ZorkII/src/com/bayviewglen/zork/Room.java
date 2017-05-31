@@ -115,7 +115,7 @@ class Room {
 
 	private String npString() {
 		if (npc != null) {
-			return ("You see " + npc.getName() + " in this room. To interact with him, write \"talk <name>\".\n");
+			return ("You see " + npc.getCharacterName() + " in this room. To interact with him, write \"talk <name>\".\n");
 		} else {
 			return "";
 		}
@@ -217,8 +217,4 @@ class Room {
 	public void setNPC(NonPlayableCharacter nonPlayableCharacter) {
 		this.npc = nonPlayableCharacter;
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> refs/remotes/origin/master

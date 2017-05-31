@@ -3,7 +3,7 @@ package com.bayviewglen.zork;
 import java.util.ArrayList;
 
 public class Deslaurier extends NonPlayableCharacter{
-	private String characterName = "Deslaurier";
+	private String characterName = "Mr. DesLauriers";
 	private int characterHealth = 500;
 	private int characterHealthMax = 500;
 	private int characterArmour = 5; 
@@ -45,7 +45,6 @@ public class Deslaurier extends NonPlayableCharacter{
 	public Deslaurier(){
 		super();
 		//String description, double mass, int cost ,int power, int critChance
-		
 	}
 	
 	

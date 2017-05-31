@@ -31,4 +31,8 @@ public class Weapon extends Item{
 	public void setPower(int power) {
 		Power = power;
 	}
+	
+	public int getCritChance() {
+		return critChance;
+	}
 }
