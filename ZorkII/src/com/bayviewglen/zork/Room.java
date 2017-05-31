@@ -159,19 +159,19 @@ class Room {
 	 */
 
 	private String itemString() {
-		if (characterInventory.getNumItems() != 0) {
-			return ("\nYou presently have " + characterInventory.print() + ".");
+		if (roomInventory.getNumItems() != 0) {
+			return ("\nIn the " + roomName + ", you find " + roomInventory.print() + ".");
 		} else {
 			return ("");
 		}
 	}
 
 	private String exitString() {
-		String returnString = "You can exit to the ";
+		String returnString = "You can exit to the: ";
 		Set keys = exits.keySet();
 		for (Iterator iter = keys.iterator(); iter.hasNext();)
-			returnString += " " + iter.next();
-		return returnString;
+			returnString += iter.next() + ", ";
+		return returnString.substring(0, returnString.length() - 2);
 	}
 
 	/**
