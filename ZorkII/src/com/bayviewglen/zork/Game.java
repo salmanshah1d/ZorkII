@@ -73,11 +73,11 @@ class Game {
 				roomInventory = new Inventory();
 				// An array of strings in the format ItemName-ItemWeight
 				for (int s = 0; s < roomItems.length; s++) {
-					if (roomItems[s].equals("None-0")) {
+					if (roomItems[s].equals(" None-0")) {
 						s += 1;
 					} else if (roomItems[s].substring(0, roomItems[s].length() - 2).equals("Sword")) {
 						roomInventory.addItem(new Weapon(roomItems[s].split("-")[0].trim(),
-								Integer.parseInt(roomItems[s].split("-")[1].trim()), 25));
+								Integer.parseInt(roomItems[s].split("-")[1].trim()), 20));
 					} else {
 						roomInventory.addItem(new Item(roomItems[s].split("-")[0].trim(),
 								Integer.parseInt(roomItems[s].split("-")[1].trim())));
@@ -87,7 +87,7 @@ class Game {
 
 				// adds room items ArrayList
 				String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
-				
+
 				// An array of strings in the format ItemName-ItemWeight
 				ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 				for (int t = 0; t < roomEnemies.length; t++) {
@@ -103,6 +103,19 @@ class Game {
 				}
 
 				room.setRoomEnemies(enemyList);
+
+				String roomNPC = roomScanner.nextLine().split(":")[1];
+
+				if (roomNPC.equals("ShayanSn")) {
+					currentRoom.setNPC(new NonPlayableCharacter("ShayanSn"));
+				}
+				if (roomNPC.equals("Salesi")) {
+					currentRoom.setNPC(new NonPlayableCharacter("Salesi"));
+				}
+
+				if (roomNPC.equals("Rodin")) {
+					currentRoom.setNPC(new NonPlayableCharacter("Rodin"));
+				}
 
 				// This puts the room we created (Without the exits in the
 				// masterMap)
@@ -135,7 +148,6 @@ class Game {
 			initRooms("data/rooms.dat");
 			currentRoom = masterRoomMap.get("ANCIENT_KEY_HOLDER_ROOM");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		parser = new Parser();
@@ -249,7 +261,6 @@ class Game {
 		try {
 			Thread.sleep((int) num);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -282,8 +293,6 @@ class Game {
 				System.out.println("Quit what?");
 			else
 				return true; // signal that we want to quit
-		} else if (commandWord.equals("eat")) {
-			eat(command);
 		} else if (commandWord.equals("use")) {
 			if (command.hasSecondWord() == false)
 				System.out.println("Use what?");
@@ -301,11 +310,6 @@ class Game {
 	 * currentRoom.getNonPlayableCharacter.talk(); } else {
 	 * System.out.println(command + " is not in this room."); } }
 	 */
-
-	private void eat(Command command) {
-		// TODO Auto-generated method stub
-
-	}
 
 	/**
 	 * Print out some help information. Here we print some stupid, cryptic
@@ -344,18 +348,19 @@ class Game {
 
 	private void takeItem(Command command) {
 		if (currentRoom.getRoomEnemies().size() > 0) {
-			System.out.println(currentRoom.getRoomEnemies().get(0).getDescription() + " " + currentRoom.getRoomEnemies().get(0).getCharacterName() + " is not letting you take this item. You must defeat him.");
+			System.out.println(currentRoom.getRoomEnemies().get(0).getDescription() + " "
+					+ currentRoom.getRoomEnemies().get(0).getCharacterName()
+					+ " is not letting you take this item. You must defeat him first.");
 			return;
 		}
-		
+
 		if (!command.hasSecondWord()) {
 			// if there is no second word, we don't know what to pick up...
 			System.out.println("Take what?");
 			return;
 		}
 
-		String object = command.getSecondWord();
-
+		String object = command.getSecondWord().toLowerCase();
 		int itemIndex = -1;
 
 		for (int i = 0; i < currentRoom.getRoomInventory().getNumItems(); i++) {
@@ -398,22 +403,25 @@ class Game {
 			return false;
 		} else {
 			if (mainSword != null) {
-			currentRoom.getRoomEnemies().get(enemyIndex).setCharacterHealth(
-					currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - mainSword.getPower());
-			mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth()
-					- currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getPower());
+				currentRoom.getRoomEnemies().get(enemyIndex).setCharacterHealth(
+						currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - mainSword.getPower());
+				if (currentRoom.getRoomEnemies().size() > 0) {
+					mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth()
+							- currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getPower());
+				}
 			} else {
 				System.out.println("You don't have a sword yet!");
 			}
-			
+
 			if (currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() <= 0) {
-				System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " has been defeated.");
+				System.out.println(
+						currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " has been defeated.");
 				currentRoom.getRoomEnemies().remove(enemyIndex);
 
 			} else if (mainCharacter.getCharacterHealth() <= 0) {
 				System.out.println("Sorry, you have lost. Catch this L.");
 				return true;
-				
+
 			} else {
 				if (mainSword != null) {
 					System.out.println(
