@@ -7,7 +7,7 @@ public class Armour extends Item{
 	//Creates the characters' armour
 	public Armour(){
 		super("Armour", 0.0);
-		this.protection = 0;
+		this.protection = 5;
 	}
 
 	public int getProtection() {
