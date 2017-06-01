@@ -7,7 +7,7 @@ public class Inventory {
 	ArrayList<Item> inventory;
 	private int weight = 0;
 	private double maxWeight = 50.0; // the max weight a character can make
-	private int wallet = 9999999;
+	private int wallet = 0;
 
 	public int getWallet() {
 		return wallet;
