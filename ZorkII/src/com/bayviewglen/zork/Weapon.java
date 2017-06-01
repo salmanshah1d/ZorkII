@@ -40,6 +40,6 @@ public class Weapon extends Item{
 		this.critChance = critChance;
 	}
 
-	
+	//
 
 }
