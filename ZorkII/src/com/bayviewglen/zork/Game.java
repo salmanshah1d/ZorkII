@@ -108,19 +108,33 @@ class Game {
 
 				if (roomNPC.equals("ShayanShakeri")) {
 					room.setNPC(new ShayanShakeriNezhad());
-				} else if (roomNPC.equals("Salesi")) {
+				}
+				
+				if (roomNPC.equals("Salesi")) {
 					room.setNPC(new ShayanSalesi());
-				} else if (roomNPC.equals("RyanAbhary")) {
+				}
+
+				if (roomNPC.equals("RyanAbhary")) {
 					room.setNPC(new RyanAbhary());
-				} else if (roomNPC.equals("Rodin")) {
+				} 
+				
+				if (roomNPC.equals("Rodin")) {
 					room.setNPC(new Rodin());
-				} else if (roomNPC.equals("Andrei")) {
+				} 
+
+				if (roomNPC.equals("Andrei")) {
 					room.setNPC(new Andrei());
-				} else if (roomNPC.equals("Daniel")) {
+				} 
+
+				if (roomNPC.equals("Daniel")) {
 					room.setNPC(new Rodin());
-				} else if (roomNPC.equals("RyanMak")) {
+				} 
+				
+				if (roomNPC.equals("RyanMak")) {
 					room.setNPC(new RyanMak());
-				} else if (roomNPC.equals("DesLauriers")) {
+				} 
+				
+				if (roomNPC.equals("DesLauriers")) {
 					room.setNPC(new DesLauriers());
 				}
 
@@ -308,7 +322,6 @@ class Game {
 	}
 
 	// implementations of user commands:
-
 	private void talk(Command command) {
 		String person = command.getSecondWord();
 		if (currentRoom.getNPC().getCharacterName().equals(person)) {
