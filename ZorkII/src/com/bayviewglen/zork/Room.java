@@ -109,7 +109,7 @@ class Room {
 	 * kitchen. Exits: north west
 	 */
 	public String longDescription() {
-		return "\nRoom: " + roomName + "\n\n" + description + enemyString() + npString() + characterItemsString()
+		return "\nRoom: " + roomName + "\n" + description + enemyString() + npString() + characterItemsString()
 				+ itemString() + "\n" + exitString();
 	}
 
@@ -160,7 +160,7 @@ class Room {
 
 	private String itemString() {
 		if (roomInventory.getNumItems() != 0) {
-			return ("\nIn the " + roomName + ", you find " + roomInventory.print() + ".");
+			return ("In the " + roomName + ", you find " + roomInventory.print() + ".");
 		} else {
 			return ("");
 		}

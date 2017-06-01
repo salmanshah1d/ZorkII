@@ -199,9 +199,9 @@ class Game {
 		System.out.print("Hello! What's your name? ");
 		String name = keyboard.nextLine();
 
-		name = textCheck(name);
+		mainCharacter.setCharacterName(textCheck(name));
 		System.out.println("(Heads up: press enter after each line when you're done reading.)");
-		// intro(name);
+		intro(name);
 		System.out.println(currentRoom.longDescription());
 	}
 
@@ -250,40 +250,12 @@ class Game {
 		System.out.print(
 				"When you have all 5 gems, you will achieve the unthinkable. You will have wealth, health, peace, happiness, and most importantly...");
 		scanner.nextLine();
-		System.out.print("You ");
-		delay(0.25);
-		System.out.print("will ");
-		delay(0.25);
-		System.out.print("get ");
-		delay(0.25);
-		System.out.print("a ");
-		delay(0.25);
-		System.out.print("5 ");
-		delay(0.25);
-		System.out.print("in ");
-		delay(0.25);
-		System.out.println("AP Computer Science A!");
+		System.out.print("You will get a 5 in AP Compputer Science!");
 		scanner.nextLine();
 		System.out.print("In the Shah mosque, you shall find these gems, but not without significant obstacles.");
 		scanner.nextLine();
-		System.out.print("May ");
-		delay(1);
-		System.out.print("your ");
-		delay(1);
-		System.out.print("adventure ");
-		delay(1);
-		System.out.print("begin. ");
+		System.out.print("May your adventure begin.");
 		scanner.nextLine();
-		// >>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
-	}
-
-	private void delay(double num) {
-		num *= 1000;
-		try {
-			Thread.sleep((int) num);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
