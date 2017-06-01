@@ -1,13 +1,13 @@
 Room Name: Ancient key holder room
 Room Description: You have just walked into the temple
-Exit Rooms: E-Sword Room, W-Axe Room
+Exit Rooms: E-Equip Room, W-Axe Room
 Room Items: Key-1
 Room Enemies: None-0
-Room NP: RyanAbhary
-Room Name: Sword Room
+Room NP: None
+Room Name: Equip Room
 Room Description: As you walk in you see a sword glowing in the corner
 Exit Rooms: S-Lighter Room, W-Ancient key holder room
-Room Items: Sword-7
+Room Items: Sword-7, Armour-15
 Room Enemies: None-0
 Room NP: ShayanShakeri
 Room Name: Axe Room
@@ -21,7 +21,7 @@ Room Description: As you walk in, you are taken aback by dank memes throughout t
 Exit Rooms: E-Axe Room
 Room Items: Meme-1
 Room Enemies: None-0
-Room NP: None
+Room NP: RyanAbhary
 Room Name: Dirt E Room
 Room Description: On the East wall there is dirt blocking all the east exits
 Exit Rooms: N-Axe Room, W-Backpack Room, S-Origins Room
@@ -60,7 +60,7 @@ Room Enemies: Yute-Mehdi
 Room NP: None
 Room Name: Lighter Room
 Room Description: On top of a table there is a lighter, also the south wall is blocked by a steel wall
-Exit Rooms: N-Sword Room, E-Basic Enemy Room, S-Gem Two Room
+Exit Rooms: N-Equip Room, E-Basic Enemy Room, S-Gem Two Room
 Room Items: Lighter-1
 Room Enemies: WasteMansYute-Shayan
 Room NP: None
@@ -97,7 +97,7 @@ Room NP: None
 Room Name: Salesi Room
 Room Description: You see a successful young man in the distance.
 Exit Rooms: W-Double Enemy Room, N-Flashlight Room
-Room Items: Two–handed–sword-9
+Room Items: None-0
 Room Enemies: Yute-Sydney 
 Room NP: ShayanSalesi
 Room Name: Double Enemy Room

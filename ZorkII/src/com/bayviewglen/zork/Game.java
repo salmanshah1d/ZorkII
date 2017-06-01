@@ -33,6 +33,7 @@ class Game {
 	private Sword mainSword;
 	private Inventory characterInventory = new Inventory();
 	private Inventory roomInventory;
+	private Armour mainArmour;
 	boolean finished;
 	// This is a MASTER object that contains all of the rooms and is easily
 	// accessible.
@@ -78,6 +79,8 @@ class Game {
 					} else if (roomItems[s].substring(0, roomItems[s].length() - 2).equals("Sword")) {
 						roomInventory.addItem(new Weapon(roomItems[s].split("-")[0].trim(),
 								Integer.parseInt(roomItems[s].split("-")[1].trim()), 20));
+					} else if (roomItems[s].substring(0, roomItems[s].length() - 2).equals("Armour")) {
+						roomInventory.addItem(new Armour());
 					} else {
 						roomInventory.addItem(new Item(roomItems[s].split("-")[0].trim(),
 								Integer.parseInt(roomItems[s].split("-")[1].trim())));
@@ -109,31 +112,31 @@ class Game {
 				if (roomNPC.equals("ShayanShakeri")) {
 					room.setNPC(new ShayanShakeriNezhad());
 				}
-				
+
 				if (roomNPC.equals("Salesi")) {
 					room.setNPC(new ShayanSalesi());
 				}
 
 				if (roomNPC.equals("RyanAbhary")) {
 					room.setNPC(new RyanAbhary());
-				} 
-				
+				}
+
 				if (roomNPC.equals("Rodin")) {
 					room.setNPC(new Rodin());
-				} 
+				}
 
 				if (roomNPC.equals("Andrei")) {
 					room.setNPC(new Andrei());
-				} 
+				}
 
 				if (roomNPC.equals("Daniel")) {
 					room.setNPC(new Rodin());
-				} 
-				
+				}
+
 				if (roomNPC.equals("RyanMak")) {
 					room.setNPC(new RyanMak());
-				} 
-				
+				}
+
 				if (roomNPC.equals("DesLauriers")) {
 					room.setNPC(new DesLauriers());
 				}
@@ -297,35 +300,35 @@ class Game {
 	private void talk(Command command) {
 		String person = command.getSecondWord();
 		if (currentRoom.getNPC().getCharacterName().equals(person)) {
-			if (person.equals("ShayanShakeri")){
+			if (person.equals("ShayanShakeri")) {
 				ShayanShakeriNezhad ShayanShakeriNezhad = new ShayanShakeriNezhad();
 				ShayanShakeriNezhad.talk(characterInventory);
 			}
-			if (person.equals("ShayanSalesi")){
+			if (person.equals("ShayanSalesi")) {
 				ShayanSalesi ShayanSalesi = new ShayanSalesi();
 				ShayanSalesi.talk(characterInventory);
 			}
-			if (person.equals("Andrei")){
+			if (person.equals("Andrei")) {
 				Andrei Andrei = new Andrei();
 				Andrei.talk(characterInventory);
 			}
-			if (person.equals("Daniel")){
+			if (person.equals("Daniel")) {
 				Daniel Daniel = new Daniel();
 				Daniel.talk(characterInventory);
 			}
-			if (person.equals("Rodin")){
+			if (person.equals("Rodin")) {
 				Rodin Rodin = new Rodin();
 				Rodin.talk(characterInventory);
 			}
-			if (person.equals("RyanAbhary")){
+			if (person.equals("RyanAbhary")) {
 				RyanAbhary RyanAbhary = new RyanAbhary();
 				RyanAbhary.talk(characterInventory);
 			}
-			if (person.equals("RyanMak")){
+			if (person.equals("RyanMak")) {
 				RyanMak RyanMak = new RyanMak();
 				RyanMak.talk(characterInventory);
 			}
-			if (person.equals("DesLauriers")){
+			if (person.equals("DesLauriers")) {
 				DesLauriers DesLauriers = new DesLauriers();
 				DesLauriers.talk();
 			}
@@ -395,6 +398,11 @@ class Game {
 			return;
 		} else if (currentRoom.getRoomInventory().getItem(itemIndex).getDescription().equals("sword")) {
 			mainSword = new Sword();
+			characterInventory.addItem(currentRoom.getRoomInventory().getItem(itemIndex));
+			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
+			System.out.println("Done. Now?");
+		} else if (currentRoom.getRoomInventory().getItem(itemIndex).getDescription().equals("armour")) {
+			mainArmour = new Armour();
 			characterInventory.addItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			System.out.println("Done. Now?");
