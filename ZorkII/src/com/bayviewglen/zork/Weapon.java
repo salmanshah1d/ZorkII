@@ -1,7 +1,7 @@
 package com.bayviewglen.zork;
 
 public class Weapon extends Item{
-	
+	//
 	private int Power;
 	private int critChance;
 
