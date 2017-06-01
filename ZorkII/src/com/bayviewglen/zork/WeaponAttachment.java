@@ -3,11 +3,23 @@ package com.bayviewglen.zork;
 public class WeaponAttachment extends Item{
 private int attackPowerAdded;
 private int critChanceAdded;
+private String swordTitleAdded;
 	
-	public WeaponAttachment (String name, Double mass, int cost, int powerAdded,int critAdded){
-		super(name,mass,cost);
-		this.attackPowerAdded = powerAdded;
+	public String getSwordTitleAdded() {
+	return swordTitleAdded;
+}
+
+public void setSwordTitleAdded(String swordTitleAdded) {
+	this.swordTitleAdded = swordTitleAdded;
+}
+
+	public WeaponAttachment (String description, Double mass,int cost, int powerAdded,int critAdded, String word){
+		super(description, mass, cost);
+		this.attackPowerAdded =powerAdded;
 		this.critChanceAdded = critAdded;
+		this.swordTitleAdded = word;
+		
+		
 	}
 
 	public int getAttackPowerAdded() {
