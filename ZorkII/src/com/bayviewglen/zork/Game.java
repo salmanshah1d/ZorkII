@@ -330,7 +330,7 @@ class Game {
 			}
 			if (person.equals("DesLauriers")) {
 				DesLauriers DesLauriers = new DesLauriers();
-				DesLauriers.talk();
+				DesLauriers.talk(mainCharacter);
 			}
 		} else {
 			System.out.println(person + " is not in this room.");
@@ -420,6 +420,54 @@ class Game {
 			return false;
 		}
 		String enemy = command.getSecondWord();
+		if (currentRoom.getNPC()!=null && enemy.equals(currentRoom.getNPC().getCharacterName())){
+			if(mainSword!=null){
+				int charDamage = mainSword.getPower();
+				int enemyDamage = currentRoom.getNPC().getWeapon().getPower();
+				int crit = (int) (Math.random() * 100);
+				for (int i = 0; i < mainSword.getCritChance(); i++) {
+					if (i == crit) {
+						charDamage *= 3;
+						charDamage = charDamage - currentRoom.getNPC().getCharacterArmor();
+					}
+				}for(int j =0; j<currentRoom.getNPC().getWeapon().getCost(); j++){
+					if (j == crit) {
+						enemyDamage *= 3;
+						enemyDamage = enemyDamage - mainArmour.getProtection();
+					}
+				}currentRoom.getNPC().setCharacterHealth(currentRoom.getNPC().getCharacterHealth() - charDamage);
+				if (currentRoom.getNPC().getCharacterHealth()>0){
+					mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth() - enemyDamage);
+				}
+			}else{
+				System.out.println("You don't have a sword yet!");
+			//	if currentRoom.getNPC().getCharacterHealth() <= 0)
+				
+			}
+			if (currentRoom.getNPC().getCharacterHealth()<=0){
+				System.out.println(currentRoom.getNPC().getCharacterName() + " has been defeated.");
+				currentRoom.setNPC(null);
+			}else if (mainCharacter.getCharacterHealth()<=0){
+				System.out.println("Sorry, you have lost. Catch this L.");
+				return true;
+			}else{
+				if (mainSword != null) {
+					System.out.println(
+							currentRoom.getNPC().getCharacterName() + " attacked you back!");
+					System.out.print("Your Health: " + mainCharacter.getCharacterHealth() + " |");
+					for (int i = 0; i < mainCharacter.getCharacterHealth() / 5; i++) {
+						System.out.print("-");
+					}
+					for (int j = mainCharacter.getCharacterHealth() / 5; j < 20; j++) {
+						System.out.print(" ");
+					}
+					System.out.println("|");
+					System.out.println(currentRoom.getNPC().getCharacterName() + "'s Health: "
+							+ currentRoom.getNPC().getCharacterHealth());
+				}
+			}	return false;
+			
+		}else{
 		int enemyIndex = -1;
 
 		for (int i = 0; i < currentRoom.getRoomEnemies().size(); i++) {
@@ -439,11 +487,13 @@ class Game {
 				for (int i = 0; i < mainSword.getCritChance(); i++) {
 					if (i == crit) {
 						charDamage *= 3;
+						charDamage = charDamage-currentRoom.getRoomEnemies().get(enemyIndex).getCharacterArmor();
 					}
 				}
 				for (int j = 0; j < currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getCritChance(); j++) {
 					if (j == crit) {
 						enemyDamage *= 3;
+						enemyDamage = enemyDamage - mainArmour.getProtection();
 					}
 				}
 				currentRoom.getRoomEnemies().get(enemyIndex).setCharacterHealth(
@@ -484,28 +534,44 @@ class Game {
 		return false;
 
 	}
-
-	public void use(String secondWord) {
-		// checks to see if the item the player wants to use in their inventory
-		int inventorySize = characterInventory.getNumItems();
-		for (int i = 0; i < inventorySize; i++) {
-			Item theItem = characterInventory.getInventory().get(i);
-			String itemName = theItem.getDescription();
-
-			if (itemName.equals(secondWord)) {
-
-				// checks the type of the item
-				if (theItem instanceof Food) {
-					mainCharacter.setCharacterHealth(
-							((Food) theItem).getHealthRestored() + mainCharacter.getCharacterHealth());
-					if (mainCharacter.getCharacterHealth() > mainCharacter.getCharacterHealthMax())
-						mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
-				} else if (theItem instanceof WeaponAttachment) {
-
-				}
-			}
-
-		}
-
 	}
-}
+
+	public void use (String secondWord) {
+		//checks to see if the item the player wants to use in their inventory
+			boolean used = false;
+			int inventorySize = characterInventory.getNumItems();
+			for(int i = 0; i<inventorySize; i++){
+				Item theItem = characterInventory.getInventory().get(i);
+				String itemName = theItem.getDescription();
+
+				if(itemName.equals(secondWord)){
+					used = true;
+					//checks the type of the item
+					if(theItem instanceof Food){
+						mainCharacter.setCharacterHealth(((Food) theItem).getHealthRestored() + mainCharacter.getCharacterHealth());
+						if(mainCharacter.getCharacterHealth()>mainCharacter.getCharacterHealthMax())
+							mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
+						System.out.println("Your health is now " + mainCharacter.getCharacterHealth() + "hp");
+					}
+					else if (theItem instanceof WeaponAttachment){
+						mainSword.setPower(((WeaponAttachment) theItem).getAttackPowerAdded()+ mainSword.getPower());
+						mainSword.setCritChance(((WeaponAttachment) theItem).getCritChanceAdded() + mainSword.getCritChance());
+						mainSword.setDescription(theItem.getDescription() + mainSword.getDescription());
+						System.out.println("Your sword has become the " + mainSword.getDescription() + ".");
+					}
+					else if (theItem instanceof ArmourAttachment){
+						mainArmour.setProtection(((ArmourAttachment) theItem).getArmourAdded() + mainArmour.getProtection());
+						mainArmour.setDescription(theItem.getDescription() + mainArmour.getDescription());
+						System.out.println("Your armour has become the " + mainArmour.getDescription() + ".");
+					}else if (theItem instanceof Pockets){
+						characterInventory.setMaxWeight(((Pockets) theItem).getSpaceAdded() + characterInventory.getMaxWeight()) ;
+						System.out.println("Your armour has become the " + mainArmour.getDescription() + ".");
+					}
+					else
+						System.out.println("You cannot use that.");
+	//add pockets as usable
+				}
+				
+			}if(used==false)
+			System.out.println("You do not have that in your inventory.");				
+		}}
