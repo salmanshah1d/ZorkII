@@ -25,7 +25,7 @@ class Room {
 	private HashMap<String, Room> exits; // stores exits of this room.
 	private Inventory roomInventory;
 	private Inventory characterInventory;
-	private Character npc;
+	private NonPlayableCharacter npc;
 	private ArrayList<Enemy> roomEnemies;
 
 	/**
@@ -216,5 +216,9 @@ class Room {
 
 	public void setNPC(NonPlayableCharacter nonPlayableCharacter) {
 		this.npc = nonPlayableCharacter;
+	}
+	
+	public NonPlayableCharacter getNPC() {
+		return this.npc;
 	}
 }

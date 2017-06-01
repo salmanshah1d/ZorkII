@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ShayanShakeriNezhad extends NonPlayableCharacter{
 	
-	private static String characterName = "Shayan Shakeri-Nezhad";
+	private static String characterName = "ShayanShakeri";
 	private int characterHealth = 1000;
 	private int characterHealthMax = 1000;
 	Weapon shayanSnKeyBlade = new Weapon("Sour Key-Blade", 5.0, 1000, 80, 4);

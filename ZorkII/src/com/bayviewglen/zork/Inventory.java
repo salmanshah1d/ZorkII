@@ -7,14 +7,14 @@ public class Inventory {
 	ArrayList<Item> inventory;
 	private int weight = 0;
 	private double maxWeight = 50.0; // the max weight a character can make
-	private int wallet = 9999999;
+	private double wallet = 9999999.0;
 
-	public int getWallet() {
+	public double getWallet() {
 		return wallet;
 	}
 
-	public void setWallet(int wallet) {
-		this.wallet = wallet;
+	public void setWallet(double d) {
+		this.wallet = d;
 	}
 
 	public Inventory() {

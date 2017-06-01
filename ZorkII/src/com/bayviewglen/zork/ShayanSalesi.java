@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class ShayanSalesi extends NonPlayableCharacter{
 
 	
-	private static String characterName = "Shayan Salesi";
+	private static String characterName = "ShayanSalesi";
 	private int characterHealth = 150;
 	private int characterHealthMax = 150;
 	Weapon shayanSlWeapon = new SupremeShank();

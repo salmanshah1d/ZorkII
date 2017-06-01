@@ -2,8 +2,8 @@ package com.bayviewglen.zork;
 
 import java.util.ArrayList;
 
-public class Deslaurier extends NonPlayableCharacter{
-	private static String characterName = "Deslaurier";
+public class DesLauriers extends NonPlayableCharacter{
+	private static String characterName = "DesLauriers";
 	private int characterHealth = 500;
 	private int characterHealthMax = 500;
 	private int characterArmour = 5; 
@@ -42,7 +42,7 @@ public class Deslaurier extends NonPlayableCharacter{
 		}
 	}
 	
-	public Deslaurier(){
+	public DesLauriers(){
 		super(characterName);
 		//String description, double mass, int cost ,int power, int critChance
 		

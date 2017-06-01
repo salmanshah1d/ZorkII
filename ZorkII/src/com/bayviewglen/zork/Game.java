@@ -105,11 +105,13 @@ class Game {
 				room.setRoomEnemies(enemyList);
 
 				String roomNPC = roomScanner.nextLine().split(":")[1].trim();
-				
-				if (roomNPC.equals("ShayanSn")) {
+
+				if (roomNPC.equals("ShayanShakeri")) {
 					room.setNPC(new ShayanShakeriNezhad());
 				} else if (roomNPC.equals("Salesi")) {
 					room.setNPC(new ShayanSalesi());
+				} else if (roomNPC.equals("RyanAbhary")) {
+					room.setNPC(new RyanAbhary());
 				} else if (roomNPC.equals("Rodin")) {
 					room.setNPC(new Rodin());
 				} else if (roomNPC.equals("Andrei")) {
@@ -118,10 +120,10 @@ class Game {
 					room.setNPC(new Rodin());
 				} else if (roomNPC.equals("RyanMak")) {
 					room.setNPC(new RyanMak());
-				} else if (roomNPC.equals("Mr. DesLauriers")) {
-					room.setNPC(new Deslaurier());
+				} else if (roomNPC.equals("DesLauriers")) {
+					room.setNPC(new DesLauriers());
 				}
-				
+
 				// This puts the room we created (Without the exits in the
 				// masterMap)
 				masterRoomMap.put(roomName.toUpperCase().substring(10).trim().replaceAll(" ", "_"), room);
@@ -287,13 +289,11 @@ class Game {
 			goRoom(command);
 		else if (commandWord.equals("take"))
 			takeItem(command);
-		else if (commandWord.equals("attack")) {
+		else if (commandWord.equals("attack"))
 			return attackEnemy(command);
-		}
-		/*
-		 * else if (commandWord.equals("talk")) talk(command);
-		 */
-		else if (commandWord.equals("quit")) {
+		else if (commandWord.equals("talk")) {
+			talk(command);
+		} else if (commandWord.equals("quit")) {
 			if (command.hasSecondWord())
 				System.out.println("Quit what?");
 			else
@@ -309,12 +309,45 @@ class Game {
 
 	// implementations of user commands:
 
-	/*
-	 * private void talk(Command command) { if
-	 * (currentRoom.getNonPlayableCharacter.getName().equals(command)){
-	 * currentRoom.getNonPlayableCharacter.talk(); } else {
-	 * System.out.println(command + " is not in this room."); } }
-	 */
+	private void talk(Command command) {
+		String person = command.getSecondWord();
+		if (currentRoom.getNPC().getCharacterName().equals(person)) {
+			if (person.equals("ShayanShakeri")){
+				ShayanShakeriNezhad ShayanShakeriNezhad = new ShayanShakeriNezhad();
+				ShayanShakeriNezhad.talk(characterInventory);
+			}
+			if (person.equals("ShayanSalesi")){
+				ShayanSalesi ShayanSalesi = new ShayanSalesi();
+				ShayanSalesi.talk(characterInventory);
+			}
+			if (person.equals("Andrei")){
+				Andrei Andrei = new Andrei();
+				Andrei.talk(characterInventory);
+			}
+			if (person.equals("Daniel")){
+				Daniel Daniel = new Daniel();
+				Daniel.talk(characterInventory);
+			}
+			if (person.equals("Rodin")){
+				Rodin Rodin = new Rodin();
+				Rodin.talk(characterInventory);
+			}
+			if (person.equals("RyanAbhary")){
+				RyanAbhary RyanAbhary = new RyanAbhary();
+				RyanAbhary.talk(characterInventory);
+			}
+			if (person.equals("RyanMak")){
+				RyanMak RyanMak = new RyanMak();
+				RyanMak.talk(characterInventory);
+			}
+			if (person.equals("DesLauriers")){
+				DesLauriers DesLauriers = new DesLauriers();
+				DesLauriers.talk();
+			}
+		} else {
+			System.out.println(person + " is not in this room.");
+		}
+	}
 
 	/**
 	 * Print out some help information. Here we print some stupid, cryptic
@@ -322,7 +355,6 @@ class Game {
 	 */
 	private void printHelp() {
 		System.out.println("You are lost. You are alone. You wander.");
-		// >>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 		System.out.println("Your command words are:");
 		parser.showCommands();
 	}
