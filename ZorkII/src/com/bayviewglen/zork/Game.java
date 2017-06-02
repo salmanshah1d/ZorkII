@@ -27,7 +27,7 @@ import org.omg.CORBA.SystemException;
 
 class Game {
 
-	public Character mainCharacter = new Character();
+	public Character mainCharacter = new Character("", 100, 100);
 	private Parser parser;
 	private Room currentRoom;
 	private Sword mainSword;
@@ -272,22 +272,22 @@ class Game {
 		}
 
 		String commandWord = command.getCommandWord();
-		if (commandWord.equals("help"))
+		if (commandWord.equalsIgnoreCase("help"))
 			printHelp();
-		else if (commandWord.equals("go"))
+		else if (commandWord.equalsIgnoreCase("go"))
 			goRoom(command);
-		else if (commandWord.equals("take"))
+		else if (commandWord.equalsIgnoreCase("take"))
 			takeItem(command);
-		else if (commandWord.equals("attack"))
+		else if (commandWord.equalsIgnoreCase("attack"))
 			return attackEnemy(command);
-		else if (commandWord.equals("talk")) {
+		else if (commandWord.equalsIgnoreCase("talk")) {
 			talk(command);
-		} else if (commandWord.equals("quit")) {
+		} else if (commandWord.equalsIgnoreCase("quit")) {
 			if (command.hasSecondWord())
 				System.out.println("Quit what?");
 			else
 				return true; // signal that we want to quit
-		} else if (commandWord.equals("use")) {
+		} else if (commandWord.equalsIgnoreCase("use")) {
 			if (command.hasSecondWord() == false)
 				System.out.println("Use what?");
 			else
@@ -299,10 +299,11 @@ class Game {
 	// implementations of user commands:
 	private void talk(Command command) {
 		String person = command.getSecondWord();
-		if (currentRoom.getNPC().getCharacterName().equals(person)) {
-			if (person.equals("ShayanShakeri")) {
-				ShayanShakeriNezhad ShayanShakeriNezhad = new ShayanShakeriNezhad();
-				ShayanShakeriNezhad.talk(characterInventory);
+		if (currentRoom.getNPC()!=null&&currentRoom.getNPC().getCharacterName().equalsIgnoreCase(person)&&currentRoom.getNPC().getCharacterHealth()>0) {
+			currentRoom.getNPC().talk(characterInventory);
+			/*	if (person.equals("ShayanShakeri")) {
+			ShayanShakeriNezhad ShayanShakeriNezhad = new ShayanShakeriNezhad();
+				currentRoom.getNPC().talk(characterInventory);
 			}
 			if (person.equals("ShayanSalesi")) {
 				ShayanSalesi ShayanSalesi = new ShayanSalesi();
@@ -331,7 +332,7 @@ class Game {
 			if (person.equals("DesLauriers")) {
 				DesLauriers DesLauriers = new DesLauriers();
 				DesLauriers.talk(mainCharacter);
-			}
+			}*/
 		} else {
 			System.out.println(person + " is not in this room.");
 		}
@@ -414,13 +415,14 @@ class Game {
 	}
 
 	private boolean attackEnemy(Command command) {
+		boolean enemyCrit = false;
 		if (!command.hasSecondWord()) {
 			// if there is no second word, we don't know who to attack
 			System.out.println("Attack who?");
 			return false;
 		}
 		String enemy = command.getSecondWord();
-		if (currentRoom.getNPC()!=null && enemy.equals(currentRoom.getNPC().getCharacterName())){
+		if (currentRoom.getNPC()!=null && enemy.equalsIgnoreCase(currentRoom.getNPC().getCharacterName())){
 			if(mainSword!=null){
 				int charDamage = mainSword.getPower();
 				int enemyDamage = currentRoom.getNPC().getWeapon().getPower();
@@ -428,16 +430,22 @@ class Game {
 				for (int i = 0; i < mainSword.getCritChance(); i++) {
 					if (i == crit) {
 						charDamage *= 3;
-						charDamage = charDamage - currentRoom.getNPC().getCharacterArmor();
+						System.out.println("CRITICAL STRIKE!");
 					}
-				}for(int j =0; j<currentRoom.getNPC().getWeapon().getCost(); j++){
+				}
+				charDamage = charDamage - currentRoom.getNPC().getCharacterArmor();
+				for(int j =0; j<currentRoom.getNPC().getWeapon().getCritChance(); j++){
 					if (j == crit) {
 						enemyDamage *= 3;
-						enemyDamage = enemyDamage - mainArmour.getProtection();
+						enemyCrit = true;
 					}
-				}currentRoom.getNPC().setCharacterHealth(currentRoom.getNPC().getCharacterHealth() - charDamage);
+				}
+				enemyDamage = enemyDamage - mainArmour.getProtection();
+				currentRoom.getNPC().setCharacterHealth(currentRoom.getNPC().getCharacterHealth() - charDamage);
 				if (currentRoom.getNPC().getCharacterHealth()>0){
 					mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth() - enemyDamage);
+					if(enemyCrit == true)
+						System.out.println("ENEMY CRITICAL STRIKE");
 				}
 			}else{
 				System.out.println("You don't have a sword yet!");
@@ -471,7 +479,7 @@ class Game {
 		int enemyIndex = -1;
 
 		for (int i = 0; i < currentRoom.getRoomEnemies().size(); i++) {
-			if (currentRoom.getRoomEnemies().get(i).getCharacterName().equals(enemy)) {
+			if (currentRoom.getRoomEnemies().get(i).getCharacterName().equalsIgnoreCase(enemy)) {
 				enemyIndex = i;
 			}
 		}
@@ -479,7 +487,7 @@ class Game {
 		if (enemyIndex == -1) {
 			System.out.println("There is no such enemy...");
 			return false;
-		} else {
+		} else {			
 			if (mainSword != null) {
 				int charDamage = mainSword.getPower();
 				int enemyDamage = currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getPower();
@@ -487,19 +495,23 @@ class Game {
 				for (int i = 0; i < mainSword.getCritChance(); i++) {
 					if (i == crit) {
 						charDamage *= 3;
-						charDamage = charDamage-currentRoom.getRoomEnemies().get(enemyIndex).getCharacterArmor();
-					}
-				}
+						System.out.println("CRITICAL STRIKE!");
+								}
+				}charDamage = charDamage-currentRoom.getRoomEnemies().get(enemyIndex).getCharacterArmor();
+
 				for (int j = 0; j < currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getCritChance(); j++) {
 					if (j == crit) {
 						enemyDamage *= 3;
-						enemyDamage = enemyDamage - mainArmour.getProtection();
+						enemyCrit = true;
 					}
 				}
+				enemyDamage = enemyDamage - mainArmour.getProtection();
 				currentRoom.getRoomEnemies().get(enemyIndex).setCharacterHealth(
 						currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - charDamage);
-				if (currentRoom.getRoomEnemies().size() > 0) {
+				if (currentRoom.getRoomEnemies().size() > 0&&currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth()>0) {
 					mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth() - enemyDamage);
+					if (enemyCrit = true)
+						System.out.println("ENEMY CRITICAL STRIKE!");
 				}
 			} else {
 				System.out.println("You don't have a sword yet!");
@@ -542,9 +554,9 @@ class Game {
 			int inventorySize = characterInventory.getNumItems();
 			for(int i = 0; i<inventorySize; i++){
 				Item theItem = characterInventory.getInventory().get(i);
-				String itemName = theItem.getDescription();
+				String itemName = theItem.getDescription().toLowerCase();
 
-				if(itemName.equals(secondWord)){
+				if(itemName.equalsIgnoreCase(secondWord)){
 					used = true;
 					//checks the type of the item
 					if(theItem instanceof Food){
@@ -558,14 +570,17 @@ class Game {
 						mainSword.setCritChance(((WeaponAttachment) theItem).getCritChanceAdded() + mainSword.getCritChance());
 						mainSword.setDescription(theItem.getDescription() + mainSword.getDescription());
 						System.out.println("Your sword has become the " + mainSword.getDescription() + ".");
+						characterInventory.removeItem(theItem);
 					}
 					else if (theItem instanceof ArmourAttachment){
 						mainArmour.setProtection(((ArmourAttachment) theItem).getArmourAdded() + mainArmour.getProtection());
 						mainArmour.setDescription(theItem.getDescription() + mainArmour.getDescription());
 						System.out.println("Your armour has become the " + mainArmour.getDescription() + ".");
+						characterInventory.removeItem(theItem);
 					}else if (theItem instanceof Pockets){
 						characterInventory.setMaxWeight(((Pockets) theItem).getSpaceAdded() + characterInventory.getMaxWeight()) ;
 						System.out.println("Your armour has become the " + mainArmour.getDescription() + ".");
+						characterInventory.removeItem(theItem);
 					}
 					else
 						System.out.println("You cannot use that.");
