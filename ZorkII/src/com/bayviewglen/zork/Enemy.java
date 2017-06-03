@@ -18,4 +18,7 @@ public class Enemy extends Character {
 	public Enemy(String name) {
 		super(name);
 	}
+	public void deathPhrase(){
+		//System.out.println("*While dying* I see the light. It's green.");
+	}
 }
