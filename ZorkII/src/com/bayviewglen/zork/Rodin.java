@@ -68,6 +68,8 @@ public class Rodin extends NonPlayableCharacter{
 		//creates the inventory for the character
 		rodinInventory.add(new Food("Half-eatenSandwich", 0.5, 0, 60));
 		rodinInventory.add(new Pockets("LargePockets", 0.0, 50, 50));
+		rodinInventory.add(new WeaponAttachment("WeaponPoison(WA)", 0.1, 55, 0, 5, "poisoned"));
+		rodinInventory.add(new ArmourAttachment("SmallUnderShirt(AA)", 0.3, 20, 1, "insulated"));
 		//String description, double mass, int cost ,int power, int critChance
 		rodinInventory.add(new DirtyShank());
 		
