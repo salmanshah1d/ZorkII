@@ -123,7 +123,7 @@ public void setWallet(int wallet) {
 		if(inventory.size() > 0){
 			for (int i = 0; i<inventory.size(); i++){
 				System.out.print(inventory.get(i).getDescription()+ ": " +inventory.get(i).getCost() + ", ");
-			}
+			}System.out.println("(Type the name of the item you wish to sell <DirtyShank>, or type 'exit'. )");
 		}else {
 			System.out.println("There is nothing in your inventory.");
 		}
