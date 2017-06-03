@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Andrei extends NonPlayableCharacter{
 	private static String characterName = "Andrei";
-	private int characterHealth = 400;
+	private int characterHealth = 200;
 	public int getCharacterHealth() {
 		return characterHealth;
 	}
@@ -12,7 +12,7 @@ public class Andrei extends NonPlayableCharacter{
 	public void setCharacterHealth(int characterHealth) {
 		this.characterHealth = characterHealth;
 	}
-	private int characterHealthMax = 400;
+	private int characterHealthMax = 200;
 	private Weapon Weapon = new Weapon("Audacity Sound File ", 1.0, 0, 20, 5);
 	public Weapon getWeapon() {
 		return Weapon;
