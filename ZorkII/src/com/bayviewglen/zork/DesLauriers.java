@@ -7,17 +7,33 @@ public class DesLauriers extends NonPlayableCharacter{
 	private int characterHealth = 500;
 	private int characterHealthMax = 500;
 	private int characterArmour = 5; 
-	Weapon deslaurierWeapon = new Weapon("Sword of Eclipse", 50.0, 1000, 50, 6);
-	private int characterPower = deslaurierWeapon.getPower();
-	ArrayList<Item> deslauerierInventory = new ArrayList<Item>();
+	Weapon Weapon = new Weapon("Sword of Eclipse", 50.0, 1000, 40, 6);
+	public int getCharacterHealth() {
+		return characterHealth;
+	}
+
+	public void setCharacterHealth(int characterHealth) {
+		this.characterHealth = characterHealth;
+	}
+
+	public Weapon getWeapon() {
+		return Weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		Weapon = weapon;
+	}
+
+	private int characterPower = Weapon.getPower();
+	ArrayList<Item> deslaurierInventory = new ArrayList<Item>();
 	//private int characterPower;
 	//private int characterArmor;
 	
 	
 	
-	public void talk(){
+	public void talk(Character main){
 		boolean stillTalking = true;
-		System.out.println("Deslaurier: Welcome my son. I have what you seek. A 5 in AP-ComSci-A. (Select the number of the option you wish to say.)");
+		System.out.println("Deslaurier: Welcome" +main.getCharacterName() + ". I have what you seek. A 5 in AP-ComSci-A. (Select the number of the option you wish to say.)");
 		while(stillTalking){
 		System.out.println("1: You held the treasure all along? Why not just give it to me when we met?");
 		System.out.println("2: I have collected all five gems. Now give me what I earned.");
@@ -63,4 +79,14 @@ public class DesLauriers extends NonPlayableCharacter{
 	}
 	
 	}*/
+	public void deathPhrase(){
+		System.out.println(characterName + ": *While dying* Well done. My son.");
+	}
+	public ArrayList<Item> getNpcInventory() {
+		return deslaurierInventory;
+	}
+
+	public void setNpcInventory(ArrayList<Item> shayanSnInventory) {
+		this.deslaurierInventory = shayanSnInventory;
+	}
 }
