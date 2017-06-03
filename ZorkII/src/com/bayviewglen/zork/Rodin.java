@@ -7,8 +7,23 @@ public class Rodin extends NonPlayableCharacter{
 	private static String characterName = "Rodin";
 	private int characterHealth = 80;
 	private int characterHealthMax = 80;
-	Weapon rodinShank = new DirtyShank();
-	private int characterPower = rodinShank.getPower();
+	private Weapon Weapon = new DirtyShank();
+	private int characterPower = Weapon.getPower();
+	public int getCharacterHealth() {
+		return characterHealth;
+	}
+
+	public void setCharacterHealth(int characterHealth) {
+		this.characterHealth = characterHealth;
+	}
+
+	public Weapon getWeapon() {
+		return Weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		Weapon = weapon;
+	}
 	ArrayList<Item> rodinInventory = new ArrayList<Item>();
 	//private int characterPower;
 	//private int characterArmor;
@@ -51,8 +66,8 @@ public class Rodin extends NonPlayableCharacter{
 	public Rodin(){
 		super(characterName);
 		//creates the inventory for the character
-		rodinInventory.add(new Food("Half-eaten sandwich", 0.5, 0, 60));
-		rodinInventory.add(new Pockets("Large Pockets", 0.0, 50, 50));
+		rodinInventory.add(new Food("Half-eatenSandwich", 0.5, 0, 60));
+		rodinInventory.add(new Pockets("LargePockets", 0.0, 50, 50));
 		//String description, double mass, int cost ,int power, int critChance
 		rodinInventory.add(new DirtyShank());
 		
@@ -111,7 +126,7 @@ public class Rodin extends NonPlayableCharacter{
 				for (int j=0; j<inv.getNumItems();j++){
 					if(wishToSell.equalsIgnoreCase(inv.getItem(j).getDescription())){
 						rodinInventory.add(inv.getItem(j));
-						inv.setWallet((int)(inv.getWallet()+inv.getItem(j).getCost()));
+						inv.setWallet(inv.getWallet()+inv.getItem(j).getCost());
 						inv.removeItem(inv.getItem(j));
 						System.out.println("You now have " + inv.getWallet() + "Iranian Rials.");
 						isSellable = true;
@@ -121,6 +136,17 @@ public class Rodin extends NonPlayableCharacter{
 					System.out.println("That is not a valid option.");
 			}stillSelling = false;
 		}
+	}
+	public void deathPhrase(){
+		System.out.println(characterName + ": *While dying* WHY U DO DIS?");
+	}
+	
+	public ArrayList<Item> getNpcInventory() {
+		return rodinInventory;
+	}
+
+	public void setNpcInventory(ArrayList<Item> shayanSnInventory) {
+		this.rodinInventory = shayanSnInventory;
 	}
 
 }
