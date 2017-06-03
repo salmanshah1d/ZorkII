@@ -98,7 +98,7 @@ class Game {
 						enemyList.add(new Yute(roomEnemies[t].split("-")[1].trim()));
 					} else if (roomEnemies[t].split("-")[0].trim().equals("WasteMansYute")) {
 						enemyList.add(new WasteMansYute(roomEnemies[t].split("-")[1].trim()));
-					} else {
+					} else if(roomEnemies[t].split("-")[0].trim().equals("HypeBeastYute")) {
 						enemyList.add(new HypeBeastYute(roomEnemies[t].split("-")[1].trim()));
 					}
 				}
@@ -156,6 +156,7 @@ class Game {
 					roomTemp.setExit(s.trim().charAt(0), exitRoom);
 				}
 			}
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -197,8 +198,8 @@ class Game {
 		@SuppressWarnings("resource")
 		Scanner keyboard = new Scanner(System.in);
 		System.out.print("Welcome to Road to Zion. Please enter your name: ");
-		String name = textCheck(keyboard.nextLine());
-		mainCharacter.setCharacterName(name);
+		String name = keyboard.nextLine();
+		mainCharacter.setCharacterName(textCheck(name));
 		System.out.println("Please press enter after each line.");
 		keyboard.nextLine();
 		intro(name);
@@ -454,7 +455,9 @@ class Game {
 
 			}
 			if (currentRoom.getNPC().getCharacterHealth() <= 0) {
+				System.out.println();
 				currentRoom.getNPC().deathPhrase();
+				System.out.println();
 				System.out.println(currentRoom.getNPC().getCharacterName() + " has been defeated.");
 				System.out.print(currentRoom.getNPC().getCharacterName() + " has dropped ");
 				for (int k = 0; k < currentRoom.getNPC().getNpcInventory().size(); k++) {
@@ -534,7 +537,9 @@ class Game {
 				}
 
 				if (currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() <= 0) {
+					System.out.println();
 					currentRoom.getRoomEnemies().get(enemyIndex).deathPhrase();
+					System.out.println();
 					System.out.println(
 							currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " has been defeated.");
 					System.out.print(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " has dropped ");
@@ -544,7 +549,7 @@ class Game {
 								.addItem(currentRoom.getRoomEnemies().get(enemyIndex).getWeapon());
 						System.out.print(currentRoom.getRoomEnemies().get(enemyIndex).getEnemyInventory().getItem(k)
 								.getDescription());
-						if (k < currentRoom.getRoomEnemies().get(enemyIndex).getEnemyInventory().getNumItems() - 1) {
+						if (k < currentRoom.getRoomEnemies().get(enemyIndex).getEnemyInventory().getNumItems()-1) {
 							System.out.print(", and ");
 						} else {
 							System.out.print(" ");
@@ -602,21 +607,20 @@ class Game {
 					mainSword.setPower(((WeaponAttachment) theItem).getAttackPowerAdded() + mainSword.getPower());
 					mainSword.setCritChance(
 							((WeaponAttachment) theItem).getCritChanceAdded() + mainSword.getCritChance());
-					mainSword.setDescription(theItem.getDescription() + mainSword.getDescription());
-					System.out.println("Your sword has become the " + mainSword.getDescription() + ".");
+					mainSword.setDescription(((WeaponAttachment) theItem).getSwordTitleAdded() + mainSword.getDescription());
+					System.out.println("Your sword has become the "  + " " + mainSword.getDescription() + ".");
 					characterInventory.removeItem(theItem);
 					break;
 				} else if (theItem instanceof ArmourAttachment) {
 					mainArmour
 							.setProtection(((ArmourAttachment) theItem).getArmourAdded() + mainArmour.getProtection());
-					mainArmour.setDescription(theItem.getDescription() + mainArmour.getDescription());
+					mainArmour.setDescription(((ArmourAttachment) theItem).getArmourTittleAdded() + " " + mainArmour.getDescription());
 					System.out.println("Your armour has become the " + mainArmour.getDescription() + ".");
 					characterInventory.removeItem(theItem);
 					break;
 				} else if (theItem instanceof Pockets) {
-					characterInventory
-							.setMaxWeight(((Pockets) theItem).getSpaceAdded() + characterInventory.getMaxWeight());
-					System.out.println("Your armour has become the " + mainArmour.getDescription() + ".");
+					characterInventory.setMaxWeight(((Pockets) theItem).getSpaceAdded() + characterInventory.getMaxWeight());
+					System.out.println("Your carry weight has increased to " + characterInventory.getMaxWeight());
 					characterInventory.removeItem(theItem);
 					break;
 				} else
