@@ -7,13 +7,29 @@ public class RyanAbhary extends NonPlayableCharacter{
 	private static String characterName = "RyanAbhary";
 	private int characterHealth = 50;
 	private int characterHealthMax = 50;
-	Weapon ryanAbharyWeapon = new GreasyShank();
-	private int characterPower = ryanAbharyWeapon.getPower();
+	private Weapon Weapon = new GreasyShank();
+	private int characterPower = Weapon.getPower();
 	//private int characterPower;
 	//private int characterArmor;
 	private Scanner keyboard = new Scanner(System.in);
 	
 	
+	public int getCharacterHealth() {
+		return characterHealth;
+	}
+
+	public void setCharacterHealth(int characterHealth) {
+		this.characterHealth = characterHealth;
+	}
+
+	public Weapon getWeapon() {
+		return Weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		Weapon = weapon;
+	}
+
 	public void talk(Inventory inv){
 		boolean stillTalking = true;
 		System.out.println("RyanAbhary: Hey what's up. The ceiling LOL. (Select the number of the option you wish to say.)");
@@ -94,5 +110,7 @@ public class RyanAbhary extends NonPlayableCharacter{
 	
 	}*/
 
-
+	public void deathPhrase(){
+		System.out.println(characterName + ": *While dying* I may die. But my jokes live on.");
+	}
 }
