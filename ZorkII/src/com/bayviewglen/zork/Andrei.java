@@ -2,6 +2,10 @@ package com.bayviewglen.zork;
 
 import java.util.ArrayList;
 
+import com.bayviewglen.zork.Inventory;
+import com.bayviewglen.zork.Item;
+import com.bayviewglen.zork.NonPlayableCharacter;
+
 public class Andrei extends NonPlayableCharacter{
 	private static String characterName = "Andrei";
 	private int characterHealth = 200;
@@ -12,7 +16,6 @@ public class Andrei extends NonPlayableCharacter{
 	public void setCharacterHealth(int characterHealth) {
 		this.characterHealth = characterHealth;
 	}
-	@SuppressWarnings("unused")
 	private int characterHealthMax = 200;
 	private Weapon Weapon = new Weapon("Audacity Sound File ", 1.0, 0, 20, 5);
 	public Weapon getWeapon() {
@@ -22,7 +25,6 @@ public class Andrei extends NonPlayableCharacter{
 	public void setWeapon(Weapon weapon) {
 		Weapon = weapon;
 	}
-	@SuppressWarnings("unused")
 	private int characterPower = Weapon.getPower();
 	ArrayList<Item> andreiInventory = new ArrayList<Item>();
 	//private int characterPower;
@@ -40,7 +42,7 @@ public class Andrei extends NonPlayableCharacter{
 		System.out.println("3: Take a look at what I have.");
 		System.out.println("4: Goodbye.");
 		String response  = scanner.nextLine();
-		if(response.equals("1")==false&&response.equals("2")==false&&response.equals("3")==false&&response.equals("4")){
+		if(response.equals("1")==false&&response.equals("2")==false&&response.equals("3")==false&&response.equals("4")==false){
 			System.out.println("That is not a valid option.");
 		}else if(response.equals("1")){
 			System.out.println("Andrei: I am trying to find ideas for my ComSci project inside this superior game.");
