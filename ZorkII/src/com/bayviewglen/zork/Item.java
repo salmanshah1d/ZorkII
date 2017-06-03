@@ -3,7 +3,9 @@ package com.bayviewglen.zork;
 public class Item {
 	private String description;
 	private double mass;
-	private double cost;
+	//I've changed the cost to an int, tell me if you want to change it back.
+	//private double cost;
+	private int cost;
 	private int power;
 	
 	Item(String objectInp, double weightInp) {
@@ -15,7 +17,7 @@ public class Item {
 	}
 	
 	Item(String objectInp, double weightInp, int costInp) {
-		description = objectInp.toLowerCase();
+		description = objectInp;
 		mass = weightInp;
 		cost = costInp;
 	}
@@ -28,7 +30,7 @@ public class Item {
 		return mass;
 	}
 	
-	public double getCost(){
+	public int getCost(){
 		return cost;
 	}
 	
@@ -38,16 +40,18 @@ public class Item {
 	public void setMass(double massInp){
 		this.mass = massInp;	}
 	
-	public void setCost(double costInp){
-		this.cost = costInp;
+//	public void setCost(double costInp){
+	public void setCOst(int costInp){
+	this.cost = costInp;
 	}
 	
 	public String display() {
 		return(description + " (" + mass + ")");
+		
 	}
-
 	public int getPower() {
 		return power;
 	}	
+
 }
 
