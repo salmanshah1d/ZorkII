@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public class DesLauriers extends NonPlayableCharacter{
 	private static String characterName = "DesLauriers";
 	private int characterHealth = 500;
-	private int characterHealthMax = 500;
-	private int characterArmour = 5; 
 	Weapon Weapon = new Weapon("Sword of Eclipse", 50.0, 1000, 40, 6);
 	public int getCharacterHealth() {
 		return characterHealth;
@@ -24,7 +22,6 @@ public class DesLauriers extends NonPlayableCharacter{
 		Weapon = weapon;
 	}
 
-	private int characterPower = Weapon.getPower();
 	ArrayList<Item> deslaurierInventory = new ArrayList<Item>();
 	//private int characterPower;
 	//private int characterArmor;
