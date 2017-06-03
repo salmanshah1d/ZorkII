@@ -6,8 +6,23 @@ public class RyanMak extends NonPlayableCharacter{
 	private static String characterName = "Ryan Mak";
 	private int characterHealth = 150;
 	private int characterHealthMax = 150;
-	Weapon ryanMakWeapon = new GreasyShank();
-	private int characterPower = ryanMakWeapon.getPower();
+	private Weapon Weapon = new GreasyShank();
+	private int characterPower =  Weapon.getPower();
+	public int getCharacterHealth() {
+		return characterHealth;
+	}
+
+	public void setCharacterHealth(int characterHealth) {
+		this.characterHealth = characterHealth;
+	}
+
+	public Weapon getWeapon() {
+		return Weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		Weapon = weapon;
+	}
 	ArrayList<Item> ryanMakInventory = new ArrayList<Item>();
 	//private int characterPower;
 	//private int characterArmor;
@@ -123,5 +138,14 @@ public class RyanMak extends NonPlayableCharacter{
 					System.out.println("That is not a valid option.");
 			}stillSelling = false;
 		}
+	}	public void deathPhrase(){
+		System.out.println("characterName + *: While dying* I should have dropped ComSci.");
+	}
+	public ArrayList<Item> getNpcInventory() {
+		return ryanMakInventory;
+	}
+
+	public void setNpcInventory(ArrayList<Item> shayanSnInventory) {
+		this.ryanMakInventory = shayanSnInventory;
 	}
 }
