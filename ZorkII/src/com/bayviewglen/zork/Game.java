@@ -591,6 +591,7 @@ class Game {
 						if(mainCharacter.getCharacterHealth()>mainCharacter.getCharacterHealthMax())
 							mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
 						System.out.println("Your health is now " + mainCharacter.getCharacterHealth() + "hp");
+						characterInventory.removeItem(theItem);
 						break;
 					}
 					else if (theItem instanceof WeaponAttachment){
