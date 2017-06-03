@@ -198,8 +198,8 @@ class Game {
 		@SuppressWarnings("resource")
 		Scanner keyboard = new Scanner(System.in);
 		System.out.print("Welcome to Road to Zion. Please enter your name: ");
-		String name = keyboard.nextLine();
-		mainCharacter.setCharacterName(textCheck(name));
+		String name = textCheck(keyboard.nextLine());
+		mainCharacter.setCharacterName(name);
 		System.out.println("Please press enter after each line.");
 		keyboard.nextLine();
 		intro(name);
