@@ -13,10 +13,14 @@ public class HypeBeastYute extends Enemy {
 
 	public void setEnemyInventory(Inventory hypeBeastYuteInventory) {
 		this.enemyInventory = hypeBeastYuteInventory;
-		hypeBeastYuteInventory.addItem(new GreasyShank());
+		hypeBeastYuteInventory.addItem(new SupremeShank());
 	}
 
 	public HypeBeastYute(String name) {
 		super(description, name, 100, hypeBeastYuteShank);
+	}
+	
+	public void deathPhrase(){
+		System.out.println(this.getCharacterName() + ": *While dying* My only regret. Is that I will miss this weeks supreme drop.");
 	}
 }
