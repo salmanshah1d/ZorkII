@@ -8,7 +8,7 @@ public class Character {
 	private String description;
 	private int characterHealth;
 	private int characterHealthMax; // what is this?
-	private Weapon characterWeapon;
+	private Weapon Weapon;
 	//private int characterPower;
 	private int characterArmor;
 
@@ -21,7 +21,7 @@ public class Character {
 	}*/
 
 	public Weapon getWeapon() {
-		return characterWeapon;
+		return Weapon;
 	}
 	
 	public int getCharacterArmor() {
@@ -44,7 +44,7 @@ public class Character {
 		this.description = kind;
 		this.characterName = name;
 		this.characterHealth = health;
-		this.characterWeapon = weapon;
+		this.Weapon = weapon;
 	}
 
 	/*
@@ -52,14 +52,19 @@ public class Character {
 	 * = name; this.characterHealth= health; this.characterPower = power; }
 	 */
 
-	public Character(String name, int health, int power, int armor) {
+	/*public Character(String name, int health, int power, int armor) {
 		this.characterName = name;
 		this.characterHealth = health;
 		//this.characterPower = power;
 		this.characterArmor = armor;
-	}
+	}*/
 
-	public Character(String name, int health, int maxHealth, int power, int armor) {
+	public Character(String name, int health, int maxHealth){
+		this.characterName = name;
+		this.characterHealth = health;
+		this.characterHealthMax = maxHealth;
+	}
+	public Character(String name, int health, int maxHealth, int armor) {
 		this.characterName = name;
 		this.characterHealth = health;
 		this.characterHealthMax = maxHealth;
@@ -92,7 +97,7 @@ public class Character {
 	}
 
 	public void setWeapon(Weapon item) {
-		this.characterWeapon = item;
+		this.Weapon = item;
 	}
 	
 	public String getDescription() {
