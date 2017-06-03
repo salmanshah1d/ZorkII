@@ -5,9 +5,23 @@ import java.util.ArrayList;
 public class Andrei extends NonPlayableCharacter{
 	private static String characterName = "Andrei";
 	private int characterHealth = 400;
+	public int getCharacterHealth() {
+		return characterHealth;
+	}
+
+	public void setCharacterHealth(int characterHealth) {
+		this.characterHealth = characterHealth;
+	}
 	private int characterHealthMax = 400;
-	Weapon andreiWeapon = new Weapon("Audacity Sound File ", 1.0, 0, 20, 5);
-	private int characterPower = andreiWeapon.getPower();
+	private Weapon Weapon = new Weapon("Audacity Sound File ", 1.0, 0, 20, 5);
+	public Weapon getWeapon() {
+		return Weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		Weapon = weapon;
+	}
+	private int characterPower = Weapon.getPower();
 	ArrayList<Item> andreiInventory = new ArrayList<Item>();
 	//private int characterPower;
 	//private int characterArmor;
@@ -116,5 +130,14 @@ public class Andrei extends NonPlayableCharacter{
 				}stillSelling = false;
 			}
 		}
-	
+	public void deathPhrase(){
+		System.out.println(characterName + ": *While dying* I see the light. It's green.");
+	}
+	public ArrayList<Item> getNpcInventory() {
+		return andreiInventory;
+	}
+
+	public void setNpcInventory(ArrayList<Item> shayanSnInventory) {
+		this.andreiInventory = shayanSnInventory;
+	}
 	}
