@@ -9,9 +9,24 @@ public class ShayanSalesi extends NonPlayableCharacter{
 	private static String characterName = "ShayanSalesi";
 	private int characterHealth = 150;
 	private int characterHealthMax = 150;
-	Weapon shayanSlWeapon = new SupremeShank();
-	private int characterPower = shayanSlWeapon.getPower();
-//	ArrayList<String> shayanSnInventoryNames = new ArrayList<String>();
+	private Weapon Weapon = new SupremeShank();
+	private int characterPower = Weapon.getPower();
+public int getCharacterHealth() {
+		return characterHealth;
+	}
+
+	public void setCharacterHealth(int characterHealth) {
+		this.characterHealth = characterHealth;
+	}
+
+	public Weapon getWeapon() {
+		return Weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		Weapon = weapon;
+	}
+	//	ArrayList<String> shayanSnInventoryNames = new ArrayList<String>();
 	ArrayList<Item> shayanSlInventory = new ArrayList<Item>();
 	//private int characterPower;
 	//private int characterArmor;
@@ -135,5 +150,14 @@ public class ShayanSalesi extends NonPlayableCharacter{
 					System.out.println("That is not a valid option.");
 			}stillSelling = false;
 		}
+	}	public void deathPhrase(){
+		System.out.println(characterName + ": *While dying* Please take care of Saturn Capital in my absence.");
+	}
+	public ArrayList<Item> getNpcInventory() {
+		return shayanSlInventory;
+	}
+
+	public void setNpcInventory(ArrayList<Item> shayanSnInventory) {
+		this.shayanSlInventory = shayanSnInventory;
 	}
 }
