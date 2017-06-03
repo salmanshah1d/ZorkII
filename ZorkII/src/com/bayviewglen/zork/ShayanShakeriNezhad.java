@@ -1,7 +1,6 @@
 package com.bayviewglen.zork;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ShayanShakeriNezhad extends NonPlayableCharacter{
 	
@@ -14,7 +13,6 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter{
 	public void setCharacterHealth(int characterHealth) {
 		this.characterHealth = characterHealth;
 	}
-	private int characterHealthMax = 1000;
 	private Weapon Weapon = new Weapon("Sour Key-Blade", 5.0, 400, 40, 4);
 	public Weapon getWeapon() {
 		return Weapon;

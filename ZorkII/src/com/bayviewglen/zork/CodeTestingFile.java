@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class CodeTestingFile {
 
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		Scanner roomScanner = new Scanner(System.in);
 		String roomItems = roomScanner.nextLine();
 		// An array of strings in the format E-RoomName

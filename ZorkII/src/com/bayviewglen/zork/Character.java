@@ -1,7 +1,5 @@
 package com.bayviewglen.zork;
 
-import java.util.ArrayList;
-
 //Used to create the main character. All other characters extend this class
 public class Character {
 	private String characterName;

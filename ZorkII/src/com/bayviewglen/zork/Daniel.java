@@ -5,9 +5,7 @@ import java.util.ArrayList;
 public class Daniel extends NonPlayableCharacter{
 	private static String characterName = "Daniel";
 	private int characterHealth = 150;
-	private int characterHealthMax = 150;
 	Weapon Weapon = new Weapon("Shoe ", 1.0, 10, 30, 3);
-	private int characterPower = Weapon.getPower();
 	public int getCharacterHealth() {
 		return characterHealth;
 	}

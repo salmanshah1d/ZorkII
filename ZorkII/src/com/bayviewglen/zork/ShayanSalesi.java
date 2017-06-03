@@ -1,17 +1,14 @@
 package com.bayviewglen.zork;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ShayanSalesi extends NonPlayableCharacter{
 
 	
 	private static String characterName = "ShayanSalesi";
 	private int characterHealth = 150;
-	private int characterHealthMax = 150;
 	private Weapon Weapon = new SupremeShank();
-	private int characterPower = Weapon.getPower();
-public int getCharacterHealth() {
+	public int getCharacterHealth() {
 		return characterHealth;
 	}
 
@@ -35,7 +32,7 @@ public int getCharacterHealth() {
 	
 	public void talk(Inventory inv){
 		boolean stillTalking = true;
-		System.out.println("ShayanSl: Hello, I am Shayan Salesi, CEO of Saturn Capital. Please buy some Saturn Capital shares. (Select the number of the option you wish to say.)");
+		System.out.println("ShayanSalesi: Hello, I am Shayan Salesi, CEO of Saturn Capital. Please buy some Saturn Capital shares. (Select the number of the option you wish to say.)");
 		while(stillTalking){
 		System.out.println();
 		System.out.println("1: What are you doing inside a temple?");
