@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import org.omg.CORBA.SystemException;
-
 /**
  * Class Game - the main class of the "Zork" game.
  *
@@ -158,7 +156,6 @@ class Game {
 					roomTemp.setExit(s.trim().charAt(0), exitRoom);
 				}
 			}
-			roomScanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -191,13 +188,13 @@ class Game {
 		}
 
 		System.out.println("Thank you for playing. Good bye.");
-		// >>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
 	}
 
 	/**
 	 * Print out the opening message for the player.
 	 */
 	private void printWelcome() {
+		@SuppressWarnings("resource")
 		Scanner keyboard = new Scanner(System.in);
 		System.out.print("Welcome to Road to Zion. Please enter your name: ");
 		String name = keyboard.nextLine();
@@ -211,6 +208,7 @@ class Game {
 	private String textCheck(String text) {
 		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 		boolean valid = true;
+		@SuppressWarnings("resource")
 		Scanner keyboard = new Scanner(System.in);
 		for (int i = 0; i < text.length() && valid == true; i++) {
 			if (alphabet.indexOf(text.charAt(i)) < 0) {
@@ -228,10 +226,10 @@ class Game {
 			}
 		}
 		return text;
-		// >>>>>>> branch 'master' of https://github.com/salmanshah1d/ZorkII.git
-	}
+}
 
 	private void intro(String name) {
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		for (int i = 0; i < 20; i++) {
 			System.out.println();
@@ -546,7 +544,7 @@ class Game {
 								.addItem(currentRoom.getRoomEnemies().get(enemyIndex).getWeapon());
 						System.out.print(currentRoom.getRoomEnemies().get(enemyIndex).getEnemyInventory().getItem(k)
 								.getDescription());
-						if (k < currentRoom.getNPC().getNpcInventory().size() - 1) {
+						if (k < currentRoom.getRoomEnemies().get(enemyIndex).getEnemyInventory().getNumItems() - 1) {
 							System.out.print(", and ");
 						} else {
 							System.out.print(" ");
