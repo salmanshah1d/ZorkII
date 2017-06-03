@@ -6,8 +6,23 @@ public class Daniel extends NonPlayableCharacter{
 	private static String characterName = "Daniel";
 	private int characterHealth = 150;
 	private int characterHealthMax = 150;
-	Weapon danielWeapon = new Weapon("Shoe ", 1.0, 10, 30, 3);
-	private int characterPower = danielWeapon.getPower();
+	Weapon Weapon = new Weapon("Shoe ", 1.0, 10, 30, 3);
+	private int characterPower = Weapon.getPower();
+	public int getCharacterHealth() {
+		return characterHealth;
+	}
+
+	public void setCharacterHealth(int characterHealth) {
+		this.characterHealth = characterHealth;
+	}
+
+	public Weapon getWeapon() {
+		return Weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		Weapon = weapon;
+	}
 	ArrayList<Item> danielInventory = new ArrayList<Item>();
 	//private int characterPower;
 	//private int characterArmor;
@@ -124,5 +139,15 @@ public class Daniel extends NonPlayableCharacter{
 					System.out.println("That is not a valid option.");
 			}stillSelling = false;
 		}
+	}
+	public void deathPhrase(){
+		System.out.println(characterName + ": *While dying* I... hate you.");
+	}
+	public ArrayList<Item> getNpcInventory() {
+		return danielInventory;
+	}
+
+	public void setNpcInventory(ArrayList<Item> shayanSnInventory) {
+		this.danielInventory = shayanSnInventory;
 	}
 }
