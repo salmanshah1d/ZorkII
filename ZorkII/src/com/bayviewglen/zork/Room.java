@@ -218,6 +218,10 @@ class Room {
 		this.npc = nonPlayableCharacter;
 	}
 	
+	/*public void setNPCtoNull() {
+		this.npc = null;
+	}*/
+	
 	public NonPlayableCharacter getNPC() {
 		return this.npc;
 	}
