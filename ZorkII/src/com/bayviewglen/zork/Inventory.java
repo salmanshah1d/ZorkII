@@ -144,4 +144,14 @@ public void setWallet(int wallet) {
 		return inventory.get(index);
 		}
 	}
+	
+	public void showNumGems(){
+		int gemCount = 0;
+		for(int i =0; i<inventory.size(); i++){
+			if (inventory.get(i).getDescription().equalsIgnoreCase("gem")){
+				gemCount++;
+			}
+		}
+		System.out.println("You have " + gemCount +" gems.");
+	}
 }
