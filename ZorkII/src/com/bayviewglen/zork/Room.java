@@ -109,23 +109,23 @@ class Room {
 	 * kitchen. Exits: north west
 	 */
 	public String longDescription() {
-		return "\nYou are in the " + roomName + ".\n" + description + enemyString() + "\n" + npString() + "\n" + characterItemsString()
-				+ "\n" + itemString() + "\n" + gemString() + "\n" + exitString();
+		return "\nYou are in the " + roomName + ".\n" + description + enemyString() + npString() + characterItemsString()
+				+ itemString() + gemString() + exitString();
 	}
 
 	private String gemString() {
 		if (characterInventory.getNumGems() == 0){
 			return("");
 		} else if (characterInventory.getNumGems() == 1){
-			return ("You have 1 gem.");
+			return ("\nYou have 1 gem.");
 		} else {
-			return ("You have " + characterInventory.getNumGems() + " gems.");
+			return ("\nYou have " + characterInventory.getNumGems() + " gems.");
 		}
 	}
 
 	private String npString() {
 		if (npc != null) {
-			return ("You see " + npc.getCharacterName()
+			return ("\nYou see " + npc.getCharacterName()
 					+ " in this room. To interact with him, write \"talk <name>\".");
 		} else {
 			return "";
@@ -151,7 +151,7 @@ class Room {
 			}
 			returnString += ". You must defeat " + enemies
 					+ " to pick up any items in this room. To attack him, type \"attack <name>\".";
-			return (returnString);
+			return ("\n" + returnString);
 		} else {
 			return ("");
 		}
@@ -159,7 +159,7 @@ class Room {
 
 	private String characterItemsString() {
 		if (characterInventory.getNumItems() != 0) {
-			return ("You presently have " + characterInventory.print() + ". ");
+			return ("\nYou presently have " + characterInventory.print() + ". ");
 		} else {
 			return ("");
 		}
@@ -171,7 +171,7 @@ class Room {
 
 	private String itemString() {
 		if (roomInventory.getNumItems() != 0) {
-			return ("In the " + roomName + ", you find " + roomInventory.print() + ".");
+			return ("\nIn the " + roomName + ", you find " + roomInventory.print() + ".");
 		} else {
 			return ("");
 		}
@@ -179,7 +179,7 @@ class Room {
 
 	@SuppressWarnings("rawtypes")
 	private String exitString() {
-		String returnString = "You can exit to the: ";
+		String returnString = "\nYou can exit to the: ";
 		Set keys = exits.keySet();
 		for (Iterator iter = keys.iterator(); iter.hasNext();)
 			returnString += iter.next() + ", ";
