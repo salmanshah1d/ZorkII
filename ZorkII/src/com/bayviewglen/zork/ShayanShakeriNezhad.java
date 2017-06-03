@@ -6,10 +6,24 @@ import java.util.Scanner;
 public class ShayanShakeriNezhad extends NonPlayableCharacter{
 	
 	private static String characterName = "ShayanShakeri";
-	private int characterHealth = 1000;
+	private int characterHealth = 300;
+	public int getCharacterHealth() {
+		return characterHealth;
+	}
+
+	public void setCharacterHealth(int characterHealth) {
+		this.characterHealth = characterHealth;
+	}
 	private int characterHealthMax = 1000;
-	Weapon shayanSnKeyBlade = new Weapon("Sour Key-Blade", 5.0, 1000, 80, 4);
-	private int characterPower = shayanSnKeyBlade.getPower();
+	private Weapon Weapon = new Weapon("Sour Key-Blade", 5.0, 400, 40, 4);
+	public Weapon getWeapon() {
+		return Weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		Weapon = weapon;
+	}
+	//private int characterPower = characterWeapon.getPower();
 //	ArrayList<String> shayanSnInventoryNames = new ArrayList<String>();
 	ArrayList<Item> shayanSnInventory = new ArrayList<Item>();
 	//private int characterPower;
@@ -30,7 +44,7 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter{
 		if(response.equals("1")==false&&response.equals("2")==false&&response.equals("3")==false&&response.equals("4")==false){
 			System.out.println("That is not a valid option.");
 		}else if(response.equals("1")){
-			System.out.println("I am looking for customers to buy my wares so I can raise money for Bayview Glen.");
+			System.out.println("ShayanSn: I am looking for customers to buy my wares so I can raise money for Bayview Glen.");
 		}else if (response.equals("2")){
 			this.displayInventory();
 			this.buy(inv);
@@ -130,5 +144,15 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter{
 					System.out.println("That is not a valid option.");
 			}stillSelling = false;
 		}
+	}	public void deathPhrase(){
+		System.out.println(characterName + ": *While dying* I will  be back.");
+	}
+
+	public ArrayList<Item> getNpcInventory() {
+		return shayanSnInventory;
+	}
+
+	public void setNpcInventory(ArrayList<Item> shayanSnInventory) {
+		this.shayanSnInventory = shayanSnInventory;
 	}
 }
