@@ -18,7 +18,6 @@ public class Andrei extends NonPlayableCharacter {
 		this.characterHealth = characterHealth;
 	}
 
-	private int characterHealthMax = 200;
 	private Weapon Weapon = new Weapon("Audacity Sound File ", 1.0, 0, 20, 5);
 
 	public Weapon getWeapon() {
@@ -29,7 +28,6 @@ public class Andrei extends NonPlayableCharacter {
 		Weapon = weapon;
 	}
 
-	private int characterPower = Weapon.getPower();
 	ArrayList<Item> andreiInventory = new ArrayList<Item>();
 	// private int characterPower;
 	// private int characterArmor;

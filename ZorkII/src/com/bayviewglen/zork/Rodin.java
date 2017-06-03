@@ -1,14 +1,11 @@
 package com.bayviewglen.zork;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Rodin extends NonPlayableCharacter{
 	private static String characterName = "Rodin";
 	private int characterHealth = 80;
-	private int characterHealthMax = 80;
 	private Weapon Weapon = new DirtyShank();
-	private int characterPower = Weapon.getPower();
 	public int getCharacterHealth() {
 		return characterHealth;
 	}

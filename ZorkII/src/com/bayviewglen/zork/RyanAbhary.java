@@ -1,16 +1,11 @@
 package com.bayviewglen.zork;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RyanAbhary extends NonPlayableCharacter{
 	private static String characterName = "RyanAbhary";
 	private int characterHealth = 50;
-	private int characterHealthMax = 50;
 	private Weapon Weapon = new GreasyShank();
-	private int characterPower = Weapon.getPower();
-	//private int characterPower;
-	//private int characterArmor;
 	private Scanner keyboard = new Scanner(System.in);
 	
 	

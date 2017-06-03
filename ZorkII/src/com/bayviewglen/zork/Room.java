@@ -109,13 +109,24 @@ class Room {
 	 * kitchen. Exits: north west
 	 */
 	public String longDescription() {
-		return "\nRoom: " + roomName + "\n" + description + enemyString() + npString() + characterItemsString()
-				+ itemString() + "\n" + exitString();
+		return "\nYou are in the " + roomName + ".\n" + description + enemyString() + "\n" + npString() + "\n" + characterItemsString()
+				+ "\n" + itemString() + "\n" + gemString() + "\n" + exitString();
+	}
+
+	private String gemString() {
+		if (characterInventory.getNumGems() == 0){
+			return("");
+		} else if (characterInventory.getNumGems() == 1){
+			return ("You have 1 gem.");
+		} else {
+			return ("You have " + characterInventory.getNumGems() + " gems.");
+		}
 	}
 
 	private String npString() {
 		if (npc != null) {
-			return ("\nYou see " + npc.getCharacterName() + " in this room. To interact with him, write \"talk <name>\".");
+			return ("You see " + npc.getCharacterName()
+					+ " in this room. To interact with him, write \"talk <name>\".");
 		} else {
 			return "";
 		}
@@ -125,7 +136,7 @@ class Room {
 		String returnString = "";
 		String enemies = "";
 		if (roomEnemies.size() != 0) {
-			returnString += "\nYou encounter ";
+			returnString += "You encounter ";
 			returnString += roomEnemies.get(0).getDescription() + " " + roomEnemies.get(0).getCharacterName();
 			enemies += roomEnemies.get(0).getCharacterName();
 			for (int i = 1; i < roomEnemies.size() - 1; i++) {
@@ -148,7 +159,7 @@ class Room {
 
 	private String characterItemsString() {
 		if (characterInventory.getNumItems() != 0) {
-			return ("\nYou presently have " + characterInventory.print() + ". ");
+			return ("You presently have " + characterInventory.print() + ". ");
 		} else {
 			return ("");
 		}
@@ -166,6 +177,7 @@ class Room {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	private String exitString() {
 		String returnString = "You can exit to the: ";
 		Set keys = exits.keySet();
@@ -217,11 +229,11 @@ class Room {
 	public void setNPC(NonPlayableCharacter nonPlayableCharacter) {
 		this.npc = nonPlayableCharacter;
 	}
-	
-	/*public void setNPCtoNull() {
-		this.npc = null;
-	}*/
-	
+
+	/*
+	 * public void setNPCtoNull() { this.npc = null; }
+	 */
+
 	public NonPlayableCharacter getNPC() {
 		return this.npc;
 	}
