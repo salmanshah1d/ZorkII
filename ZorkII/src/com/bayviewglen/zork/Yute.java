@@ -25,5 +25,7 @@ public class Yute extends Enemy{
 	
 	public Yute(String name){
 		super(description, name, 50, yuteShank);
+	}	public void deathPhrase(){
+		System.out.println(this.getCharacterName() +": *While dying* AHHHHHHH!");
 	}
 }
