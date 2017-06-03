@@ -37,8 +37,8 @@ public class DesLauriers extends NonPlayableCharacter{
 		while(stillTalking){
 		System.out.println("1: You held the treasure all along? Why not just give it to me when we met?");
 		System.out.println("2: I have collected all five gems. Now give me what I earned.");
-		System.out.println("3: Think game is pretty good, I think you should give it a 100%.");
-		System.out.println("4: You are a very handsome and Intelligent man.");
+		System.out.println("3: This game is pretty good, I think you should give it a 100%.");
+		System.out.println("4: You are a very handsome and intelligent man.");
 		System.out.println("5: So be it. Let us fight.");
 		String response  = scanner.nextLine();
 		if(response.equals("1")==false||response.equals("2")==false||response.equals("3")==false||response.equals("4")==false||response.equals("5")==false||response.equals("6")==false){
@@ -64,21 +64,6 @@ public class DesLauriers extends NonPlayableCharacter{
 		
 	}
 	
-	
-	
-/*	public void displayInventory(){
-	//	shayanSnInventoryNames =new ArrayList<String>();
-		if(ryanMakInventory.size() > 0){
-		System.out.println("Ryan Mak: I don't have much, but take a look.");
-		System.out.println();
-		for (int i = 0; i<ryanMakInventory.size(); i++){
-			System.out.print(ryanMakInventory.get(i).getDescription()+ ": " + ryanMakInventory.get(i).getCost() + " ");
-		}
-	}else {
-		System.out.println("I have nothing more to sell.");
-	}
-	
-	}*/
 	public void deathPhrase(){
 		System.out.println(characterName + ": *While dying* Well done. My son.");
 	}

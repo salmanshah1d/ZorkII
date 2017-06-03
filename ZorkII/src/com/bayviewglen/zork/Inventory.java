@@ -7,7 +7,7 @@ public class Inventory {
 	ArrayList<Item> inventory;
 	private int weight = 0;
 	private double maxWeight = 50.0; // the max weight a character can make
-private int wallet = 0;
+private int wallet = 100;
 	
 	public int getWallet() {
 	return wallet;
@@ -21,7 +21,6 @@ public void setWallet(int wallet) {
 
 	public Inventory() {
 		inventory = new ArrayList<Item>(); // construct the object
-		inventory.add(new DirtyShank());
 	}
 
 	// how to add an item to a inventory

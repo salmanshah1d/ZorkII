@@ -115,7 +115,7 @@ class Room {
 
 	private String npString() {
 		if (npc != null) {
-			return ("\nYou see " + npc.getCharacterName() + " in this room. To interact with him, write \"talk <name>\".\n");
+			return ("\nYou see " + npc.getCharacterName() + " in this room. To interact with him, write \"talk <name>\".");
 		} else {
 			return "";
 		}
@@ -139,7 +139,7 @@ class Room {
 				enemies += roomEnemies.get(roomEnemies.size() - 1).getCharacterName();
 			}
 			returnString += ". You must defeat " + enemies
-					+ " to pick up any items in this room. To attack him, type \"attack <name>\".\n";
+					+ " to pick up any items in this room. To attack him, type \"attack <name>\".";
 			return (returnString);
 		} else {
 			return ("");
@@ -148,7 +148,7 @@ class Room {
 
 	private String characterItemsString() {
 		if (characterInventory.getNumItems() != 0) {
-			return ("\nYou presently have " + characterInventory.print() + ".");
+			return ("\nYou presently have " + characterInventory.print() + ". ");
 		} else {
 			return ("");
 		}

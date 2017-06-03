@@ -8,15 +8,7 @@ public class Yute extends Enemy{
 	static Weapon yuteShank = new DirtyShank();
 	//sets character attributes
 	private int characterPower = yuteShank.getPower();
-	//private int characterHealth = 100;
-	//private int characterHealthMax = 100;
-	//ArrayList<Item> yuteInventory = new ArrayList<Item>();
-	
 
-	
-	/*public ArrayList<Item> getYuteInventory() {
-		return yuteInventory;
-	}*/
 
 	public void setEnemyInventory(Inventory yuteInventory) {
 		this.enemyInventory = yuteInventory;
@@ -25,6 +17,7 @@ public class Yute extends Enemy{
 	
 	public Yute(String name){
 		super(description, name, 50, yuteShank);
+		
 	}	public void deathPhrase(){
 		System.out.println(this.getCharacterName() +": *While dying* AHHHHHHH!");
 	}

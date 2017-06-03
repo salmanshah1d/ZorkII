@@ -33,7 +33,7 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter{
 	
 	public void talk(Inventory inv){
 		boolean stillTalking = true;
-		System.out.println("ShayanSn: Welcome to the tuck shop, what can I do for you. (Select the number of the option you wish to say.)");
+		System.out.println("ShayanShakeri: Welcome to the tuck shop, what can I do for you. (Select the number of the option you wish to say.)");
 		while(stillTalking){
 		System.out.println();
 		System.out.println("1: What are you doing inside a temple?");
@@ -44,7 +44,7 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter{
 		if(response.equals("1")==false&&response.equals("2")==false&&response.equals("3")==false&&response.equals("4")==false){
 			System.out.println("That is not a valid option.");
 		}else if(response.equals("1")){
-			System.out.println("ShayanSn: I am looking for customers to buy my wares so I can raise money for Bayview Glen.");
+			System.out.println("ShayanShakeri: I am looking for customers to buy my wares so I can raise money for Bayview Glen.");
 		}else if (response.equals("2")){
 			this.displayInventory();
 			this.buy(inv);
@@ -65,15 +65,13 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter{
 	public ShayanShakeriNezhad(){
 		super(characterName);
 		//creates the inventory for the character
-		shayanSnInventory.add(new Food("skittles", 0.4, 25, 30));
-		shayanSnInventory.add(new Food("skittles", 0.4, 25, 30));
-		shayanSnInventory.add(new Food("skittles", 0.4, 25, 30));
+		shayanSnInventory.add(new Food("Skittles", 0.4, 25, 30));
+		shayanSnInventory.add(new Food("Skittles", 0.4, 25, 30));
+		shayanSnInventory.add(new Food("Skittles", 0.4, 25, 30));
 		shayanSnInventory.add(new Food("SourKey", 0.2, 10, 10));
 		shayanSnInventory.add(new Food("SourKey", 0.2, 10, 10));
 		shayanSnInventory.add(new Food("SourKey", 0.2, 10, 10));
 		shayanSnInventory.add(new Food("SourKey", 0.2, 10, 10));
-		shayanSnInventory.add(new Food("FunDip", 0.5, 35, 80));
-		shayanSnInventory.add(new Food("FunDip", 0.5, 35, 80));
 		shayanSnInventory.add(new Food("KinderEgg", 0.1, 80, 100000000));
 		//String description, double mass, int cost ,int power, int critChance
 		shayanSnInventory.add(new Weapon("SourKey-Blade", 5.0, 1000, 80, 4));
@@ -85,13 +83,18 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter{
 	public void displayInventory(){
 	//	shayanSnInventoryNames =new ArrayList<String>();
 		if(shayanSnInventory.size() > 0){
-		System.out.println("ShayanSn:Here are my wares.");
+		System.out.println("ShayanShakeri: Here are my wares.");
 		System.out.println("(Type the name of the item you wish to buy. Or type exit.)");
 
 		System.out.println();
 		for (int i = 0; i<shayanSnInventory.size(); i++){
-			System.out.print(shayanSnInventory.get(i).getDescription()+ ": " + shayanSnInventory.get(i).getCost() + ", ");
+			if (i == shayanSnInventory.size()-1){
+				System.out.print(shayanSnInventory.get(i).getDescription()+ ": " + shayanSnInventory.get(i).getCost());
+			} else {
+				System.out.print(shayanSnInventory.get(i).getDescription()+ ": " + shayanSnInventory.get(i).getCost() + ", ");
+			}
 		}
+		System.out.println();
 	}else {
 		System.out.println("I have nothing more to sell.");
 	}
@@ -113,7 +116,7 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter{
 								inv.addItem(shayanSnInventory.get(i));
 								System.out.println("You have bought " + shayanSnInventory.get(i).getDescription() + ".");
 								inv.setWallet(inv.getWallet() - shayanSnInventory.get(i).getCost());
-								System.out.println("You now have " + inv.getWallet() + "Iranian Rials.");
+								System.out.println("You now have " + inv.getWallet() + " Iranian Rials.");
 								shayanSnInventory.remove(i);
 								isBuyable = true;
 								break;	

@@ -73,7 +73,7 @@ public class RyanAbhary extends NonPlayableCharacter{
 			keyboard.nextLine();
 			System.out.print("The two were discussing. The first said, \"Bro my life is awesome!\" The second said, \"Real talk bro.\"");
 			keyboard.nextLine();
-			System.out.print("The third friend arrived. He said, \"Guys, I think I messed up.\"");
+			System.out.print("The third friend arrived. He said, \"Guys, I think I messed up.\"\n");
 		}else if(response.equals("3")){
 			System.out.println("RyanAbhary: I look at overpriced unfashionable clothes that my parents won't pay for.");
 		}else{
