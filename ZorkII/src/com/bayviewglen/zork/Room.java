@@ -166,7 +166,6 @@ class Room {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	private String exitString() {
 		String returnString = "You can exit to the: ";
 		Set keys = exits.keySet();

@@ -5,10 +5,8 @@ import java.util.ArrayList;
 public class RyanMak extends NonPlayableCharacter{
 	private static String characterName = "Ryan Mak";
 	private int characterHealth = 150;
-	@SuppressWarnings("unused")
 	private int characterHealthMax = 150;
 	private Weapon Weapon = new GreasyShank();
-	@SuppressWarnings("unused")
 	private int characterPower =  Weapon.getPower();
 	public int getCharacterHealth() {
 		return characterHealth;

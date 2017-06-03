@@ -1,11 +1,14 @@
 package com.bayviewglen.zork;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RyanAbhary extends NonPlayableCharacter{
 	private static String characterName = "RyanAbhary";
 	private int characterHealth = 50;
+	private int characterHealthMax = 50;
 	private Weapon Weapon = new GreasyShank();
+	private int characterPower = Weapon.getPower();
 	//private int characterPower;
 	//private int characterArmor;
 	private Scanner keyboard = new Scanner(System.in);
@@ -82,9 +85,30 @@ public class RyanAbhary extends NonPlayableCharacter{
 	
 	public RyanAbhary(){
 		super(characterName);
-
+		//creates the inventory for the character
+		//ryanMakInventory.add(new Food("Spicy Noodles", 0.5, 5, 5 ));
+		//ryanMakInventory.add(new Pockets("Pockets", 0.0,30, 35));
+		//ryanMakInventory.add(new DirtyShank());
+		//String description, double mass, int cost ,int power, int critChance
 		
 	}
+	
+	
+/*	
+	public void displayInventory(){
+	//	shayanSnInventoryNames =new ArrayList<String>();
+		if(ryanMakInventory.size() > 0){
+		System.out.println("Ryan Mak: I don't have much, but take a look.");
+		System.out.println("(Type the name of the item you wish to buy. Or type exit.)");
+		System.out.println();
+		for (int i = 0; i<ryanMakInventory.size(); i++){
+			System.out.print(ryanMakInventory.get(i).getDescription()+ ": " + ryanMakInventory.get(i).getCost() + ", ");
+		}
+	}else {
+		System.out.println("I have nothing more to sell.");
+	}
+	
+	}*/
 
 	public void deathPhrase(){
 		System.out.println(characterName + ": *While dying* I may die. But my jokes live on.");
