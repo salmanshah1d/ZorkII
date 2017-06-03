@@ -279,7 +279,7 @@ class Game {
 		else if (commandWord.equalsIgnoreCase("take"))
 			takeItem(command);
 		else if (commandWord.equalsIgnoreCase("attack"))
-			return attackEnemy(command);
+			return attackEnemy(command, currentRoom);
 		else if (commandWord.equalsIgnoreCase("talk")) {
 			talk(command);
 		} else if (commandWord.equalsIgnoreCase("quit")) {
@@ -390,7 +390,7 @@ class Game {
 		int itemIndex = -1;
 
 		for (int i = 0; i < currentRoom.getRoomInventory().getNumItems(); i++) {
-			if (currentRoom.getRoomInventory().getItem(i).getDescription().equals(object)) {
+			if (currentRoom.getRoomInventory().getItem(i).getDescription().equalsIgnoreCase(object)) {
 				itemIndex = i;
 			}
 		}
@@ -414,7 +414,7 @@ class Game {
 		}
 	}
 
-	private boolean attackEnemy(Command command) {
+	private boolean attackEnemy(Command command, Room currentRoom) {
 		boolean enemyCrit = false;
 		if (!command.hasSecondWord()) {
 			// if there is no second word, we don't know who to attack
@@ -424,6 +424,7 @@ class Game {
 		String enemy = command.getSecondWord();
 		if (currentRoom.getNPC()!=null && enemy.equalsIgnoreCase(currentRoom.getNPC().getCharacterName())){
 			if(mainSword!=null){
+				
 				int charDamage = mainSword.getPower();
 				int enemyDamage = currentRoom.getNPC().getWeapon().getPower();
 				int crit = (int) (Math.random() * 100);
@@ -431,6 +432,16 @@ class Game {
 					if (i == crit) {
 						charDamage *= 3;
 						System.out.println("CRITICAL STRIKE!");
+						if(currentRoom.getNPC().getCharacterName().equals("DesLauriers")){
+							int gemCount = 0;
+							for(int j = 0; 	j<characterInventory.getNumItems(); j++){
+								if(characterInventory.getItem(j).getDescription().equals("gem"))
+									gemCount++;
+							}
+							if(gemCount<5)
+							charDamage = 0;
+							System.out.println("Delaurier: HAH YOU DO NOE HAVE THE GEMS. I AM INVINCLIBLE.");
+						}
 					}
 				}
 				charDamage = charDamage - currentRoom.getNPC().getCharacterArmor();
@@ -444,8 +455,9 @@ class Game {
 				currentRoom.getNPC().setCharacterHealth(currentRoom.getNPC().getCharacterHealth() - charDamage);
 				if (currentRoom.getNPC().getCharacterHealth()>0){
 					mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth() - enemyDamage);
-					if(enemyCrit == true)
+					if(enemyCrit == true){
 						System.out.println("ENEMY CRITICAL STRIKE");
+				}
 				}
 			}else{
 				System.out.println("You don't have a sword yet!");
@@ -453,7 +465,14 @@ class Game {
 				
 			}
 			if (currentRoom.getNPC().getCharacterHealth()<=0){
+				currentRoom.getNPC().deathPhrase();
 				System.out.println(currentRoom.getNPC().getCharacterName() + " has been defeated.");
+				System.out.println(currentRoom.getNPC().getCharacterName() + " has dropped ");
+				for(int k = 0; k<currentRoom.getNPC().getNpcInventory().size(); k++){
+					currentRoom.getRoomInventory().addItem(currentRoom.getNPC().getNpcInventory().get(k));
+					System.out.print(currentRoom.getNPC().getNpcInventory().get(k).getDescription() +  " ");
+				}
+				System.out.println();
 				currentRoom.setNPC(null);
 			}else if (mainCharacter.getCharacterHealth()<=0){
 				System.out.println("Sorry, you have lost. Catch this L.");
@@ -510,18 +529,26 @@ class Game {
 						currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() - charDamage);
 				if (currentRoom.getRoomEnemies().size() > 0&&currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth()>0) {
 					mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealth() - enemyDamage);
-					if (enemyCrit = true)
+					if (enemyCrit != false){
 						System.out.println("ENEMY CRITICAL STRIKE!");
-				}
+					}
+					}
 			} else {
 				System.out.println("You don't have a sword yet!");
 			}
 
 			if (currentRoom.getRoomEnemies().get(enemyIndex).getCharacterHealth() <= 0) {
+				currentRoom.getRoomEnemies().get(enemyIndex).deathPhrase();
 				System.out.println(
 						currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " has been defeated.");
+				System.out.println(currentRoom.getRoomEnemies().get(enemyIndex).getCharacterName() + " has dropped ");
+				for(int k=0; k<currentRoom.getRoomEnemies().get(enemyIndex).getEnemyInventory().getNumItems(); k++){
+					currentRoom.getRoomInventory().addItem(currentRoom.getRoomEnemies().get(enemyIndex).getWeapon());
+					System.out.print( currentRoom.getRoomEnemies().get(enemyIndex).getWeapon().getDescription() + "");
+				}
+				System.out.println();
 				currentRoom.getRoomEnemies().remove(enemyIndex);
-
+			
 			} else if (mainCharacter.getCharacterHealth() <= 0) {
 				System.out.println("Sorry, you have lost. Catch this L.");
 				return true;
@@ -564,6 +591,7 @@ class Game {
 						if(mainCharacter.getCharacterHealth()>mainCharacter.getCharacterHealthMax())
 							mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
 						System.out.println("Your health is now " + mainCharacter.getCharacterHealth() + "hp");
+						break;
 					}
 					else if (theItem instanceof WeaponAttachment){
 						mainSword.setPower(((WeaponAttachment) theItem).getAttackPowerAdded()+ mainSword.getPower());
@@ -571,16 +599,19 @@ class Game {
 						mainSword.setDescription(theItem.getDescription() + mainSword.getDescription());
 						System.out.println("Your sword has become the " + mainSword.getDescription() + ".");
 						characterInventory.removeItem(theItem);
+						break;
 					}
 					else if (theItem instanceof ArmourAttachment){
 						mainArmour.setProtection(((ArmourAttachment) theItem).getArmourAdded() + mainArmour.getProtection());
 						mainArmour.setDescription(theItem.getDescription() + mainArmour.getDescription());
 						System.out.println("Your armour has become the " + mainArmour.getDescription() + ".");
 						characterInventory.removeItem(theItem);
+						break;
 					}else if (theItem instanceof Pockets){
 						characterInventory.setMaxWeight(((Pockets) theItem).getSpaceAdded() + characterInventory.getMaxWeight()) ;
 						System.out.println("Your armour has become the " + mainArmour.getDescription() + ".");
 						characterInventory.removeItem(theItem);
+						break;
 					}
 					else
 						System.out.println("You cannot use that.");
