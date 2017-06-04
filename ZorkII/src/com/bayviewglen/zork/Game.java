@@ -361,7 +361,7 @@ class Game {
 		} else if (currentRoom.nextRoom(direction).checkConditions() != true) { // checks if room conditions are being met
 			System.out.println("\n" + currentRoom.nextRoom(direction).conditionMessage());
 			System.out.println(currentRoom.longDescription());
-			System.out.println("You have " + characterInventory.getNumGems() + "gems");
+			System.out.println("You have " + characterInventory.getNumGems() + " gems");
 			return;
 		} else {
 			currentRoom = nextRoom;
