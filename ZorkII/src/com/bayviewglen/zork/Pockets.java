@@ -2,16 +2,16 @@ package com.bayviewglen.zork;
 
 public class Pockets extends Item{
 
-	private int spaceAdded;
+	private double spaceAdded;
 
 	
-	public Pockets(String description, Double mass, int cost,int pocketSpace){
+	public Pockets(String description, Double mass, int cost,double pocketSpace){
 		super(description,mass,cost);
 	
 	}
 
 
-	public int getSpaceAdded() {
+	public double getSpaceAdded() {
 		return spaceAdded;
 	}
 

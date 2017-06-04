@@ -28,7 +28,7 @@ Room NP: RyanAbhary
 Condition: None-None
 Room Name: Dirt Room
 Room Description: On the East wall, there was dirt blocking the east exit, but you cleared it with the axe that you got earlier.
-Exit Rooms: N-Axe Room, W-Backpack Room, S-Origins Room, E-TNT Room
+Exit Rooms: N-Axe Room, W-Backpack Room, S-Origins Room, E-Andrei Room
 Room Items: None-0
 Room Enemies: Yute-Devin
 Room NP: ShayanShakeri
@@ -42,7 +42,7 @@ Room NP: None
 Condition: None-None
 Room Name: Message Room
 Room Description: There is a message edged into the wall saying "You are getting close to the gems!"
-Exit Rooms: E-Origins Room, S-Shovel Room
+Exit Rooms: E-Origins Room, S-Shovel Room, N-Backpack Room
 Room Items: None-0
 Room Enemies: WasteMansYute-Roman 
 Room NP: ShayanShakeri
@@ -59,7 +59,7 @@ Room Description: On the middle of the floor there is a rusty shovel. You may ne
 Exit Rooms: S-Uno Enemy Room, N-Message Room
 Room Items: Shovel-4
 Room Enemies: WasteMansYute-Colin
-Room NP: ShayanShakeri
+Room NP: Daniel
 Condition: None-None
 Room Name: Andrei Room
 Room Description: You see a young man with a Zork not better than this one.
@@ -105,14 +105,14 @@ Room NP: ShayanShakeri
 Condition: None-None
 Room Name: Archer Room
 Room Description: Two enemies jump out!
-Exit Rooms: E-Flashlight Room, S-Double Enemy Room, W-Riddle Room
+Exit Rooms: E-Flashlight Room, S-Double Enemy Room, W-Salesi Room
 Room Items: None-0 
 Room Enemies: Yute-Jonathan, WasteMansYute-Graham 
 Room NP: None
 Condition: None-None
 Room Name: Salesi Room
 Room Description: You see a successful young man in the distance, counting his losses.
-Exit Rooms: W-Double Enemy Room, N-Flashlight Room
+Exit Rooms: E-Double Enemy Room
 Room Items: None-0
 Room Enemies: Yute-Sydney 
 Room NP: ShayanSalesi
@@ -133,7 +133,7 @@ Room NP: ShayanShakeri
 Condition: None-None
 Room Name: Ryan Room
 Room Description: You see a person that goes on Reddit during class.
-Exit Rooms: S-Genius Room, E-Double Enemy Room, N-Riddle Room
+Exit Rooms: S-Genius Room, E-Double Enemy Room, N-Salesi Room
 Room Items: None-0
 Room Enemies: WasteMansYute-Ryan 
 Room NP: RyanMak
@@ -175,7 +175,7 @@ Room NP: None
 Condition: None-None
 Room Name: Uno Enemy Room
 Room Description: There is an enemy. Must kill the enemy to move on. 
-Exit Rooms: N-Shovel Room, S-Dirt S Room, E-Fourth Gem Room
+Exit Rooms: N-Shovel Room, S-Dirt S Room,
 Room Items: None-0
 Room Enemies: Yute-Ehsan
 Room NP: ShayanShakeri
@@ -227,7 +227,7 @@ Room Description: The gods have answered. You see more dank memes in front of yo
 Exit Rooms: W-Third Enrichment Room, S-Dark Two Room, N-Last Gem Message Room
 Room Items: Meme-1
 Room Enemies: None-0
-Room NP: Daniel
+Room NP: ShayanShakeri
 Condition: None-None
 Room Name: Third Enrichment Room
 Room Description: You can upgrade your gear here. 
