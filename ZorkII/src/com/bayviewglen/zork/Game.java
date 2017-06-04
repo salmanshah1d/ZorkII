@@ -12,7 +12,7 @@ class Game {
 	private Parser parser;
 	private Room currentRoom;
 	private Weapon characterSword; // sets character's sword
-	private Inventory characterInventory = new Inventory(500);
+	private Inventory characterInventory = new Inventory(100); // 100 is wallet amount
 	private Inventory roomInventory;
 	private Armour characterArmour;
 	boolean finished;
