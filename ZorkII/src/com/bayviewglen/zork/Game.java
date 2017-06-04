@@ -194,6 +194,7 @@ class Game {
 		System.out.println("-                                                                   -");
 		System.out.println("-Thanks for an amazing year, Mr. DesLauriers. It's been a pleasure. -");
 		System.out.println("-            Love, The Genius Team Behind Road to Zion              -");
+		System.out.println("-                                                                   -");
 		System.out.println("---------------------------------------------------------------------");
 	}
 
@@ -306,6 +307,8 @@ class Game {
 			goRoom(command);
 		else if (commandWord.equalsIgnoreCase("take"))
 			takeItem(command);
+		else if (commandWord.equalsIgnoreCase("drop"))
+			dropItem(command);
 		else if (commandWord.equalsIgnoreCase("attack"))
 			return attackEnemy(command, currentRoom);
 		else if (commandWord.equalsIgnoreCase("talk")) {
@@ -322,6 +325,34 @@ class Game {
 				use(command.getSecondWord());
 		}
 		return false;
+	}
+
+	private void dropItem(Command command) {
+		if (!command.hasSecondWord()) {
+			// if there is no second word, we don't know what to pick up...
+			System.out.println("Drop what?");
+			System.out.println(currentRoom.longDescription());
+			return;
+		}
+		
+		String object = command.getSecondWord().toLowerCase();
+		int itemIndex = -1;
+
+		for (int i = 0; i < characterInventory.getNumItems(); i++) {
+			if (characterInventory.getItem(i).getDescription().equalsIgnoreCase(object)) {
+				itemIndex = i;
+			}
+		}
+		
+		if (itemIndex == -1) {
+			System.out.println("There is no such item...");
+			return;
+		}
+		
+		currentRoom.getRoomInventory().addItem(characterInventory.getItem(itemIndex));
+		characterInventory.removeItem(characterInventory.getItem(itemIndex));
+		System.out.println("Done.");
+		System.out.println(currentRoom.longDescription());
 	}
 
 	// implementations of user commands:
@@ -373,7 +404,6 @@ class Game {
 																				// met
 			System.out.println("\n" + currentRoom.nextRoom(direction).conditionMessage());
 			System.out.println(currentRoom.longDescription());
-			System.out.println("You have " + characterInventory.getNumGems() + " gems");
 			return;
 		} else {
 			currentRoom = nextRoom;
@@ -383,16 +413,18 @@ class Game {
 
 	// takes [item]
 	private void takeItem(Command command) {
+		if (!command.hasSecondWord()) {
+			// if there is no second word, we don't know what to pick up...
+			System.out.println("Take what?");
+			System.out.println(currentRoom.longDescription());
+			return;
+		}
+
 		if (currentRoom.getRoomEnemies().size() > 0) {
 			System.out.println(currentRoom.getRoomEnemies().get(0).getDescription() + " "
 					+ currentRoom.getRoomEnemies().get(0).getCharacterName()
 					+ " is not letting you take this item. You must defeat him first.");
-			return;
-		}
-
-		if (!command.hasSecondWord()) {
-			// if there is no second word, we don't know what to pick up...
-			System.out.println("Take what?");
+			System.out.println(currentRoom.longDescription());
 			return;
 		}
 
@@ -444,6 +476,7 @@ class Game {
 		if (!command.hasSecondWord()) {
 			// if there is no second word, we don't know who to attack
 			System.out.println("Attack who?");
+			System.out.println(currentRoom.longDescription());
 			return false;
 		}
 		String enemy = command.getSecondWord();
@@ -500,8 +533,8 @@ class Game {
 							System.out.print(" ");
 						}
 					}
-					System.out.println();
 					currentRoom.setNPC(null);
+					System.out.println(currentRoom.longDescription());
 				} else if (mainCharacter.getCharacterHealth() <= 0) {
 					System.out.println("Sorry, you have lost. Catch this L.");
 					return true;
@@ -523,6 +556,7 @@ class Game {
 			} else {
 				System.out.println("You need both a sword and armour to attack enemies.");
 			}
+			System.out.println(currentRoom.longDescription());
 			return false;
 		}
 
@@ -589,8 +623,8 @@ class Game {
 								System.out.print(" ");
 							}
 						}
-						System.out.println();
 						currentRoom.getRoomEnemies().remove(enemyIndex);
+						System.out.println(currentRoom.longDescription());
 
 					} else if (mainCharacter.getCharacterHealth() <= 0) {
 						System.out.println("Sorry, you have lost. Catch this L.");
@@ -615,6 +649,7 @@ class Game {
 					}
 				} else {
 					System.out.println("You need both a sword and armour to attack enemies.");
+					System.out.println(currentRoom.longDescription());
 				}
 			}
 			return false;
@@ -640,9 +675,7 @@ class Game {
 						mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
 					System.out.println("Your health is now " + mainCharacter.getCharacterHealth() + " HP.");
 					characterInventory.removeItem(theItem);
-					break;
-				} else if (theItem instanceof Weapon) {
-					characterSword = (Weapon) theItem;
+					System.out.println(currentRoom.longDescription());
 				} else if (theItem instanceof WeaponAttachment) {
 					characterSword
 							.setPower(((WeaponAttachment) theItem).getAttackPowerAdded() + characterSword.getPower());
@@ -652,7 +685,7 @@ class Game {
 							((WeaponAttachment) theItem).getSwordTitleAdded() + characterSword.getDescription() + " ");
 					System.out.println("Your sword now has become the " + " " + characterSword.getDescription() + ".");
 					characterInventory.removeItem(theItem);
-					break;
+					System.out.println(currentRoom.longDescription());
 				} else if (theItem instanceof ArmourAttachment) {
 					characterArmour.setProtection(
 							((ArmourAttachment) theItem).getArmourAdded() + characterArmour.getProtection());
@@ -660,19 +693,23 @@ class Game {
 							+ characterArmour.getDescription());
 					System.out.println("Your armour has become the " + characterArmour.getDescription() + ".");
 					characterInventory.removeItem(theItem);
-					break;
+					System.out.println(currentRoom.longDescription());
 				} else if (theItem instanceof Pockets) {
 					characterInventory
 							.setMaxWeight(((Pockets) theItem).getSpaceAdded() + characterInventory.getMaxWeight());
 					System.out.println("Your carry weight has increased to " + characterInventory.getMaxWeight());
 					characterInventory.removeItem(theItem);
-					break;
-				} else
+					System.out.println(currentRoom.longDescription());
+				} else {
 					System.out.println("You cannot use that.");
+					System.out.println(currentRoom.longDescription());
+				}
 			}
 
 		}
-		if (used == false)
+		if (used == false) {
 			System.out.println("You do not have that in your inventory.");
+			System.out.println(currentRoom.longDescription());
+		}
 	}
 }

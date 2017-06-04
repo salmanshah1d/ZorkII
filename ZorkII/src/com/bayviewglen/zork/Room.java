@@ -118,12 +118,10 @@ class Room {
 	}
 
 	private String gemString() {
-		if (characterInventory.getNumGems() == 0) {
-			return ("");
-		} else if (characterInventory.getNumGems() == 1) {
-			return ("\nYou have 1 gem.");
+		if (characterInventory.getNumGems() == 1) {
+			return ("\nCurrently, you have 1 gem.");
 		} else {
-			return ("\nYou have " + characterInventory.getNumGems() + " gems.");
+			return ("\nCurrently, you have " + characterInventory.getNumGems() + " gems.");
 		}
 	}
 
