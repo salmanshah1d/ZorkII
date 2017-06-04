@@ -7,12 +7,15 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 class Game {
-                                            // name, health, max health 
-	public Character mainCharacter = new Character("", 100, 100); // name will be added later
+	// name, health, max health
+	public Character mainCharacter = new Character("", 100, 100); // name will
+																	// be added
+																	// later
 	private Parser parser;
 	private Room currentRoom;
 	private Weapon characterSword; // sets character's sword
-	private Inventory characterInventory = new Inventory(100); // 100 is wallet amount
+	private Inventory characterInventory = new Inventory(100); // 100 is wallet
+																// amount
 	private Inventory roomInventory;
 	private Armour characterArmour;
 	boolean finished;
@@ -35,7 +38,7 @@ class Game {
 			while (roomScanner.hasNext()) {
 
 				Room room = new Room(characterInventory);
-				
+
 				// Set's room's name
 				String roomName = roomScanner.nextLine();
 				room.setRoomName(roomName.split(":")[1].trim());
@@ -72,7 +75,8 @@ class Game {
 				room.setRoomInventory(roomInventory);
 				String[] roomEnemies = roomScanner.nextLine().split(":")[1].split(",");
 
-				// sets room's enemies (if any) in the format enemyType-enemyName
+				// sets room's enemies (if any) in the format
+				// enemyType-enemyName
 				ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 				for (int t = 0; t < roomEnemies.length; t++) {
 					if (roomEnemies[t].equals("None-0")) {
@@ -87,7 +91,8 @@ class Game {
 				}
 				room.setRoomEnemies(enemyList);
 
-				// sets the room's NonPlayableCharacters (if any) in the format npcName
+				// sets the room's NonPlayableCharacters (if any) in the format
+				// npcName
 				String roomNPC = roomScanner.nextLine().split(":")[1].trim();
 				if (roomNPC.equals("ShayanShakeri")) {
 					room.setNPC(new ShayanShakeriNezhad());
@@ -114,7 +119,8 @@ class Game {
 					room.setNPC(new DesLauriers());
 				}
 
-				// sets the room's conditions (if any) in the format requiredItem-messageToPrint
+				// sets the room's conditions (if any) in the format
+				// requiredItem-messageToPrint
 				String roomConditions = roomScanner.nextLine().split(":")[1].trim();
 				room.setConditionMessage(roomConditions.split("-")[1].trim());
 				String[] conditions = roomConditions.split("-")[0].trim().split(",");
@@ -358,7 +364,13 @@ class Game {
 		if (nextRoom == null) {
 			System.out.println("There is no door!");
 			return;
-		} else if (currentRoom.nextRoom(direction).checkConditions() != true) { // checks if room conditions are being met
+		} else if (currentRoom.nextRoom(direction).checkConditions() != true) { // checks
+																				// if
+																				// room
+																				// conditions
+																				// are
+																				// being
+																				// met
 			System.out.println("\n" + currentRoom.nextRoom(direction).conditionMessage());
 			System.out.println(currentRoom.longDescription());
 			System.out.println("You have " + characterInventory.getNumGems() + " gems");
@@ -401,13 +413,12 @@ class Game {
 			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			System.out.println("Done.");
 			System.out.println(currentRoom.longDescription());
-		/*} else if (currentRoom.getRoomInventory().getItem(itemIndex) instanceof Weapon) {
-			characterSword = (Weapon) currentRoom.getRoomInventory().getItem(itemIndex);
+		} else if (currentRoom.getRoomInventory().getItem(itemIndex) instanceof Weapon) {
 			characterInventory.addItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
-			System.out.println("Done.");*/
-			//System.out.println(currentRoom.longDescription());
-		}else if (currentRoom.getRoomInventory().getItem(itemIndex).getDescription().equals("armour")) {
+			System.out.println("Done.");
+			System.out.println(currentRoom.longDescription());
+		} else if (currentRoom.getRoomInventory().getItem(itemIndex).getDescription().equals("armour")) {
 			characterArmour = new Armour();
 			characterInventory.addItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
@@ -627,9 +638,11 @@ class Game {
 							((Food) theItem).getHealthRestored() + mainCharacter.getCharacterHealth());
 					if (mainCharacter.getCharacterHealth() > mainCharacter.getCharacterHealthMax())
 						mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
-					System.out.println("Your health is now " + mainCharacter.getCharacterHealth() + "hp");
+					System.out.println("Your health is now " + mainCharacter.getCharacterHealth() + " HP.");
 					characterInventory.removeItem(theItem);
 					break;
+				} else if (theItem instanceof Weapon) {
+					characterSword = (Weapon) theItem;
 				} else if (theItem instanceof WeaponAttachment) {
 					characterSword
 							.setPower(((WeaponAttachment) theItem).getAttackPowerAdded() + characterSword.getPower());
@@ -637,7 +650,7 @@ class Game {
 							((WeaponAttachment) theItem).getCritChanceAdded() + characterSword.getCritChance());
 					characterSword.setDescription(
 							((WeaponAttachment) theItem).getSwordTitleAdded() + characterSword.getDescription() + " ");
-					System.out.println("Your sword has become the " + " " + characterSword.getDescription() + ".");
+					System.out.println("Your sword now has become the " + " " + characterSword.getDescription() + ".");
 					characterInventory.removeItem(theItem);
 					break;
 				} else if (theItem instanceof ArmourAttachment) {
