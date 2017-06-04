@@ -400,12 +400,12 @@ class Game {
 			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			System.out.println("Done.");
 			System.out.println(currentRoom.longDescription());
-		} else if (currentRoom.getRoomInventory().getItem(itemIndex) instanceof Weapon) {
+		/*} else if (currentRoom.getRoomInventory().getItem(itemIndex) instanceof Weapon) {
 			characterSword = (Weapon) currentRoom.getRoomInventory().getItem(itemIndex);
 			characterInventory.addItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
-			System.out.println("Done.");
-			System.out.println(currentRoom.longDescription());
+			System.out.println("Done.");*/
+			//System.out.println(currentRoom.longDescription());
 		}else if (currentRoom.getRoomInventory().getItem(itemIndex).getDescription().equals("armour")) {
 			characterArmour = new Armour();
 			characterInventory.addItem(currentRoom.getRoomInventory().getItem(itemIndex));
@@ -413,7 +413,7 @@ class Game {
 			System.out.println("Done.");
 			System.out.println(currentRoom.longDescription());
 		} else if (currentRoom.getRoomInventory().getItem(itemIndex).getDescription().equals("backpack")) {
-			characterInventory.setMaxWeight(characterInventory.getMaxWeight() + 6);
+			characterInventory.setMaxWeight(characterInventory.getMaxWeight() + 20);
 			characterInventory.addItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			currentRoom.getRoomInventory().removeItem(currentRoom.getRoomInventory().getItem(itemIndex));
 			System.out.println("Done.");
@@ -635,7 +635,7 @@ class Game {
 					characterSword.setCritChance(
 							((WeaponAttachment) theItem).getCritChanceAdded() + characterSword.getCritChance());
 					characterSword.setDescription(
-							((WeaponAttachment) theItem).getSwordTitleAdded() + characterSword.getDescription());
+							((WeaponAttachment) theItem).getSwordTitleAdded() + characterSword.getDescription() + " ");
 					System.out.println("Your sword has become the " + " " + characterSword.getDescription() + ".");
 					characterInventory.removeItem(theItem);
 					break;
