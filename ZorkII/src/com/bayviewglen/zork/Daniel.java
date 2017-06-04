@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Daniel extends NonPlayableCharacter{
 	private static String characterName = "Daniel";
 	private int characterHealth = 150;
+	//string name, double weight, int cost, int power, int CritChance
 	Weapon Weapon = new Weapon("Shoe ", 1.0, 10, 30, 3);
 	public int getCharacterHealth() {
 		return characterHealth;
@@ -34,7 +35,7 @@ public class Daniel extends NonPlayableCharacter{
 			System.out.println();
 		System.out.println("1: What are you doing inside a temple?");
 		System.out.println("2: What is you opinion on this game?");
-		System.out.println("3: What is you opinion on Canadian Prime Minister Justin Trudea?");
+		System.out.println("3: What is you opinion on Canadian Prime Minister Justin Trudeau?");
 		System.out.println("4: What is you opinion on fidget spinners?");
 		System.out.println("5: Show me your wares.");
 		System.out.println("6: Take a look at what I have.");
@@ -52,7 +53,7 @@ public class Daniel extends NonPlayableCharacter{
 		}else if(response.equals("4")){
 			System.out.println("Daniel: I hate them.");
 		}else if (response.equals("5")){
-			this.displayInventory();
+			this.displayInventory(inv);
 			this.buy(inv);;
 		}else if (response.equals("6")){
 			inv.showInventory();
@@ -67,22 +68,29 @@ public class Daniel extends NonPlayableCharacter{
 	public Daniel(){
 		super(characterName);
 		//creates the inventory for the character
+		//String description, Double mass,int cost, int powerAdded,int critAdded, String word
 		danielInventory.add(new ArmourAttachment("Cotton Fluff(AA)", 2.0, 50, 5, "fluffy"));
+		// String name, Double mass, int cost,int armourIncreased, String word
 		danielInventory.add(new WeaponAttachment("Electro Magnet(WA)", 1.0,50, 12, 2, "Electro-Magnetic"));
-		danielInventory.add(new Weapon("Shoe ", 1.0, 10, 30, 3));
-		//String description, double mass, int cost ,int power, int critChance
-		
+		//string name, double weight, int cost, int power, int CritChance
+		danielInventory.add(new Weapon("Shoe ", 1.0, 10, 30, 3));	
 	}
 	
 	
-	
-	public void displayInventory(){
+	public void displayInventory(Inventory inv){
 	//	shayanSnInventoryNames =new ArrayList<String>();
 		if(danielInventory.size() > 0){
-		System.out.println("Daniel: Heres what I have.");
+		System.out.println("Daniel: Here's what I have.");
+		System.out.println("(Type the name of the item you wish to buy. Or type exit.)");
+		
 		System.out.println();
+		System.out.println("You have " + inv.getWallet() + " Iranian Rials.");
 		for (int i = 0; i<danielInventory.size(); i++){
-			System.out.print(danielInventory.get(i).getDescription()+ ": " + danielInventory.get(i).getCost() + ", ");
+			if (i == danielInventory.size()-1){
+				System.out.print(danielInventory.get(i).getDescription()+ ": " + danielInventory.get(i).getCost());
+			} else {
+				System.out.print(danielInventory.get(i).getDescription()+ ": " + danielInventory.get(i).getCost() + ", ");
+			}
 		}
 	}else {
 		System.out.println("I have nothing more to sell.");

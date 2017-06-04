@@ -3,8 +3,8 @@ package com.bayviewglen.zork;
 public class Sword extends Weapon{
 
 	public Sword(){
-		//Description, weight, power, critChance
-		super("Sword", 0.0, 20, 3);
+		//string name, double weight, int power, int CritChance
+		super("Sword", 7.0, 20, 3);
 		
 	}
 }

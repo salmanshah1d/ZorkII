@@ -2,10 +2,11 @@ package com.bayviewglen.zork;
 
 import java.util.ArrayList;
 
-public class ShayanShakeriNezhad extends NonPlayableCharacter{
-	
+public class ShayanShakeriNezhad extends NonPlayableCharacter {
+
 	private static String characterName = "ShayanShakeri";
 	private int characterHealth = 300;
+
 	public int getCharacterHealth() {
 		return characterHealth;
 	}
@@ -13,7 +14,10 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter{
 	public void setCharacterHealth(int characterHealth) {
 		this.characterHealth = characterHealth;
 	}
+	
+	//string name, double weight, int cost, int power, int CritChance
 	private Weapon Weapon = new Weapon("Sour Key-Blade", 5.0, 400, 40, 4);
+
 	public Weapon getWeapon() {
 		return Weapon;
 	}
@@ -21,48 +25,47 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter{
 	public void setWeapon(Weapon weapon) {
 		Weapon = weapon;
 	}
-	//private int characterPower = characterWeapon.getPower();
-//	ArrayList<String> shayanSnInventoryNames = new ArrayList<String>();
+
 	ArrayList<Item> shayanSnInventory = new ArrayList<Item>();
-	//private int characterPower;
-	//private int characterArmor;
-	
-	
-	
-	public void talk(Inventory inv){
+
+	public void talk(Inventory inv) {
 		boolean stillTalking = true;
-		System.out.println("ShayanShakeri: Welcome to the tuck shop, what can I do for you. (Select the number of the option you wish to say.)");
-		while(stillTalking){
-		System.out.println();
-		System.out.println("1: What are you doing inside a temple?");
-		System.out.println("2: Show me your wares.");
-		System.out.println("3: Take a look at my stuff.");
-		System.out.println("4: Goodbye.");
-		String response  = scanner.nextLine();
-		if(response.equals("1")==false&&response.equals("2")==false&&response.equals("3")==false&&response.equals("4")==false){
-			System.out.println("That is not a valid option.");
-		}else if(response.equals("1")){
-			System.out.println("ShayanShakeri: I am looking for customers to buy my wares so I can raise money for Bayview Glen.");
-		}else if (response.equals("2")){
-			this.displayInventory();
-			this.buy(inv);
-		}else if(response.equals("3")){
-			inv.showInventory();
-			if(inv.getInventory().size() == 0)
-				System.out.println("You have noting to sell.");
-			else{
-				this.sell(inv);
+		System.out.println(
+				"ShayanShakeri: Welcome to the tuck shop, what can I do for you? (Select the number of the option you wish to say.)");
+		while (stillTalking) {
+			System.out.println();
+			System.out.println("1: What are you doing inside a temple?");
+			System.out.println("2: Show me your wares.");
+			System.out.println("3: Take a look at my stuff.");
+			System.out.println("4: Goodbye.");
+			String response = scanner.nextLine();
+			if (response.equals("1") == false && response.equals("2") == false && response.equals("3") == false
+					&& response.equals("4") == false) {
+				System.out.println("That is not a valid option.");
+			} else if (response.equals("1")) {
+				System.out.println(
+						"ShayanShakeri: I am looking for customers to buy my wares so I can raise money for Bayview Glen.");
+			} else if (response.equals("2")) {
+				this.displayInventory(inv);
+				this.buy(inv);
+			} else if (response.equals("3")) {
+				inv.showInventory();
+				if (inv.getInventory().size() == 0)
+					System.out.println("You have noting to sell.");
+				else {
+					this.sell(inv);
+				}
+			} else {
+				System.out.println("Come again.");
+				stillTalking = false;
 			}
-			}else{
-			System.out.println("Come again.");
-			stillTalking = false;
-		}
 		}
 	}
-	
-	public ShayanShakeriNezhad(){
+
+	public ShayanShakeriNezhad() {
 		super(characterName);
-		//creates the inventory for the character
+		// creates the inventory for the character
+		// String description, Double mass, int cost, int healthReturned
 		shayanSnInventory.add(new Food("Skittles", 0.4, 25, 30));
 		shayanSnInventory.add(new Food("Skittles", 0.4, 25, 30));
 		shayanSnInventory.add(new Food("Skittles", 0.4, 25, 30));
@@ -71,81 +74,91 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter{
 		shayanSnInventory.add(new Food("SourKey", 0.2, 10, 10));
 		shayanSnInventory.add(new Food("SourKey", 0.2, 10, 10));
 		shayanSnInventory.add(new Food("KinderEgg", 0.1, 80, 100000000));
-		//String description, double mass, int cost ,int power, int critChance
-		shayanSnInventory.add(new Weapon("SourKey-Blade", 5.0, 1000, 80, 4));
-		
-	}
-	
-	
-	
-	public void displayInventory(){
-	//	shayanSnInventoryNames =new ArrayList<String>();
-		if(shayanSnInventory.size() > 0){
-		System.out.println("ShayanShakeri: Here are my wares.");
-		System.out.println("(Type the name of the item you wish to buy. Or type exit.)");
+		// String description, double mass, int cost, int power, int critChance
+		shayanSnInventory.add(new Weapon("SourKey-Blade", 5.0, 400, 40, 4));
 
-		System.out.println();
-		for (int i = 0; i<shayanSnInventory.size(); i++){
-			if (i == shayanSnInventory.size()-1){
-				System.out.print(shayanSnInventory.get(i).getDescription()+ ": " + shayanSnInventory.get(i).getCost());
-			} else {
-				System.out.print(shayanSnInventory.get(i).getDescription()+ ": " + shayanSnInventory.get(i).getCost() + ", ");
+	}
+
+	public void displayInventory(Inventory inv) {
+		// shayanSnInventoryNames =new ArrayList<String>();
+		if (shayanSnInventory.size() > 0) {
+			System.out.println("ShayanShakeri: Here are my wares.");
+			System.out.println("(Type the name of the item you wish to buy. Or type exit.)");
+
+			System.out.println();
+			System.out.println("You have " + inv.getWallet() + " Iranian Rials.");
+			for (int i = 0; i < shayanSnInventory.size(); i++) {
+				if (i == shayanSnInventory.size() - 1) {
+					System.out.print(
+							shayanSnInventory.get(i).getDescription() + ": " + shayanSnInventory.get(i).getCost());
+				} else {
+					System.out.print(shayanSnInventory.get(i).getDescription() + ": "
+							+ shayanSnInventory.get(i).getCost() + ", ");
+				}
 			}
+			System.out.println();
+		} else {
+			System.out.println("I have nothing more to sell.");
 		}
-		System.out.println();
-	}else {
-		System.out.println("I have nothing more to sell.");
+
 	}
-	
-	}
-	public void buy(Inventory inv){
+
+	public void buy(Inventory inv) {
 		boolean stillBuying = true;
-		while(stillBuying){
+		while (stillBuying) {
 			String wishToBuy = scanner.nextLine();
-			if(wishToBuy.equals("exit"))
+			if (wishToBuy.equals("exit"))
 				stillBuying = false;
-			else{
+			else {
 				boolean isBuyable = false;
-				for (int i = 0; i<shayanSnInventory.size(); i++){
-					if(wishToBuy.equalsIgnoreCase(shayanSnInventory.get(i).getDescription())){
-							if(inv.getWallet()<shayanSnInventory.get(i).getCost()){
-								System.out.println("You do not have enough to buy this item.");
-							}else{
-								inv.addItem(shayanSnInventory.get(i));
-								System.out.println("You have bought " + shayanSnInventory.get(i).getDescription() + ".");
-								inv.setWallet(inv.getWallet() - shayanSnInventory.get(i).getCost());
-								System.out.println("You now have " + inv.getWallet() + " Iranian Rials.");
-								shayanSnInventory.remove(i);
-								isBuyable = true;
-								break;	
-							}
+				for (int i = 0; i < shayanSnInventory.size(); i++) {
+					if (wishToBuy.equalsIgnoreCase(shayanSnInventory.get(i).getDescription())) {
+						if (inv.getWallet() < shayanSnInventory.get(i).getCost()) {
+							System.out.println("You do not have enough to buy this item.");
+						} else {
+							inv.addItem(shayanSnInventory.get(i));
+							System.out.println("You have bought " + shayanSnInventory.get(i).getDescription() + ".");
+							inv.setWallet(inv.getWallet() - shayanSnInventory.get(i).getCost());
+							System.out.println("You now have " + inv.getWallet() + " Iranian Rials.");
+							shayanSnInventory.remove(i);
+							isBuyable = true;
+							break;
+						}
 					}
-				}if(isBuyable == false)
+				}
+				if (isBuyable == false)
 					System.out.println("That is not a valid option.");
-			}stillBuying = false;
+			}
+			stillBuying = false;
 		}
-	}public void sell(Inventory inv){
+	}
+
+	public void sell(Inventory inv) {
 		boolean stillSelling = true;
-		while(stillSelling){
+		while (stillSelling) {
 			String wishToSell = scanner.nextLine();
-			if(wishToSell.equals("exit"))
+			if (wishToSell.equals("exit"))
 				stillSelling = false;
-			else{
-				boolean isSellable= false;
-				for (int j=0; j<inv.getNumItems();j++){
-					if(wishToSell.equalsIgnoreCase(inv.getItem(j).getDescription())){
+			else {
+				boolean isSellable = false;
+				for (int j = 0; j < inv.getNumItems(); j++) {
+					if (wishToSell.equalsIgnoreCase(inv.getItem(j).getDescription())) {
 						shayanSnInventory.add(inv.getItem(j));
-						inv.setWallet(inv.getWallet()+inv.getItem(j).getCost());
+						inv.setWallet(inv.getWallet() + inv.getItem(j).getCost());
 						inv.removeItem(inv.getItem(j));
 						System.out.println("You now have " + inv.getWallet() + "Iranian Rials.");
 						isSellable = true;
-						break;	
+						break;
 					}
-				}if(isSellable== false)
+				}
+				if (isSellable == false)
 					System.out.println("That is not a valid option.");
-			}stillSelling = false;
+			}
+			stillSelling = false;
 		}
-	}	public void deathPhrase(){
+	}
+
+	public void deathPhrase() {
 		System.out.println(characterName + ": *While dying* I will  be back.");
 	}
 

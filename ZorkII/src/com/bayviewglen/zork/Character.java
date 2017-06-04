@@ -7,16 +7,8 @@ public class Character {
 	private int characterHealth;
 	private int characterHealthMax; // what is this?
 	private Weapon Weapon;
-	//private int characterPower;
 	private int characterArmor;
 
-	/*public int getCharacterPower() {
-		return characterPower;
-	}*/
-
-	/*public void setCharacterPower(int characterPower) {
-		this.characterPower = characterPower;
-	}*/
 
 	public Weapon getWeapon() {
 		return Weapon;
@@ -30,10 +22,6 @@ public class Character {
 		this.characterArmor = characterArmor;
 	}
 
-	public Character() {
-		this.characterHealth = 100;
-	}
-
 	public Character(String name) {
 		this.characterName = name;
 	}
@@ -45,28 +33,16 @@ public class Character {
 		this.Weapon = weapon;
 	}
 
-	/*
-	 * public Character(String name, int health, int power){ this.characterName
-	 * = name; this.characterHealth= health; this.characterPower = power; }
-	 */
-
-	/*public Character(String name, int health, int power, int armor) {
-		this.characterName = name;
-		this.characterHealth = health;
-		//this.characterPower = power;
-		this.characterArmor = armor;
-	}*/
-
 	public Character(String name, int health, int maxHealth){
 		this.characterName = name;
 		this.characterHealth = health;
 		this.characterHealthMax = maxHealth;
 	}
+	
 	public Character(String name, int health, int maxHealth, int armor) {
 		this.characterName = name;
 		this.characterHealth = health;
 		this.characterHealthMax = maxHealth;
-		//this.characterPower = power;
 		this.characterArmor = armor;
 	}
 

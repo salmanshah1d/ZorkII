@@ -22,9 +22,11 @@ import java.util.Iterator;
 class Room {
 	private String roomName;
 	private String description;
+	private String conditionMessage;
 	private HashMap<String, Room> exits; // stores exits of this room.
 	private Inventory roomInventory;
 	private Inventory characterInventory;
+	private Inventory roomConditions;
 	private NonPlayableCharacter npc;
 	private ArrayList<Enemy> roomEnemies;
 
@@ -45,6 +47,8 @@ class Room {
 		roomInventory = new Inventory();
 		characterInventory = characterInventoryInput;
 		roomEnemies = new ArrayList<Enemy>();
+		roomConditions = new Inventory();
+		conditionMessage = new String();
 	}
 
 	public void setExit(char direction, Room r) throws Exception {
@@ -109,14 +113,14 @@ class Room {
 	 * kitchen. Exits: north west
 	 */
 	public String longDescription() {
-		return "\nYou are in the " + roomName + ".\n" + description + enemyString() + npString() + characterItemsString()
-				+ itemString() + gemString() + exitString();
+		return "\nYou are in the " + roomName + ".\n" + description + enemyString() + npString()
+				+ characterItemsString() + itemString() + gemString() + exitString();
 	}
 
 	private String gemString() {
-		if (characterInventory.getNumGems() == 0){
-			return("");
-		} else if (characterInventory.getNumGems() == 1){
+		if (characterInventory.getNumGems() == 0) {
+			return ("");
+		} else if (characterInventory.getNumGems() == 1) {
 			return ("\nYou have 1 gem.");
 		} else {
 			return ("\nYou have " + characterInventory.getNumGems() + " gems.");
@@ -139,18 +143,14 @@ class Room {
 			returnString += "You encounter ";
 			returnString += roomEnemies.get(0).getDescription() + " " + roomEnemies.get(0).getCharacterName();
 			enemies += roomEnemies.get(0).getCharacterName();
-			for (int i = 1; i < roomEnemies.size() - 1; i++) {
+			for (int i = 1; i < roomEnemies.size(); i++) {
 				returnString += ", " + roomEnemies.get(i).getDescription() + " "
 						+ roomEnemies.get(i).getCharacterName();
 				enemies += ", " + roomEnemies.get(i).getCharacterName();
 			}
-			if (roomEnemies.size() > 1) {
-				returnString += roomEnemies.get(roomEnemies.size() - 1).getDescription() + " "
-						+ roomEnemies.get(roomEnemies.size() - 1).getCharacterName();
-				enemies += roomEnemies.get(roomEnemies.size() - 1).getCharacterName();
-			}
 			returnString += ". You must defeat " + enemies
 					+ " to pick up any items in this room. To attack him, type \"attack <name>\".";
+
 			return ("\n" + returnString);
 		} else {
 			return ("");
@@ -159,7 +159,9 @@ class Room {
 
 	private String characterItemsString() {
 		if (characterInventory.getNumItems() != 0) {
-			return ("\nYou presently have " + characterInventory.print() + ". ");
+			return ("\nYou presently have " + characterInventory.print() + " and " + characterInventory.getWallet()
+					+ " Iranian Rials. Weight: (" + characterInventory.getWeight() + "/"
+					+ (int) characterInventory.getMaxWeight() + ")");
 		} else {
 			return ("");
 		}
@@ -171,7 +173,8 @@ class Room {
 
 	private String itemString() {
 		if (roomInventory.getNumItems() != 0) {
-			return ("\nIn the " + roomName + ", you find " + roomInventory.print() + ".");
+			return ("\nIn the " + roomName + ", you find " + roomInventory.print()
+					+ ". To take an item, write \"take <item>\".");
 		} else {
 			return ("");
 		}
@@ -236,5 +239,42 @@ class Room {
 
 	public NonPlayableCharacter getNPC() {
 		return this.npc;
+	}
+
+	public void setConditions(Inventory roomConditionsInp) {
+		this.roomConditions = roomConditionsInp;
+	}
+
+	public Boolean checkConditions() {
+		if (roomConditions == null || roomConditions.getNumItems() == 0) {
+			return true;
+		} else {
+			boolean equal = false;
+			for (int i = 0; i < roomConditions.getNumItems(); i++) {
+				equal = false;
+				for (int j = 0; j < characterInventory.getNumItems(); j++) {
+					if (roomConditions.getItem(i).getDescription()
+							.equals(characterInventory.getItem(j).getDescription())) {
+						equal = true;
+					}
+				}
+				if (equal == false) {
+					return false;
+				}
+			}
+			return equal;
+		}
+	}
+
+	public String conditionMessage() {
+		return this.conditionMessage;
+	}
+
+	public void setConditionMessage(String conditionMessageInp) {
+		conditionMessage = conditionMessageInp;
+	}
+
+	public Inventory getConditions() {
+		return this.roomConditions;
 	}
 }

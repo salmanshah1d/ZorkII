@@ -6,5 +6,4 @@ public class DirtyShank extends Weapon{
 		//string, weight, cost, power, CritChance
 		super("DirtyShank", 2.5, 15, 10, 1);
 	}
-
 }

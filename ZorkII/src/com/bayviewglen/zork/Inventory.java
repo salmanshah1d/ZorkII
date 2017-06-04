@@ -7,7 +7,7 @@ public class Inventory {
 	ArrayList<Item> inventory;
 	private int weight = 0;
 	private double maxWeight = 50.0; // the max weight a character can make
-	private int wallet = 100;
+	private int wallet;
 
 	public int getWallet() {
 		return wallet;
@@ -21,6 +21,11 @@ public class Inventory {
 		inventory = new ArrayList<Item>(); // construct the object
 	}
 
+	public Inventory(int money) {
+		inventory = new ArrayList<Item>(); // construct the object
+		this.wallet = money;
+	}
+	
 	// how to add an item to a inventory
 	public void addItem(Item item) {
 		if ((weight + item.getMass()) < maxWeight) { // IT IS A + NOT A "+="
@@ -64,7 +69,6 @@ public class Inventory {
 		return inventory.size();
 	}
 
-	// print out the inventory you have
 	// print out the inventory you have
 	public String print() {
 		String words = "";
@@ -115,6 +119,7 @@ public class Inventory {
 		return words;
 	}
 
+	// shows inventory for non playable characters
 	public void showInventory() {
 		if (inventory.size() > 0) {
 			for (int i = 0; i < inventory.size(); i++) {
@@ -132,10 +137,12 @@ public class Inventory {
 		return maxWeight;
 	}
 
+	// set the max weight you can carry
 	public void setMaxWeight(double maxWeight) {
 		this.maxWeight = maxWeight;
 	}
 
+	// get an item at a particular index
 	public Item getItem(int index) {
 		if (inventory.get(index).getDescription().equals("Sword")) {
 			return (Weapon) inventory.get(index);
@@ -144,6 +151,7 @@ public class Inventory {
 		}
 	}
 
+	// returns the amount of gems you presently have
 	public int getNumGems() {
 		int gemCount = 0;
 		for (int i = 0; i < inventory.size(); i++) {

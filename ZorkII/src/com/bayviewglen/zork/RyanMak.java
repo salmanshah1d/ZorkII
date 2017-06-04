@@ -21,15 +21,11 @@ public class RyanMak extends NonPlayableCharacter{
 	public void setWeapon(Weapon weapon) {
 		Weapon = weapon;
 	}
-	ArrayList<Item> ryanMakInventory = new ArrayList<Item>();
-	//private int characterPower;
-	//private int characterArmor;
-	
-	
+	ArrayList<Item> ryanMakInventory = new ArrayList<Item>();	
 	
 	public void talk(Inventory inv){
 		boolean stillTalking = true;
-		System.out.println("Ryan: Oh hi. Can you help me with my ComSci? (Select the number of the option you wish to say.)");
+		System.out.println("Ryan: Oh hi. Can you help me with my Comp Sci? (Select the number of the option you wish to say.)");
 		while(stillTalking){
 		System.out.println();
 		System.out.println("1: What are you doing inside a temple?");
@@ -45,7 +41,7 @@ public class RyanMak extends NonPlayableCharacter{
 		}else if(response.equals("1")){
 			System.out.println("Ryan: I'm here to find the lost treasure. A five in AP ComSci. Alhtough I can't figure out how to get out of this room.");
 		}else if(response.equals("2")){
-				System.out.println("Ryan: I can't get my Cross Country Assignment to work. What does System.out.println() do?");
+				System.out.println("Ryan: I can't get my Cross Country Assignment to work. How do I install the JDIde?");
 		}else if(response.equals("3")){
 			System.out.println("Ryan: Ya I think your right.");
 		}else if(response.equals("4")){
@@ -66,11 +62,11 @@ public class RyanMak extends NonPlayableCharacter{
 	public RyanMak(){
 		super(characterName);
 		//creates the inventory for the character
+		// String description, Double mass, int cost, int healthReturned
 		ryanMakInventory.add(new Food("Spicy Noodles", 0.5, 5, 5 ));
+		// String description, Double mass, int cost,int pocketSpace
 		ryanMakInventory.add(new Pockets("Pockets", 0.0,30, 35));
 		ryanMakInventory.add(new DirtyShank());
-		//String description, double mass, int cost ,int power, int critChance
-		
 	}
 	
 	

@@ -22,10 +22,6 @@ public class Rodin extends NonPlayableCharacter{
 		Weapon = weapon;
 	}
 	ArrayList<Item> rodinInventory = new ArrayList<Item>();
-	//private int characterPower;
-	//private int characterArmor;
-	
-	
 	
 	public void talk(Inventory inv){
 		boolean stillTalking = true;
@@ -48,7 +44,7 @@ public class Rodin extends NonPlayableCharacter{
 		}else if(response.equals("3")){
 			System.out.println("Rodin: SO LONG MAN!");
 		}else if (response.equals("4")){
-			this.displayInventory();
+			this.displayInventory(inv);
 			this.buy(inv);
 		}else if (response.equals("5")){
 			inv.showInventory();
@@ -63,26 +59,36 @@ public class Rodin extends NonPlayableCharacter{
 	public Rodin(){
 		super(characterName);
 		//creates the inventory for the character
+		
 		rodinInventory.add(new Food("Half-eatenSandwich", 0.5, 0, 60));
+		// String description, Double mass, int cost, int healthReturned
 		rodinInventory.add(new Pockets("LargePockets", 0.0, 50, 50));
+		// String name, Double mass, int cost,int armourIncreased, String word
 		rodinInventory.add(new WeaponAttachment("WeaponPoison(WA)", 0.1, 55, 0, 5, "poisoned"));
+		//String description, Double mass,int cost, int powerAdded,int critAdded, String word
 		rodinInventory.add(new ArmourAttachment("SmallUnderShirt(AA)", 0.3, 20, 1, "insulated"));
-		//String description, double mass, int cost ,int power, int critChance
 		rodinInventory.add(new DirtyShank());
 		
 	}
 	
 	
 	
-	public void displayInventory(){
+	public void displayInventory(Inventory inv){
 	//	shayanSnInventoryNames =new ArrayList<String>();
 		if(rodinInventory.size() > 0){
 		System.out.print("YOU WANT?!");
 		System.out.println("(Type the name of the item you wish to buy. Or type exit.)");
+		
 		System.out.println();
+		System.out.println("You have " + inv.getWallet() + " Iranian Rials.");
 		for (int i = 0; i<rodinInventory.size(); i++){
-			System.out.print(rodinInventory.get(i).getDescription()+ ": " + rodinInventory.get(i).getCost() + ", ");
+			if (i == rodinInventory.size()-1){
+				System.out.print(rodinInventory.get(i).getDescription()+ ": " + rodinInventory.get(i).getCost());
+			} else {
+				System.out.print(rodinInventory.get(i).getDescription()+ ": " + rodinInventory.get(i).getCost() + ", ");
+			}
 		}
+		System.out.println();
 	}else {
 		System.out.println("I ain't got nutin.");
 	}
@@ -104,7 +110,7 @@ public class Rodin extends NonPlayableCharacter{
 								inv.addItem(rodinInventory.get(i));
 								System.out.println("You have bought " + rodinInventory.get(i).getDescription() + ".");
 								inv.setWallet(inv.getWallet() - rodinInventory.get(i).getCost());
-								System.out.println("You now have " + inv.getWallet() + "Iranian Rials.");
+								System.out.println("You now have " + inv.getWallet() + " Iranian Rials.");
 								rodinInventory.remove(i);
 								isBuyable = true;
 								break;	

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class DesLauriers extends NonPlayableCharacter{
 	private static String characterName = "DesLauriers";
 	private int characterHealth = 500;
+	//string name, double weight, int cost, int power, int CritChance
 	Weapon Weapon = new Weapon("Sword of Eclipse", 50.0, 1000, 40, 6);
 	public int getCharacterHealth() {
 		return characterHealth;
@@ -43,7 +44,7 @@ public class DesLauriers extends NonPlayableCharacter{
 		}else if(response.equals("1")){
 			System.out.println("Deslaurier: It was funny watching you struggle. HAHAHAHAHA.");
 		}else if(response.equals("2")){
-				System.out.println("Deslauerier: Not so fast my son. If you want the treasure, you must fight for it.");
+				System.out.println("Deslauerier: Not so fast, my son. If you want the treasure, you must fight for it.");
 		}else if(response.equals("3")){
 			System.out.println("Deslaurier: You are correct. I should give this game a 100%.");
 		}else if(response.equals("4")){
@@ -57,8 +58,6 @@ public class DesLauriers extends NonPlayableCharacter{
 	
 	public DesLauriers(){
 		super(characterName);
-		//String description, double mass, int cost ,int power, int critChance
-		
 	}
 	
 	public void deathPhrase(){

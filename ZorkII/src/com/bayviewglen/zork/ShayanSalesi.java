@@ -74,17 +74,9 @@ public class ShayanSalesi extends NonPlayableCharacter {
 		super(characterName);
 		// creates the inventory for the character
 		System.out.println();
-		/*
-		 * shayanSlInventory.add(new Item("SaturnCapitalShare", 0.0, 40));
-		 * shayanSlInventory.add(new Item("SaturnCapitalShare", 0.0, 40));
-		 * shayanSlInventory.add(new Item("SaturnCapitalShare", 0.0, 40));
-		 * shayanSlInventory.add(new Item("SaturnCapitalShare", 0.0, 40));
-		 */
-		// String description, Double mass, int cost, int powerAdded,int
-		// critAdded, String word
+		// String name, Double mass, int cost,int armourIncreased, String word
 		shayanSlInventory.add(new WeaponAttachment("Supreme logo(WA)", 0.2, 80, 10, 3, "Supreme"));
 		shayanSlInventory.add(new WeaponAttachment("Weapon Grease(WA)", 0.2, 50, 5, 2, "Greasy"));
-		// String description, double mass, int cost ,int power, int critChance
 		shayanSlInventory.add(new SupremeShank());
 
 	}

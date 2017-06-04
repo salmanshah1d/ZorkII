@@ -18,7 +18,8 @@ public class Andrei extends NonPlayableCharacter {
 		this.characterHealth = characterHealth;
 	}
 
-	private Weapon Weapon = new Weapon("Audacity Sound File ", 1.0, 0, 20, 5);
+	//string name, double weight, int cost, int power, int CritChance
+	private Weapon Weapon = new Weapon("Audacity Sound File", 1.0, 0, 20, 5);
 
 	public Weapon getWeapon() {
 		return Weapon;
@@ -29,13 +30,11 @@ public class Andrei extends NonPlayableCharacter {
 	}
 
 	ArrayList<Item> andreiInventory = new ArrayList<Item>();
-	// private int characterPower;
-	// private int characterArmor;
 
 	public void talk(Inventory inv) {
 		boolean stillTalking = true;
 		System.out.println(
-				"Andrei: Oh hi there, didn't see you. Do you want to buy some ugly green GRAD sweaters. (Select the number of the option you wish to say.)");
+				"Andrei: Oh hi there, didn't see you. Do you want to buy some ugly green GRAD sweaters? (Select the number of the option you wish to say.)");
 		while (stillTalking) {
 			System.out.println();
 			System.out.println("1: What are you doing inside a temple?");
@@ -48,9 +47,9 @@ public class Andrei extends NonPlayableCharacter {
 				System.out.println("That is not a valid option.");
 			} else if (response.equals("1")) {
 				System.out
-						.println("Andrei: I am trying to find ideas for my ComSci project inside this superior game.");
+						.println("Andrei: I am trying to find ideas for my Comp Sci project inside this superior game.");
 			} else if (response.equals("2")) {
-				this.displayInventory();
+				this.displayInventory(inv);
 				this.buy(inv);
 			} else if (response.equals("3")) {
 				inv.showInventory();
@@ -65,24 +64,32 @@ public class Andrei extends NonPlayableCharacter {
 	public Andrei() {
 		super(characterName);
 		// creates the inventory for the character
+		//String description, Double mass,int cost, int powerAdded,int critAdded, String word
 		andreiInventory.add(new ArmourAttachment("Uglygreensweater(AA)", 1.0, 30, 5, "Ugly Green"));
+		// String name, Double mass, int cost,int armourIncreased, String word
 		andreiInventory.add(new WeaponAttachment("Repostedmeme(WA)", 0.1, 20, 5, 1, "Reposted"));
+		// String description, Double mass, int cost,int pocketSpace
 		andreiInventory.add(new Pockets("SmallPockets", 0.0, 10, 20));
-		andreiInventory.add(new Weapon("AudacitySoundFile", 1.0, 0, 20, 5));
 		// String description, double mass, int cost ,int power, int critChance
-
+		andreiInventory.add(new Weapon("AudacitySoundFile", 1.0, 0, 20, 5));
 	}
 
-	public void displayInventory() {
+	public void displayInventory(Inventory inv) {
 		// shayanSnInventoryNames =new ArrayList<String>();
 		if (andreiInventory.size() > 0) {
 			System.out.println("Andrei: Check em out ");
 			System.out.println("(Type the name of the item you wish to buy. Or type exit.)");
+			
 			System.out.println();
-			for (int i = 0; i < andreiInventory.size(); i++) {
-				System.out.print(
-						andreiInventory.get(i).getDescription() + ": " + andreiInventory.get(i).getCost() + ", ");
+			System.out.println("You have " + inv.getWallet() + " Iranian Rials.");
+			for (int i = 0; i<andreiInventory.size(); i++){
+				if (i == andreiInventory.size()-1){
+					System.out.print(andreiInventory.get(i).getDescription()+ ": " + andreiInventory.get(i).getCost());
+				} else {
+					System.out.print(andreiInventory.get(i).getDescription()+ ": " + andreiInventory.get(i).getCost() + ", ");
+				}
 			}
+			System.out.println();
 		} else {
 			System.out.println("I have nothing more to sell.");
 		}
@@ -104,7 +111,7 @@ public class Andrei extends NonPlayableCharacter {
 							inv.addItem(andreiInventory.get(i));
 							System.out.println("You have bought " + andreiInventory.get(i).getDescription() + ".");
 							inv.setWallet(inv.getWallet() - andreiInventory.get(i).getCost());
-							System.out.println("You now have " + inv.getWallet() + "Iranian Rials.");
+							System.out.println("You now have " + inv.getWallet() + " Iranian Rials.");
 							andreiInventory.remove(i);
 							isBuyable = true;
 							break;

@@ -1,6 +1,7 @@
 package com.bayviewglen.zork;
 
 public class WasteMansYute extends Enemy{
+	private static final int wasteMansYutePower = 75;
 	static String description = "Waste Mans";
 	static Weapon wasteMansYuteShank = new GreasyShank();
 
@@ -10,7 +11,7 @@ public class WasteMansYute extends Enemy{
 	}
 
 	public WasteMansYute(String name){
-		super(description, name, 75, wasteMansYuteShank);
+		super(description, name, wasteMansYutePower, wasteMansYuteShank);
 	}
 	public void deathPhrase(){
 		System.out.println(this.getCharacterName() +": *While dying* All mans reach... the afterlife.");

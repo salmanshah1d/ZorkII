@@ -8,6 +8,10 @@ public class Item {
 	private int cost;
 	private int power;
 	
+	Item(String objectInp) {
+		description = objectInp.toLowerCase();
+	}
+	
 	Item(String objectInp, double weightInp) {
 		description = objectInp.toLowerCase();
 		mass = weightInp;
@@ -52,6 +56,4 @@ public class Item {
 	public int getPower() {
 		return power;
 	}	
-
 }
-

@@ -1,21 +1,32 @@
 package com.bayviewglen.zork;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class CodeTestingFile {
 
 	public static void main(String[] args) {
-		@SuppressWarnings("resource")
-		Scanner roomScanner = new Scanner(System.in);
-		String roomItems = roomScanner.nextLine();
-		// An array of strings in the format E-RoomName
-		String[] items = roomItems.split(":")[1].split(",");
-		ArrayList<Item> itemList = new ArrayList<Item>(); 
-		for (String s : items){
-			itemList.add(new Item(s.split("-")[0].trim(), Integer.parseInt(s.split("-")[1].trim())));
-		}
+		Inventory roomConditions = new Inventory();
+		Inventory characterInventory = new Inventory();
 		
-		System.out.println(itemList);
+		roomConditions.addItem(new Item("Key"));
+		characterInventory.addItem(new Item("Boi", 20.0));
+		characterInventory.addItem(new Item("Key", 20.0));
+		
+		System.out.println(checkConditions(roomConditions, characterInventory));
+	}
+
+	public static boolean checkConditions(Inventory roomConditions, Inventory characterInventory) {
+		boolean equal = false;
+		for (int i = 0; i < roomConditions.getNumItems(); i++) {
+			equal = false;
+			for (int j = 0; j < characterInventory.getNumItems(); j++) {
+				if (roomConditions.getItem(i).getDescription()
+						.equals(characterInventory.getItem(j).getDescription())) {
+					equal = true;
+				}
+			}
+			if (equal == false) {
+				return false;
+			}
+		}
+		return equal;
 	}
 }

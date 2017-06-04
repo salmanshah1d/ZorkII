@@ -1,6 +1,7 @@
 package com.bayviewglen.zork;
 
 public class Yute extends Enemy{
+	static final int yutePower = 50;
 	static String description = "Yute";
 	//creates a weapon to be used in combat
 	static Weapon yuteShank = new DirtyShank();
@@ -13,7 +14,7 @@ public class Yute extends Enemy{
 	}
 	
 	public Yute(String name){
-		super(description, name, 50, yuteShank);
+		super(description, name, yutePower, yuteShank);
 		
 	}	public void deathPhrase(){
 		System.out.println(this.getCharacterName() +": *While dying* AHHHHHHH!");

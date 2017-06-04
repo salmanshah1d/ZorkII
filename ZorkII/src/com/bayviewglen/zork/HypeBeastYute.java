@@ -3,10 +3,8 @@ package com.bayviewglen.zork;
 public class HypeBeastYute extends Enemy {
 	static String description = "Hype Beast";
 	// creates a weapon to be used in combat
-	static Weapon hypeBeastYuteShank = new GreasyShank();
-	// sets character attributes
-	// private int characterHealth = 100;
-	// private int characterHealthMax = 100;
+	static Weapon hypeBeastYuteShank = new SupremeShank();
+	private static int CHARACTERHEALTH = 100;
 
 	public void setEnemyInventory(Inventory hypeBeastYuteInventory) {
 		this.enemyInventory = hypeBeastYuteInventory;
@@ -14,10 +12,12 @@ public class HypeBeastYute extends Enemy {
 	}
 
 	public HypeBeastYute(String name) {
-		super(description, name, 100, hypeBeastYuteShank);
+		super(description, name, CHARACTERHEALTH, hypeBeastYuteShank);
+
 	}
-	
-	public void deathPhrase(){
-		System.out.println(this.getCharacterName() + ": *While dying* My only regret. Is that I will miss this weeks supreme drop.");
+
+	public void deathPhrase() {
+		System.out.println(
+				this.getCharacterName() + ": *While dying* My only regret: I will miss this week's Supreme drop.");
 	}
 }
