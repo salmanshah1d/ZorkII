@@ -14,7 +14,7 @@ class Game {
 	private Parser parser;
 	private Room currentRoom;
 	private Weapon characterSword; // sets character's sword
-	private Inventory characterInventory = new Inventory(100); // 100 is wallet
+	private Inventory characterInventory = new Inventory(200); // 100 is wallet
 																// amount
 	private Inventory roomInventory;
 	private Armour characterArmour;
@@ -334,7 +334,7 @@ class Game {
 			System.out.println(currentRoom.longDescription());
 			return;
 		}
-		
+
 		String object = command.getSecondWord().toLowerCase();
 		int itemIndex = -1;
 
@@ -343,12 +343,12 @@ class Game {
 				itemIndex = i;
 			}
 		}
-		
+
 		if (itemIndex == -1) {
 			System.out.println("There is no such item...");
 			return;
 		}
-		
+
 		currentRoom.getRoomInventory().addItem(characterInventory.getItem(itemIndex));
 		characterInventory.removeItem(characterInventory.getItem(itemIndex));
 		System.out.println("Done.");
@@ -364,6 +364,7 @@ class Game {
 		} else {
 			System.out.println(person + " is not in this room.");
 		}
+		System.out.println(currentRoom.longDescription());
 	}
 
 	/**
@@ -658,57 +659,58 @@ class Game {
 
 	// uses [item]
 	public void use(String secondWord) {
-		// checks to see if the item the player wants to use in their inventory
-		boolean used = false;
-		int inventorySize = characterInventory.getNumItems();
-		for (int i = 0; i < inventorySize; i++) {
-			Item theItem = characterInventory.getInventory().get(i);
-			String itemName = theItem.getDescription().toLowerCase();
-
-			if (itemName.equalsIgnoreCase(secondWord)) {
-				used = true;
-				// checks the type of the item
-				if (theItem instanceof Food) {
-					mainCharacter.setCharacterHealth(
-							((Food) theItem).getHealthRestored() + mainCharacter.getCharacterHealth());
-					if (mainCharacter.getCharacterHealth() > mainCharacter.getCharacterHealthMax())
-						mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
-					System.out.println("Your health is now " + mainCharacter.getCharacterHealth() + " HP.");
-					characterInventory.removeItem(theItem);
-					System.out.println(currentRoom.longDescription());
-				} else if (theItem instanceof WeaponAttachment) {
-					characterSword
-							.setPower(((WeaponAttachment) theItem).getAttackPowerAdded() + characterSword.getPower());
-					characterSword.setCritChance(
-							((WeaponAttachment) theItem).getCritChanceAdded() + characterSword.getCritChance());
-					characterSword.setDescription(
-							((WeaponAttachment) theItem).getSwordTitleAdded() + characterSword.getDescription() + " ");
-					System.out.println("Your sword now has become the " + " " + characterSword.getDescription() + ".");
-					characterInventory.removeItem(theItem);
-					System.out.println(currentRoom.longDescription());
-				} else if (theItem instanceof ArmourAttachment) {
-					characterArmour.setProtection(
-							((ArmourAttachment) theItem).getArmourAdded() + characterArmour.getProtection());
-					characterArmour.setDescription(((ArmourAttachment) theItem).getArmourTittleAdded() + " "
-							+ characterArmour.getDescription());
-					System.out.println("Your armour has become the " + characterArmour.getDescription() + ".");
-					characterInventory.removeItem(theItem);
-					System.out.println(currentRoom.longDescription());
-				} else if (theItem instanceof Pockets) {
-					characterInventory
-							.setMaxWeight(((Pockets) theItem).getSpaceAdded() + characterInventory.getMaxWeight());
-					System.out.println("Your carry weight has increased to " + characterInventory.getMaxWeight());
-					characterInventory.removeItem(theItem);
-					System.out.println(currentRoom.longDescription());
-				} else {
-					System.out.println("You cannot use that.");
-					System.out.println(currentRoom.longDescription());
-				}
-			}
-
+		
+		if (secondWord == null) {
+			// if there is no second word, we don't know what to pick up...
+			System.out.println("Take what?");
+			System.out.println(currentRoom.longDescription());
+			return;
 		}
-		if (used == false) {
-			System.out.println("You do not have that in your inventory.");
+		
+		// checks to see if the item the player wants to use in their inventory
+		int inventorySize = characterInventory.getNumItems();
+		int itemIndex = -1;
+		for (int i = 0; i < inventorySize; i++) {
+			itemIndex = i;
+		}
+
+		Item theItem = characterInventory.getInventory().get(itemIndex);
+
+		// checks the type of the item
+		if (theItem instanceof Food) {
+			mainCharacter.setCharacterHealth(((Food) theItem).getHealthRestored() + mainCharacter.getCharacterHealth());
+			if (mainCharacter.getCharacterHealth() > mainCharacter.getCharacterHealthMax()) {
+				mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
+				characterInventory.addItem(theItem);
+			}
+			System.out.println("Your health is now " + mainCharacter.getCharacterHealth() + " HP.");
+			characterInventory.removeItem(theItem);
+			System.out.println(currentRoom.longDescription());
+		} else if (theItem instanceof WeaponAttachment) {
+			characterSword.setPower(((WeaponAttachment) theItem).getAttackPowerAdded() + characterSword.getPower());
+			characterSword
+					.setCritChance(((WeaponAttachment) theItem).getCritChanceAdded() + characterSword.getCritChance());
+			characterSword.setDescription(
+					((WeaponAttachment) theItem).getSwordTitleAdded() + characterSword.getDescription() + " ");
+			System.out.println("Your sword now has become the " + " " + characterSword.getDescription() + ".");
+			characterInventory.removeItem(theItem);
+			System.out.println(currentRoom.longDescription());
+		} else if (theItem instanceof ArmourAttachment) {
+			characterArmour
+					.setProtection(((ArmourAttachment) theItem).getArmourAdded() + characterArmour.getProtection());
+			characterArmour.setDescription(
+					((ArmourAttachment) theItem).getArmourTittleAdded() + " " + characterArmour.getDescription());
+			System.out.println("Your armour has become the " + characterArmour.getDescription() + ".");
+			characterInventory.removeItem(theItem);
+			System.out.println(currentRoom.longDescription());
+		} else if (theItem instanceof Pockets) {
+			characterInventory.setMaxWeight(((Pockets) theItem).getSpaceAdded() + characterInventory.getMaxWeight());
+			System.out.println("Your carry weight has increased to " + characterInventory.getMaxWeight());
+			characterInventory.removeItem(theItem);
+			System.out.println(currentRoom.longDescription());
+		} else {
+			System.out.println("You cannot use that.");
+			characterInventory.removeItem(theItem);
 			System.out.println(currentRoom.longDescription());
 		}
 	}

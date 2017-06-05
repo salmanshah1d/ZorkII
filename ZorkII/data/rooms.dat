@@ -27,12 +27,12 @@ Room Enemies: None-0
 Room NP: RyanAbhary
 Condition: None-None
 Room Name: Dirt Room
-Room Description: On the East wall, there was dirt blocking the east exit, but you cleared it with the axe that you got earlier.
+Room Description: This room has dirt all around it.
 Exit Rooms: N-Axe Room, W-Backpack Room, S-Origins Room, E-Andrei Room
 Room Items: None-0
 Room Enemies: Yute-Devin
 Room NP: ShayanShakeri
-Condition: Axe-You need an axe to enter this room. It has dirt blocking it.
+Condition: None-None
 Room Name: Backpack Room
 Room Description: There is a small backpack with a gem patch on it.
 Exit Rooms: E-Dirt Room, S-Message Room
@@ -51,12 +51,12 @@ Room Name: Origins Room
 Room Description: You can see a glowing gem in the back of the room but there is an enemy before it.
 Exit Rooms: W-Message Room, N-Dirt Room
 Room Items: Gem-2
-Room Enemies: WasteMansYute-David
+Room Enemies: HypeBeastYute-David
 Room NP: None
 Condition: None-None
 Room Name: Shovel Room
 Room Description: On the middle of the floor there is a rusty shovel. You may need it later.
-Exit Rooms: S-Uno Enemy Room, N-Message Room
+Exit Rooms: N-Message Room
 Room Items: Shovel-4
 Room Enemies: WasteMansYute-Colin
 Room NP: Daniel
@@ -77,16 +77,16 @@ Room NP: Rodin
 Condition: None-None
 Room Name: Basic Enemy Room
 Room Description: One enemy jumps out of the shadows.
-Exit Rooms: W-Lighter Room, S-Enrichment Room
+Exit Rooms: W-Lighter Room, S-Rowing Room
 Room Items: None-0 
 Room Enemies: HypeBeastYute-Raaed 
 Room NP: ShayanShakeri
 Condition: None-None
 Room Name: Gem Two Room
 Room Description: You see another gem with an enemy blocking your way.
-Exit Rooms: N-Lighter Room
+Exit Rooms: N-Lighter Room, S-Flashlight Room
 Room Items: Gem-2
-Room Enemies: Yute-Jide
+Room Enemies: HypeBeastYute-Jide
 Room NP: ShayanShakeri
 Condition: None-None
 Room Name: Rowing Room
@@ -98,21 +98,21 @@ Room NP: None
 Condition: None-None
 Room Name: Flashlight Room
 Room Description: There is a flashlight on the floor. You might need it later.
-Exit Rooms: E-Enrichment Room, S-Salesi Room, W-Archer Room
+Exit Rooms: E-Rowing Room, S-Salesi Room, W-Archer Room, N-Gem Two Room
 Room Items: Flashlight-1
 Room Enemies: WasteMansYute-Arun 
 Room NP: ShayanShakeri
 Condition: None-None
 Room Name: Archer Room
 Room Description: Two enemies jump out!
-Exit Rooms: E-Flashlight Room, S-Double Enemy Room, W-Salesi Room
+Exit Rooms: E-Flashlight Room, S-Double Enemy Room, W-Leaky Tap Room
 Room Items: None-0 
 Room Enemies: Yute-Jonathan, WasteMansYute-Graham 
 Room NP: None
 Condition: None-None
 Room Name: Salesi Room
 Room Description: You see a successful young man in the distance, counting his losses.
-Exit Rooms: E-Double Enemy Room
+Exit Rooms: N-Flashlight Room, W-Double Enemy Room
 Room Items: None-0
 Room Enemies: Yute-Sydney 
 Room NP: ShayanSalesi
@@ -126,17 +126,17 @@ Room NP: None
 Condition: None-None
 Room Name: Leaky Tap Room
 Room Description: There seems to be a leaky tap in this room with a beautiful man guarding it.
-Exit Rooms: E-Archer Room, S-Ryan
+Exit Rooms: E-Archer Room, S-Ryan Room
 Room Items: None-0
 Room Enemies: HypeBeastYute-Aliqyan 
 Room NP: ShayanShakeri
 Condition: None-None
 Room Name: Ryan Room
 Room Description: You see a person that goes on Reddit during class.
-Exit Rooms: S-Genius Room, E-Double Enemy Room, N-Salesi Room
+Exit Rooms: S-Genius Room, E-Double Enemy Room, N-Leaky Tap Room
 Room Items: None-0
 Room Enemies: WasteMansYute-Ryan 
-Room NP: RyanMak
+Room NP: RyanAbhary
 Condition: None-None
 Room Name: Genius Room
 Room Description: You see a student that's actually good at comp sci. 
@@ -147,99 +147,78 @@ Room NP: None
 Condition: None-None
 Room Name: Dark Room
 Room Description: Good thing you had a flashlight, huh.
-Exit Rooms: N-Enrichment Room, W-Dirt W Room
+Exit Rooms: N-Rowing Room, S-Dirt Room Two
 Room Items: None-0
 Room Enemies: Yute-Noah 
 Room NP: None
 Condition: Flashlight-It's too dark to see in this room without a flashlight.
 Room Name: Dirt Room Two
-Room Description: Looks like there's fallen dirt on the west side. 
-Exit Rooms: E-Dark Room, W-Third Gem Room, S-Locked Door Room
+Room Description: This room has dirt all around
+Exit Rooms: N-Dark Room, W-Third Gem Room, S-Locked Door Room
 Room Items: None-0
 Room Enemies: Yute-Jennifer 
-Room NP: None
-Condition: Axe-This room has dirt blocking it. You need an axe!
+Room NP: RyanMak
+Condition: None-None
 Room Name: Locked Door Room
 Room Description: There seems to be a man who doesn't know how to install Eclipse in this room.
-Exit Rooms: N-Dirt W Room, S-Third Gem Room
+Exit Rooms: N-Dirt Room Two, S-Fourth Gem Room
 Room Items: None-0
 Room Enemies: WasteMansYute-Sebastian 
 Room NP: None
 Condition: Key-You need the key from the first few rooms to access this room.
 Room Name: Third Gem Room
 Room Description: There is a gem surrounded by enemies. You must kill the enemies first to pick up the gem.
-Exit Rooms: N-Locked Door Room, W-Dirt W Room
+Exit Rooms: E-Dirt Room Two
 Room Items: Gem-2
 Room Enemies: HypeBeastYute-Bryan, Yute-Rahul
 Room NP: None
 Condition: None-None
-Room Name: Uno Enemy Room
-Room Description: There is an enemy. Must kill the enemy to move on. 
-Exit Rooms: N-Shovel Room, S-Dirt S Room,
-Room Items: None-0
-Room Enemies: Yute-Ehsan
-Room NP: ShayanShakeri
-Condition: None-None
-Room Name: Dirt S Room
-Room Description: Fallen dirt is blocking access to a room. Must clear it to see where it leads.
-Exit Rooms: S-Fourth Gem Room, N-Uno Enemy Room
-Room Items: None-0
-Room Enemies: WasteMansYute-Ryan
-Room NP: None
-Condition: None-None
 Room Name: Fourth Gem Room
 Room Description: Another gem, but you must kill the enemies first.
-Exit Rooms: E-Uno Enemy Room, W-Last Gem Room
+Exit Rooms: N-Locked Door Room, S-Fifth Gem Message Room
 Room Items: Gem-2
-Room Enemies: Yute-Alex
+Room Enemies: HypeBeastYute-Alex, WasteMansYute-Rossos
 Room NP: None
 Condition: None-None
 Room Name: Fifth Gem Message Room
 Room Description: Something is scratched on the wall ("Looking for the 5th Gem?")
-Exit Rooms: N-Second Enrichment Room, S-Meme Two Room, W-Third Enrichment Room, E-Fourth Gem Room
+Exit Rooms: N-Fourth Gem Room, S-Steel Wall Room
 Room Items: None-0
 Room Enemies: None-0
 Room NP: None
 Condition: None-None
-Room Name: Second Enrichment Room
-Room Description: There is a master sword here.
-Exit Rooms: W-Last Gem Message Room
-Room Items: None-0
-Room Enemies: None-0
-Room NP: None
-Condition: None-None
-Room Name: Steel Wall S Room
+Room Name: Steel Wall Room
 Room Description: Steel wall is blocking a path, must break it down to get access.
-Exit Rooms: W-Last Gem Message Room, S-Dark Two Room
+Exit Rooms: N-Fifth Gem Message Room, S-Dark Room Two
 Room Items: None-0
 Room Enemies: None-0
 Room NP: None
 Condition: None-None
 Room Name: Dark Room Two
 Room Description: You've managed to light up this room with your flashlight. Turns out, it is completely empty. 
-Exit Rooms: N-Steel Wall, S-Room, W-Last Gem and Boss Room
+Exit Rooms: N-Steel Wall Room, S-Meme Room Two, E-Last Gem Message Room
 Room Items: None-0
 Room Enemies: None-0
 Room NP: None
 Condition: Flashlight-It's too dark to see in this room without a flashlight.
-Room Name: Meme Two Room
-Room Description: The gods have answered. You see more dank memes in front of you.
-Exit Rooms: W-Third Enrichment Room, S-Dark Two Room, N-Last Gem Message Room
-Room Items: Meme-1
+Room Name: Last Gem Message Room
+Room Description: You see a sign that says, "IT IS TIME TAKE THE FINAL GEM."
+Exit Rooms: W-Dark Room Two, S-Last Gem and Boss Room
+Room Items: None-0
 Room Enemies: None-0
 Room NP: ShayanShakeri
 Condition: None-None
-Room Name: Third Enrichment Room
-Room Description: You can upgrade your gear here. 
-Exit Rooms: N-Last Gem Message Room, E-Meme Two Room
-Room Items: None-0
+Room Name: Meme Room Two
+Room Description: The gods have answered. You see more dank memes in front of you.
+Exit Rooms: N-Dark Room Two, E-Last Gem and Boss Room
+Room Items: FreshMeme-1
 Room Enemies: None-0
-Room NP: None
+Room NP: ShayanShakeri
 Condition: None-None
 Room Name: Last Gem and Boss Room
 Room Description: It is the final gem, but you must first defeat the enemy.
-Exit Rooms: W-Meme Two Room
+Exit Rooms: W-Meme Room Two, N-Last Gem Message Room
 Room Items: Gem-2
 Room Enemies: HypeBeastYute-Salman
 Room NP: DesLauriers
-Condition: None-None
+Condition: FreshMeme-You need a fresh meme to enter this room!

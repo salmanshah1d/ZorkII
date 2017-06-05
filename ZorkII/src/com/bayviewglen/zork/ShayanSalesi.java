@@ -112,7 +112,7 @@ public class ShayanSalesi extends NonPlayableCharacter {
 							inv.addItem(shayanSlInventory.get(i));
 							System.out.println("You have bought " + shayanSlInventory.get(i).getDescription() + ".");
 							inv.setWallet(inv.getWallet() - shayanSlInventory.get(i).getCost());
-							System.out.println("You now have " + inv.getWallet() + "Iranian Rials.");
+							System.out.println("You now have " + inv.getWallet() + " Iranian Rials.");
 							shayanSlInventory.remove(i);
 							isBuyable = true;
 							break;
@@ -139,7 +139,7 @@ public class ShayanSalesi extends NonPlayableCharacter {
 						shayanSlInventory.add(inv.getItem(j));
 						inv.setWallet(inv.getWallet() + inv.getItem(j).getCost());
 						inv.removeItem(inv.getItem(j));
-						System.out.println("You now have " + inv.getWallet() + "Iranian Rials.");
+						System.out.println("You now have " + inv.getWallet() + " Iranian Rials.");
 						isSellable = true;
 						break;
 					}

@@ -65,9 +65,9 @@ public class Andrei extends NonPlayableCharacter {
 		super(characterName);
 		// creates the inventory for the character
 		//String description, Double mass,int cost, int powerAdded,int critAdded, String word
-		andreiInventory.add(new ArmourAttachment("Uglygreensweater(AA)", 1.0, 30, 5, "Ugly Green"));
+		andreiInventory.add(new ArmourAttachment("UglyGreenDweater(AA)", 1.0, 30, 5, "Ugly Green"));
 		// String name, Double mass, int cost,int armourIncreased, String word
-		andreiInventory.add(new WeaponAttachment("Repostedmeme(WA)", 0.1, 20, 5, 1, "Reposted"));
+		andreiInventory.add(new WeaponAttachment("RepostedMeme(WA)", 0.1, 20, 5, 1, "Reposted"));
 		// String description, Double mass, int cost,int pocketSpace
 		andreiInventory.add(new Pockets("SmallPockets", 0.0, 10, 20));
 		// String description, double mass, int cost ,int power, int critChance
@@ -138,7 +138,7 @@ public class Andrei extends NonPlayableCharacter {
 						andreiInventory.add(inv.getItem(j));
 						inv.setWallet(inv.getWallet() + inv.getItem(j).getCost());
 						inv.removeItem(inv.getItem(j));
-						System.out.println("You now have " + inv.getWallet() + "Iranian Rials.");
+						System.out.println("You now have " + inv.getWallet() + " Iranian Rials.");
 						isSellable = true;
 						break;
 					}

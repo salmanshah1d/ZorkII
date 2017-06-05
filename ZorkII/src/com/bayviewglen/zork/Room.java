@@ -119,7 +119,9 @@ class Room {
 
 	private String gemString() {
 		if (characterInventory.getNumGems() == 1) {
-			return ("\nCurrently, you have 1 gem.");
+			return ("\nYou have all the gems! Congratulations! You have won the game, and you will now have health, wealth, peace, happiness, and a 5 in AP Computer Science. Type \"quit\" to quit.");
+		} else if (characterInventory.getNumGems() == 5) {
+				return ("\nCurrently, you have 1 gem.");
 		} else {
 			return ("\nCurrently, you have " + characterInventory.getNumGems() + " gems.");
 		}

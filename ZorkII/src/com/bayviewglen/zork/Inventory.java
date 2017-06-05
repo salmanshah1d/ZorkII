@@ -25,7 +25,7 @@ public class Inventory {
 		inventory = new ArrayList<Item>(); // construct the object
 		this.wallet = money;
 	}
-	
+
 	// how to add an item to a inventory
 	public void addItem(Item item) {
 		if ((weight + item.getMass()) < maxWeight) { // IT IS A + NOT A "+="
@@ -111,7 +111,15 @@ public class Inventory {
 		} else {
 			for (int i = 0; i < inventory.size() - 1; i++) {
 				if (inventory.get(i) != null) {
-					words += "a " + inventory.get(i).display() + ", ";
+					if (inventory.get(i).getDescription().charAt(0) == 'a'
+							|| inventory.get(0).getDescription().charAt(0) == 'e'
+							|| inventory.get(0).getDescription().charAt(0) == 'i'
+							|| inventory.get(0).getDescription().charAt(0) == 'o'
+							|| inventory.get(0).getDescription().charAt(0) == 'u') {
+						words += "an " + inventory.get(i).display() + ", ";
+					} else {
+						words += "a " + inventory.get(i).display() + ", ";
+					}
 				}
 			}
 			words += "and " + inventory.get(inventory.size() - 1).display();
@@ -159,6 +167,6 @@ public class Inventory {
 				gemCount++;
 			}
 		}
-		return(gemCount);
+		return (gemCount);
 	}
 }

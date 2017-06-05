@@ -146,7 +146,7 @@ public class ShayanShakeriNezhad extends NonPlayableCharacter {
 						shayanSnInventory.add(inv.getItem(j));
 						inv.setWallet(inv.getWallet() + inv.getItem(j).getCost());
 						inv.removeItem(inv.getItem(j));
-						System.out.println("You now have " + inv.getWallet() + "Iranian Rials.");
+						System.out.println("You now have " + inv.getWallet() + " Iranian Rials.");
 						isSellable = true;
 						break;
 					}
