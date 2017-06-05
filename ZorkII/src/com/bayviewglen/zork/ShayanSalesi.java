@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ShayanSalesi extends NonPlayableCharacter {
 
-	private static String characterName = "ShayanSalesi";
+	private static String characterName = "Salesi";
 	private int characterHealth = 150;
 	private Weapon Weapon = new SupremeShank();
 	public int getCharacterHealth() {
@@ -42,7 +42,7 @@ public class ShayanSalesi extends NonPlayableCharacter {
 			System.out.println("6: Goodbye.");
 			String response = scanner.nextLine();
 			if (response.equals("1") == false && response.equals("2") == false && response.equals("3") == false
-					&& response.equals("4") == false && response.equals("5") == false) {
+					&& response.equals("4") == false && response.equals("5") == false && response.equals("6")) {
 				System.out.println("That is not a valid option.");
 			} else if (response.equals("1")) {
 				System.out.println(
