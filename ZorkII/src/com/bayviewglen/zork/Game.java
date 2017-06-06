@@ -656,9 +656,59 @@ class Game {
 			return false;
 		}
 	}
+public void use(String secondWord) {
+		// checks to see if the item the player wants to use in their inventory
+		boolean used = false;
+		int inventorySize = characterInventory.getNumItems();
+		for (int i = 0; i < inventorySize; i++) {
+			Item theItem = characterInventory.getInventory().get(i);
+			String itemName = theItem.getDescription().toLowerCase();
 
+			if (itemName.equalsIgnoreCase(secondWord)) {
+				used = true;
+				// checks the type of the item
+				if (theItem instanceof Food) {
+					mainCharacter.setCharacterHealth(
+							((Food) theItem).getHealthRestored() + mainCharacter.getCharacterHealth());
+					if (mainCharacter.getCharacterHealth() > mainCharacter.getCharacterHealthMax())
+						mainCharacter.setCharacterHealth(mainCharacter.getCharacterHealthMax());
+					System.out.println("Your health is now " + mainCharacter.getCharacterHealth() + "hp");
+					characterInventory.removeItem(theItem);
+					break;
+				} else if (theItem instanceof WeaponAttachment) {
+					characterSword
+							.setPower(((WeaponAttachment) theItem).getAttackPowerAdded() + characterSword.getPower());
+					characterSword.setCritChance(
+							((WeaponAttachment) theItem).getCritChanceAdded() + characterSword.getCritChance());
+					characterSword.setDescription(
+							((WeaponAttachment) theItem).getSwordTitleAdded() + characterSword.getDescription() + " ");
+					System.out.println("Your sword has become the " + " " + characterSword.getDescription() + ".");
+					characterInventory.removeItem(theItem);
+					break;
+				} else if (theItem instanceof ArmourAttachment) {
+					characterArmour.setProtection(
+							((ArmourAttachment) theItem).getArmourAdded() + characterArmour.getProtection());
+					characterArmour.setDescription(((ArmourAttachment) theItem).getArmourTittleAdded() + " "
+							+ characterArmour.getDescription());
+					System.out.println("Your armour has become the " + characterArmour.getDescription() + ".");
+					characterInventory.removeItem(theItem);
+					break;
+				} else if (theItem instanceof Pockets) {
+					characterInventory
+							.setMaxWeight(((Pockets) theItem).getSpaceAdded() + characterInventory.getMaxWeight());
+					System.out.println("Your carry weight has increased to " + characterInventory.getMaxWeight());
+					characterInventory.removeItem(theItem);
+					break;
+				} else
+					System.out.println("You cannot use that.");
+			}
+
+		}
+		if (used == false)
+			System.out.println("You do not have that in your inventory.");
+	}
 	// uses [item]
-	public void use(String secondWord) {
+	/*public void use(String secondWord) {
 		
 		if (secondWord == null) {
 			// if there is no second word, we don't know what to pick up...
@@ -713,5 +763,5 @@ class Game {
 			characterInventory.removeItem(theItem);
 			System.out.println(currentRoom.longDescription());
 		}
-	}
+	}*/
 }
